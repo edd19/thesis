@@ -1,11 +1,37 @@
 
+% EPL master thesis cover template
+\documentclass{eplmastersthesis}
 
-\documentclass{report}
-
-\usepackage[utf8]{inputenc}
 \usepackage{todonotes}
 
+% Fill in here the information: title, student name, speciality, jury members
+\title{Network Administration Tool For the Internet of Things}	% Master thesis title
+% \subtitle{Subtitle (optional)}			% Optional subtitle
+\author{Eddy \textsc{Ndizera}}	% Student name
+\secondauthor{Ivan \textsc{Ahad}}	% Second student name if applicable
+\speciality{Computer Science}		% Speciality (use one of the following options):
+										% Biomedical Engineering
+										% Chemical and Materials Engineering
+										% Civil Engineering
+										% Computer Science
+										% Computer Science and Engineering
+										% Electrical Engineering
+										% Electro-mechanical Engineering
+										% Mathematical Engineering
+										% Mechanical Engineering
+										% Physical Engineering
+%\options{Option(s)}		% If required by program commission mention options
+\supervisor{Ramin \textsc{Sadre}}	% 1st supervisor name
+%\cosupervisor{Firstname \textsc{Lastname}}	% 2nd supervisor name if applicable
+\readerone{Olivier \textsc{Bonaventure}}		% 1st reader name
+\readertwo{Lionel \textsc{Metongnon}}		% 2nd reader name
+\readerthree{Firstname \textsc{Lastname}}	% 3rd reader name
+\years{2016-2017}	% Academic year
+
 \begin{document}
+
+\maketitle					% To create front cover page
+\thispagestyle{empty}		% To suppress header and footer on the back of the cover page
 
 
 \include{chapters/abstract}
@@ -28,5 +54,8 @@
 \nocite{*}
 \bibliographystyle{amsplain}
 \bibliography{biblio}
+
+% Back cover page
+\backcoverpage
 
 \end{document}
