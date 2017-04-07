@@ -12,28 +12,44 @@ In this section, we will go deeper into the world of the \textit{Internet of Thi
 
 \section{What is the Internet of Things?}
 Challenges of iot : preface of book (page xx)\\
++ slide 17 du premier cours de mobile.
 
 Smart objects : "a smart object is an item equipped with a form of sensor or actuator, a tiny microprocessor, a communication device and a power source"(connecting smart objects with IP book). The sensor or actuator gives the smart object the ability to interact with the physical world, the microprocessor enables the smart object to transform the data captured from the sensors, albeit at a limited speed and at limited complexity. The communication device enables the smart object to communicate its sensor readings to the outside world and receive input from other smart objects. The power source provides electrical energy for the smart object to do its work. \\
 
 Wireless sensor networks ? page 11. 
+
+\subsection{Challenges of WSN}
+Data transmission, security, resource constraint, 
 
 \section{Netflow - A Traffic Collector}
 \textit{Netflow} is a feature that was created by Cisco Systems and introduced on Cisco Routers. Netflow allows the collection of the IP traffic in networks, and thus monitoring network traffic. Information such as Source and Destination addresses (defined as "Flows) and Traffic volume can be retrieved and further analyzed.\\
 
 There are three components when having Netflow set up : the Flow Exporter, the Flow Collector(s), and the analysis application (reference wikipedia/article). The Flow Exporter collects packets and forms what we call flows (having various definitions according to the version of Netflow used). Flows represent a stream of packets sharing common attributes (such as source and destination addresses). The exporter records the flows into Netlow records and sends passes them onto the Flow Collector. After reception, the Flow Collector will store the flow records received from the Exporter. The data stored can then be analyzed by applications, hence having statistics of traffic exchanges in a particular network.\\
 
-Ajouter des détails techniques ici sur Netflow.\\
+\todo{Ajouter des détails techniques ici sur Netflow}.\\
 
 Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Objective section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Solution section (fourth section?), we will describe in more details how we used Netflow in IoT Networks as a solution to our monitoring task.
 
 \section{ContikiOS - Cooja - Softwares a portee de main}
+
 We will now discuss Operating Systems in the Internet of Things. As discussed earlier, objects in IoT Networks have limited capabilities, i.e. processing capacity and storage, and limited battery. It is thus preferred to have an operating system that is not demanding and as light as possible. \\
 
 Though not ideal, a light version of Linux could be used. However, one requirement of working with smart objects is having the ability to react to \textit{Real-Time events}. In a situation where a smart sensor is used in a car to make its airbags open when a car crash occurs, the software in the said sensor must react to the crash almost instantly. In this case, we need a maximum time reaction to an event, otherwise the purpose of the object (and thus the airbag) is not met. A few operating systems have been developed to answer to the requirements of IoT objects, they are light, have a minimal set of functionalities, plus they guarantee time-bounded reaction to events. (source : Mobile and embedded systems, prof Sadre)\\
 
-Among existing operating systems, we have chosen to use one that is called \textit{ContikiOS}. It was developed in 2003 and is quite popular. Contiki is quite light in terms of memory, processing speed, and communication bandwidth. It is preemptive.\\
+\subsection{Cooja Simulating Software}
+(besoin de mettre une sous-section ou pas?)
+
+Among existing operating systems, we have chosen to use one that is called \textit{ContikiOS}. It is an open source operating system and it was developed in 2003. Contiki is quite light in terms of memory, processing speed, and communication bandwidth. It is preemptive.\\
 
 \todo{WHY WE HAVE CHOSEN CONTIKI?}
+
+\begin{itemize}
+\item protothreads
+\item Reduced C
+\end{itemize}
+wikipedia : "Contiki provides three network mechanisms: the uIP TCP/IP stack,[5] which provides IPv4 networking, the uIPv6 stack,[6] which provides IPv6 networking, and the Rime stack, which is a set of custom lightweight networking protocols designed for low-power wireless networks. The IPv6 stack was contributed by Cisco and was, when released, the smallest IPv6 stack to receive the IPv6 Ready certification.[7] The IPv6 stack also contains the Routing Protocol for Low power and Lossy Networks (RPL) routing protocol for low-power lossy IPv6 networks and the 6LoWPAN header compression and adaptation layer for IEEE 802.15.4 links.
+
+Rime is an alternative network stack, for use when the overhead of the IPv4 or IPv6 stacks is prohibitive. The Rime stack provides a set of communication primitives for low-power wireless systems. The default primitives are single-hop unicast, single-hop broadcast, multi-hop unicast, network flooding, and address-free data collection. The primitives can be used on their own or combined to form more complex protocols and mechanisms.[8]" 
 
 \subsection{Cooja Simulating Software}
 An existing tool called \textit{Cooja} has been developed on Contiki. Cooja is a simulation software (partly an emulator too) for Internet of Things networks. It has many features, such as allowing to build networks with different types of components (Sky motes, Z1 motes). Those components are Contiki nodes, i.e. nodes working through ContikiOS. Cooja allows to upload code to virtual motes, the same way Contiki code may be uploaded on physical. Cooja can either emulate nodes (the hardware of each component is entirely emulated), or create "Cooja nodes" where Contiki code is uploaded on, compiled and then executed on a simulation host. (Cooja allows to use non-Contiki nodes as well. Pertinent?). Cooja presents itself as a very useful software for our thesis, as it allows us to simulate large networks, and is quite useful when it comes to testing, since the uploading and compilation time of Contiki codes on the nodes in the Network we are testing and analyzing is faster than on real hardware. It also avoids physical material restriction.
