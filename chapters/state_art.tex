@@ -18,48 +18,53 @@ While it seems pretty straightforward, there does not seem to be a fine line of 
 (source : theinternetofthings.pdf, McKensey Quarterly)
 The main purpose of smart objects is automation, to replace human intervention for specific computations and data collection. Obviously, they allow the \textit{collection} of bigger loads of data at a faster pace. Once data is collected, the next step is to make actual conclusions about data information. From that point, according to those computations, instructions are passed through the IoT network and the network can enter the process of modifying the physical world through actuators, in an automated fashion and again with no human intervention once the IoT network is set up.\\
 
-While automation is already of great use, the Internet of Things aims at \textit{optimizing} how it affects the physical world. 
-1. Process optimization
-The Internet of Things is opening new frontiers for improving 
-processes. Some industries, such as chemical production, are 
-installing legions of sensors to bring much greater granularity to 
-monitoring. These sensors feed data to computers, which in turn 
-analyze them and then send signals to actuators that adjust processes—
-for example, by modifying ingredient mixtures, temperatures, or 
-pressures. Sensors and actuators can also be used to change the 
-position of a physical object as it moves down an assembly line, 
-ensuring that it arrives at machine tools in an optimum position 
-(small deviations in the position of work in process can jam or even 
-damage machine tools). This improved instrumentation, multiplied 
-hundreds of times during an entire process, allows for major 
-reductions in waste, energy costs, and human intervention.
-
-2. Optimized resource consumption
-Networked sensors and automated feedback mechanisms can change 
-usage patterns for scarce resources, including energy and water, often 
-by enabling more dynamic pricing. Utilities such as Enel in Italy and 
-Pacific Gas and Electric (PG&E) in the United States, for example, 
-are deploying “smart” meters that provide residential and industrial 
-customers with visual displays showing energy usage and the real-
-time costs of providing it. (The traditional residential fixed-price-
-per-kilowatt-hour billing masks the fact that the cost of producing 
-energy varies substantially throughout the day.) Based on time-of-use 
-pricing and better information residential consumers could shut down 
-air conditioners or delay running dishwashers during peak times.  
-Commercial customers can shift energy-intensive processes and 
-production away from high-priced periods of peak energy demand to 
-low-priced off-peak hours.
-Data centers, which are among the fastest-growing segments of global 
-energy demand, are starting to adopt power-management techniques 
-tied to information feedback. Power consumption is often half of a 
-typical facility’s total lifetime cost, but most managers lack a detailed 
-view of energy consumption patterns. Getting such a view isn’t easy, 
-since the energy usage of servers spikes at various times, depending 
-on workloads
+To go along with automation, the Internet of Things aims at \textit{optimizing} how it affects the physical world, in terms of energy consumption efficiency, timing, accuracy, etc. 
 
 \subsection{Challenges of the IoT}
+
+page 2 article : IoT : a survey (deuxième colonne) : 
+It shall not be forgotten, anyway, that the words ‘‘Inter-
+144
+net” and ‘‘Things”, when put together, assume a meaning
+145
+which introduces a disruptive level of innovation into to-
+146
+day ICT world. In fact, ‘‘Internet of Things” semantically
+147
+means ‘‘a world-wide network of interconnected objects
+148
+uniquely addressable, based on standard communication
+149
+protocols”
+[3]. This implies a huge number of (heteroge-
+150
+neous) objects involved in the process.
+151
+The object unique addressing and the representation
+152
+and storing of the exchanged information become the most
+153
+challenging issues, bringing directly to a third, ‘‘
+Semantic
+154
+oriented”, perspective of IoT. "
 \subsection{Wireless Sensor Networks}
-Data transmission, security, resource constraint, 
+
+(en.wikipedia.org/wiki/Wireless\_sensor\_network),\\
+
+The main kind of IoT network we have focused on are Wireless Sensor Networks. While our solution fits most types of IoT networks, we have decided to mainly focus on WSNs because they are the most constraining types(développer?).\\
+
+(per Connecting iot objets with IP book)
+The idea behind \textit{Wireless Sensor Networks} (\textit{WSN} in shortened form) is having small sensors collecting pertinent data from the physical world, communicating wirelessly to other sensors and in the end to a base station where all the data is collected and stored for further processing. Sensors not capable of directly transmitting information to the base station send their data to other sensors capable of relaying the information towards it (AJOUTER UNE IMAGE DE WSN?), in a hop by hop fashion.\\
+
+Wireless Sensor Networks are regularly used for environmental conditions monitoring such as wild fire tracking, agriculture management, humidity and temperature monitoring in forests, effect of global warming on glacier structures, air pollution monitoring, and many more. They are also used in the industrial field such as in data centers, mainly to monitor the temperature of racks.  \\
+
+(en.wikipedia.org/wiki/Sensor\_node), 
+The components of WSNs are "\textit{Wireless Nodes}" or "Motes". WSNs may be composed of a few hundreds to thousands of nodes, each node being conneted to one or several sensors. In addition to sensors, those nodes are also equipped with a microcontroller, a radio transceiver, memory, and a power source (a battery). The sensors are responsible for capturing data from the environment, especially when there is a change in an environmental condition such as temperature or humidity. (The continual analog signal produced by the sensors is digitized by an analog-to-digital converter and sent to controllers for further processing). Sensors are usually very small and thus consume a very low amount of battery power. The \textit{microcontroller} is responsible for peforming specific tasks and processing the data collected by the sensor, but also controlling other components of the node. The transceiver is used for communication purposes, mainly sending and receiving data using specific. It is often of the form of a radio or infrared. Transceivers have the particularity of both being able to send and receive data. Finally, the power source provides power supply instead of mains supply. The power source is thus in the form of a battery, it is consumed when the node is sending the environment, communicating with other sensor nodes, and doing some data processing. All of the components are designed to be as little power-consuming as possible. Having nodes not connected to mains power is an advantage because of not having to be plugged to a power supply (when the physical world makes it hard to have some, in moutains for example), but with such an advantage come resource constraints as we will explain later.  \\
+
+The main challenges of WSNs are Data transmission, resource constraint, and security. First, nodes must send their data to the server. As discussed earlier, each node may not have the server in their sending range because of a lack of power, thus they must send their data to an intermediate node relaying the information. Moreover, limited battery, must stay idle, ENERGY HARVESTING etc. Puis security.\\
+
+((((((Each such sensor network node has typically several parts: a radio transceiver with an internal antenna or connection to an external antenna, a microcontroller, an electronic circuit for interfacing with the sensors and an energy source, usually a battery or an embedded form of energy harvesting. A sensor node might vary in size from that of a shoebox down to the size of a grain of dust, although functioning "motes" of genuine microscopic dimensions have yet to be created. The cost of sensor nodes is similarly variable, ranging from a few to hundreds of dollars, depending on the complexity of the individual sensor nodes. Size and cost constraints on sensor nodes result in corresponding constraints on resources such as energy, memory, computational speed and communications bandwidth. The topology of the WSNs can vary from a simple star network to an advanced multi-hop wireless mesh network. The propagation technique between the hops of the network can be routing or flooding.)))))\\
 
 \subsection{The IoT, Not Totally Deployed Yet?}
 
