@@ -6,9 +6,64 @@ In this section, we will go deeper into the world of the \textit{Internet of Thi
 Challenges of iot : preface of book (page xx)\\
 + slide 17 du premier cours de mobile.
 
-Smart objects : "a smart object is an item equipped with a form of sensor or actuator, a tiny microprocessor, a communication device and a power source"(connecting smart objects with IP book). The sensor or actuator gives the smart object the ability to interact with the physical world, the microprocessor enables the smart object to transform the data captured from the sensors, albeit at a limited speed and at limited complexity. The communication device enables the smart object to communicate its sensor readings to the outside world and receive input from other smart objects. The power source provides electrical energy for the smart object to do its work. \\
-\subsection{Challenges of WSN}
+The Internet of Things can be used in many different situations. Power grids can now be better controlled and managed with smart objects, the temperature in buildings and houses can now be monitored and smart objects control radiators and air conditioners to modify ambient temperature, and thus make a more efficient consumption of energy. Shipping containers could also be equipped with devices to better help monitor and modify the climate inside, thus making sure food, clothing, and various materials are better taken care of.\\
+\subsection{Smart Objects ? IoT Devices?}
+
+Smart objects are the main components of an IoT Network. We will explain what makes them special and the purpose of their use.\\
+
+Smart objects, also called IoT Devices, smart devices or connected devices, are physical objects, that are embedded with an electronical component, that allows them to communicate with other objects. Those objects are composed of a software, are equipped with a microprocessor, a sensor or an actuator that allows them to interact with the physical and modify/control it, and network connectivity to allow exchange and collection of data. Thanks to network connectivity, devices can sense and exchange sense data of the physical world with each other. They are also equipped with a small battery, that provides a power source to the device.\\
+
+While it seems pretty straightforward, there does not seem to be a fine line of what exactly smart objects refer to. They may refer to the actual small device with processing and interacting capacity, or the bigger entity that is a physical object made "smart" by the addition of a sensor or actuator. In our case we will consider the latter definition of what an IoT device is.\\
+
+(source : theinternetofthings.pdf, McKensey Quarterly)
+The main purpose of smart objects is automation, to replace human intervention for specific computations and data collection. Obviously, they allow the \textit{collection} of bigger loads of data at a faster pace. Once data is collected, the next step is to make actual conclusions about data information. From that point, according to those computations, instructions are passed through the IoT network and the network can enter the process of modifying the physical world through actuators, in an automated fashion and again with no human intervention once the IoT network is set up.\\
+
+While automation is already of great use, the Internet of Things aims at \textit{optimizing} how it affects the physical world. 
+1. Process optimization
+The Internet of Things is opening new frontiers for improving 
+processes. Some industries, such as chemical production, are 
+installing legions of sensors to bring much greater granularity to 
+monitoring. These sensors feed data to computers, which in turn 
+analyze them and then send signals to actuators that adjust processes—
+for example, by modifying ingredient mixtures, temperatures, or 
+pressures. Sensors and actuators can also be used to change the 
+position of a physical object as it moves down an assembly line, 
+ensuring that it arrives at machine tools in an optimum position 
+(small deviations in the position of work in process can jam or even 
+damage machine tools). This improved instrumentation, multiplied 
+hundreds of times during an entire process, allows for major 
+reductions in waste, energy costs, and human intervention.
+
+2. Optimized resource consumption
+Networked sensors and automated feedback mechanisms can change 
+usage patterns for scarce resources, including energy and water, often 
+by enabling more dynamic pricing. Utilities such as Enel in Italy and 
+Pacific Gas and Electric (PG&E) in the United States, for example, 
+are deploying “smart” meters that provide residential and industrial 
+customers with visual displays showing energy usage and the real-
+time costs of providing it. (The traditional residential fixed-price-
+per-kilowatt-hour billing masks the fact that the cost of producing 
+energy varies substantially throughout the day.) Based on time-of-use 
+pricing and better information residential consumers could shut down 
+air conditioners or delay running dishwashers during peak times.  
+Commercial customers can shift energy-intensive processes and 
+production away from high-priced periods of peak energy demand to 
+low-priced off-peak hours.
+Data centers, which are among the fastest-growing segments of global 
+energy demand, are starting to adopt power-management techniques 
+tied to information feedback. Power consumption is often half of a 
+typical facility’s total lifetime cost, but most managers lack a detailed 
+view of energy consumption patterns. Getting such a view isn’t easy, 
+since the energy usage of servers spikes at various times, depending 
+on workloads
+
+\subsection{Challenges of the IoT}
+\subsection{Wireless Sensor Networks}
 Data transmission, security, resource constraint, 
+
+\subsection{The IoT, Not Totally Deployed Yet?}
+
+Most existing applications using the Internet of Things have been developed privately. Companies, developers, researchers have developed some specific solutions using the Internet of Things. However, those solutions are more specific, and hence optimized, for one particular application.\\
 
 \section{Netflow - A Traffic Collector}
 \textit{Netflow} is a feature that was created by Cisco Systems and introduced on Cisco Routers. Netflow allows the collection of the IP traffic in networks, and thus monitoring network traffic. Information such as Source and Destination addresses (defined as "Flows) and Traffic volume can be retrieved and further analyzed.\\
