@@ -3,6 +3,14 @@
 In this section, we will go deeper into the world of the \textit{Internet of Things}, see what differs from the traditional networking domain and explain the impact of such differences. We will also give insight on what has been done in matter of monitoring IoT network.\\
 
 \section{What is the Internet of Things?}
+
+The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies"\cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks"\cite{ituitu}. \\
+
+\todo[inline]{Give other examples.}
+With IoT, we dispose of networks constituted by devices which have the ability to communicate between them to exchange data. Also those devices can interact with their environment with means of sensors or actuators. An illustration of such network would be the \textit{Smart Home}. With Smart Home, automation comes into our house. The idea is to have, for example, your door talking to the lights to tell them to light on or to light off depending on if you enter or leave the room. You could have that your alarm would tell the coffee machine to prepare some coffee. Also, you could remotely manage your house by activating or deactivating the heat and so on. \\
+
+It is often viewed as the next \textit{Industrial Revolution} which is named as \textit{Industry 4.0}. This revolution is made possible by the emergence of IoT but also Cloud Computing which make possible the treatment of the vast amount of data that comes from IoT networks.\\
+
 Challenges of iot : preface of book (page xx)\\
 + slide 17 du premier cours de mobile.
 
@@ -18,11 +26,11 @@ While it seems pretty straightforward, there does not seem to be a fine line of 
 (source : theinternetofthings.pdf, McKensey Quarterly)
 The main purpose of smart objects is automation, to replace human intervention for specific computations and data collection. Obviously, they allow the \textit{collection} of bigger loads of data at a faster pace. Once data is collected, the next step is to make actual conclusions about data information. From that point, according to those computations, instructions are passed through the IoT network and the network can enter the process of modifying the physical world through actuators, in an automated fashion and again with no human intervention once the IoT network is set up.\\
 
-To go along with automation, the Internet of Things aims at \textit{optimizing} how it affects the physical world, in terms of energy consumption efficiency, timing, accuracy, etc. 
+To go along with automation, the Internet of Things aims at \textit{optimizing} how it affects the physical world, in terms of energy consumption efficiency, timing, accuracy, etc.
 
 \subsection{Challenges of the IoT}
 
-page 2 article : IoT : a survey (deuxième colonne) : 
+page 2 article : IoT : a survey (deuxième colonne) :
 It shall not be forgotten, anyway, that the words ‘‘Inter-
 144
 net” and ‘‘Things”, when put together, assume a meaning
@@ -59,7 +67,7 @@ The idea behind \textit{Wireless Sensor Networks} (\textit{WSN} in shortened for
 
 Wireless Sensor Networks are regularly used for environmental conditions monitoring such as wild fire tracking, agriculture management, humidity and temperature monitoring in forests, effect of global warming on glacier structures, air pollution monitoring, and many more. They are also used in the industrial field such as in data centers, mainly to monitor the temperature of racks.  \\
 
-(en.wikipedia.org/wiki/Sensor\_node), 
+(en.wikipedia.org/wiki/Sensor\_node),
 The components of WSNs are "\textit{Wireless Nodes}" or "Motes". WSNs may be composed of a few hundreds to thousands of nodes, each node being conneted to one or several sensors. In addition to sensors, those nodes are also equipped with a microcontroller, a radio transceiver, memory, and a power source (a battery). The sensors are responsible for capturing data from the environment, especially when there is a change in an environmental condition such as temperature or humidity. (The continual analog signal produced by the sensors is digitized by an analog-to-digital converter and sent to controllers for further processing). Sensors are usually very small and thus consume a very low amount of battery power. The \textit{microcontroller} is responsible for peforming specific tasks and processing the data collected by the sensor, but also controlling other components of the node. The transceiver is used for communication purposes, mainly sending and receiving data using specific. It is often of the form of a radio or infrared. Transceivers have the particularity of both being able to send and receive data. Finally, the power source provides power supply instead of mains supply. The power source is thus in the form of a battery, it is consumed when the node is sending the environment, communicating with other sensor nodes, and doing some data processing. All of the components are designed to be as little power-consuming as possible. Having nodes not connected to mains power is an advantage because of not having to be plugged to a power supply (when the physical world makes it hard to have some, in moutains for example), but with such an advantage come resource constraints as we will explain later.  \\
 
 The main challenges of WSNs are Data transmission, resource constraint, and security. First, nodes must send their data to the server. As discussed earlier, each node may not have the server in their sending range because of a lack of power, thus they must send their data to an intermediate node relaying the information. Moreover, limited battery, must stay idle, ENERGY HARVESTING etc. Puis security.\\
@@ -98,7 +106,7 @@ Among existing operating systems, we have chosen to use one that is called \text
 \end{itemize}
 wikipedia : "Contiki provides three network mechanisms: the uIP TCP/IP stack,[5] which provides IPv4 networking, the uIPv6 stack,[6] which provides IPv6 networking, and the Rime stack, which is a set of custom lightweight networking protocols designed for low-power wireless networks. The IPv6 stack was contributed by Cisco and was, when released, the smallest IPv6 stack to receive the IPv6 Ready certification.[7] The IPv6 stack also contains the Routing Protocol for Low power and Lossy Networks (RPL) routing protocol for low-power lossy IPv6 networks and the 6LoWPAN header compression and adaptation layer for IEEE 802.15.4 links.
 
-Rime is an alternative network stack, for use when the overhead of the IPv4 or IPv6 stacks is prohibitive. The Rime stack provides a set of communication primitives for low-power wireless systems. The default primitives are single-hop unicast, single-hop broadcast, multi-hop unicast, network flooding, and address-free data collection. The primitives can be used on their own or combined to form more complex protocols and mechanisms.[8]" 
+Rime is an alternative network stack, for use when the overhead of the IPv4 or IPv6 stacks is prohibitive. The Rime stack provides a set of communication primitives for low-power wireless systems. The default primitives are single-hop unicast, single-hop broadcast, multi-hop unicast, network flooding, and address-free data collection. The primitives can be used on their own or combined to form more complex protocols and mechanisms.[8]"
 
 \subsection{Cooja Simulating Software}
 An existing tool called \textit{Cooja} has been developed on Contiki. Cooja is a simulation software (partly an emulator too) for Internet of Things networks. It has many features, such as allowing to build networks with different types of components (Sky motes, Z1 motes). Those components are Contiki nodes, i.e. nodes working through ContikiOS. Cooja allows to upload code to virtual motes, the same way Contiki code may be uploaded on physical. Cooja can either emulate nodes (the hardware of each component is entirely emulated), or create "Cooja nodes" where Contiki code is uploaded on, compiled and then executed on a simulation host. (Cooja allows to use non-Contiki nodes as well. Pertinent?). Cooja presents itself as a very useful software for our thesis, as it allows us to simulate large networks, and is quite useful when it comes to testing, since the uploading and compilation time of Contiki codes on the nodes in the Network we are testing and analyzing is faster than on real hardware. It also avoids physical material restriction.
