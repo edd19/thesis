@@ -112,21 +112,6 @@ The main challenges of WSNs are Data transmission, resource constraint, and secu
 
 Most existing applications using the Internet of Things have been developed privately. Companies, developers, researchers have developed some specific solutions using the Internet of Things. However, those solutions are more specific, and hence optimized, for one particular application.\\
 
-\section{Netflow - A Traffic Collector}
-\textit{Netflow} is a feature that was created by Cisco Systems and introduced on Cisco Routers. Netflow allows the collection of the IP traffic in networks, and thus monitoring network traffic. Information such as Source and Destination addresses (defined as "Flows) and Traffic volume can be retrieved and further analyzed.\\
-
-There are three components when having Netflow set up : the Flow Exporter, the Flow Collector(s), and the analysis application (reference wikipedia/article). The Flow Exporter collects packets and forms what we call flows (having various definitions according to the version of Netflow used). Flows represent a stream of packets sharing common attributes (such as source and destination addresses). The exporter records the flows into Netlow records and sends passes them onto the Flow Collector. After reception, the Flow Collector will store the flow records received from the Exporter. The data stored can then be analyzed by applications, hence having statistics of traffic exchanges in a particular network.\\
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{res/netflow.png}
-  \caption{Netflow}
-  \label{fig:netflow}
-\end{figure}
-
-\todo{Ajouter des détails techniques ici sur Netflow}.\\
-
-Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Objective section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Solution section (fourth section?), we will describe in more details how we used Netflow in IoT Networks as a solution to our monitoring task.
 
 \section{ContikiOS - Cooja - Softwares a portee de main}
 
@@ -159,7 +144,14 @@ An existing tool called \textit{Cooja} has been developed on Contiki. Cooja is a
 
 There are three components when having Netflow set up : the Flow Exporter, the Flow Collector(s), and the analysis application (reference wikipedia/article). The Flow Exporter collects packets and forms what we call flows (having various definitions according to the version of Netflow used). Flows represent a stream of packets sharing common attributes (such as source and destination addresses). The exporter records the flows into Netlow records and sends passes them onto the Flow Collector. After reception, the Flow Collector will store the flow records received from the Exporter. The data stored can then be analyzed by applications, hence having statistics of traffic exchanges in a particular network.\\
 
-Ajouter des détails techniques ici sur Netflow.\\
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{res/netflow.png}
+  \caption{Netflow}
+  \label{fig:netflow}
+\end{figure}
+
+\todo[inline]{Ajouter des détails techniques ici sur Netflow}.\\
 
 Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Objective section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Solution section (fourth section?), we will describe in more details how we used Netflow in IoT Networks as a solution to our monitoring task.
 
