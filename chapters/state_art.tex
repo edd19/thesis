@@ -53,7 +53,7 @@ While it seems pretty straightforward, there does not seem to be a fine line of 
 Those devices are quite limited also in term of resources. Those are small embedded devices with low power cpu and a limited memory size. Also they are not plugged meaning they rely mainly on their battery. To maximize the battery lifetime, they often switch between awake phases, where the mote is able to communicate and execute process, and sleep phases, where the mote does nothing. Additionally, their wireless range do not permit them to often communicate directly with all members of the network. This is why most of the IoT networks are organized in a hop-by-hop fashion. \\
 
 \todo[inline]{Verify number of sensors nodes}
-Tab.\ref{tab:sensors_char} gives some component characteristics about some devices. The raspberry pi 3 presents good specifications. This is typically the type of device that would be used as sink node or data aggregator or data analyser inside an IoT network. The other devices, the MTM-CM5000-MSP and Zolertia Firefly, are mainly sensor motes. They are used to sense the environment and transmit the values. They are not intended for intensive applications. They do not need high specifications and this is why they present low characteristics compare to the Raspberry. But when designing protocols for the Internet of Things, this is those low power devices that needs to be taken into account as they are the most restraining. Also they compose most of the objects used in IoT.
+Tab.\ref{tab:sensors_char} gives some component characteristics about some devices. The raspberry pi 3 presents good specifications. This is typically the type of device that would be used as sink node or data aggregator or data analyser inside an IoT network. The other devices, the MTM-CM5000-MSP and Zolertia Firefly, are mainly sensor motes. They are used to sense the environment and transmit the values. They are not intended for intensive applications. They do not need high specifications and this is why they present low characteristics compare to the Raspberry. But when designing protocols for the Internet of Things, this is those low power devices that must be taken into account as they are the most restraining. Also they compose most of the objects used in IoT. \\
 
 \todo[inline]{Add sensors for table}
 \begin{table}
@@ -66,13 +66,12 @@ Tab.\ref{tab:sensors_char} gives some component characteristics about some devic
     Wireless & IEEE 802.15.4 2.4GHz Wireless Module (up to 250Kbps) & IEEE 802.15.4 2.4GHz Wireless Module (up to 250Kbps) & 802.11n Wireless LAN (up to 600Mbps)\\ \hline
     Dimension & 84.4x36.25x13.30mm & 68x25mm & 85 x 56 x 17 mm \\ \hline
   \end{tabularx}
-  \caption{Devices characteristics}
+  \caption{IoT devices characteristics}
   \label{tab:sensors_char}
 
 \end{table}
 
-(source : theinternetofthings.pdf, McKensey Quarterly)
-The main purpose of smart objects is automation, to replace human intervention for specific computations and data collection. Obviously, they allow the \textit{collection} of bigger loads of data at a faster pace. Once data is collected, the next step is to make actual conclusions about data information. From that point, according to those computations, instructions are passed through the IoT network and the network can enter the process of modifying the physical world through actuators, in an automated fashion and again with no human intervention once the IoT network is set up.\\
+As \cite{chui2010internet} states, the main purpose of smart objects is automation, to replace human intervention for specific computations and data collection. Obviously, they allow the \textit{collection} of bigger loads of data at a faster pace. Once data is collected, the next step is to make actual conclusions about data information. From that point, according to those computations, instructions are passed through the IoT network and the network can enter the process of modifying the physical world through actuators, in an automated fashion and again with no human intervention once the IoT network is set up.\\
 
 To go along with automation, the Internet of Things aims at \textit{optimizing} how it affects the physical world, in terms of energy consumption efficiency, timing, accuracy, etc.
 
