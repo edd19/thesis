@@ -5,7 +5,7 @@
 The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "\textit{a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies}" \cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "\textit{an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks}" \cite{ituitu}. Fig.\ref{fig:iot} depicts the Internet of Things.\\
 
 \todo[inline]{Give other examples as industry automation or smart cities, or healthcare. (see architecting iot article)}
-With IoT, we dispose of networks constituted by devices which have the ability to communicate between them to exchange data. Also those devices can interact with their environment with means of sensors or actuators. An illustration of such network would be the \textit{Smart Home}. With Smart Home, automation comes into our house. The idea is to have, for example, your door talking to the lights to tell them to light on or to light off depending on if you enter or leave the room. You could have that your alarm would tell the coffee machine to prepare some coffee when ringing in the morning or that your thermostat would regulate the heat of the house. Also, you could remotely manage your house by activating or deactivating the heat and so on. \\
+With the IoT, we dispose of networks constituted by devices which have the ability to communicate between them to exchange data. Also those devices can interact with their environment with means of sensors or actuators. An illustration of such network would be the \textit{Smart Home}. With Smart Home, automation comes into our house. The idea is to have, for example, your door talking to the lights to tell them to light on or to light off depending on if you enter or leave the room. You could have that your alarm would tell the coffee machine to prepare some coffee when ringing in the morning or that your thermostat would regulate the heat of the house. Also, you could remotely manage your house by activating or deactivating the heat and so on. While discussing the present of the IoT in homes, one field that could largely benefit from the IoT is the field of \textit{e-health}, thanks to the medical monitoring of elderly, ill, and disabled patients, while they would still be in their house and keep their autonomy in their daily life. Smart objects could either be implanted in or around the patient, and information is retrieved from their situation to have regular checkups on their condition(s). The information is then sent and analyzed by specialized staff, ready to intervene if needed. The advantage here is having the ability to remotely monitor patients' situation. (source : architecting the iot).\\
 
 \begin{figure}
   \centering
@@ -16,7 +16,7 @@ With IoT, we dispose of networks constituted by devices which have the ability t
 
 But IoT is not limited only to home. It is already deployed on organizations. For example, the start-up Epicenter injects microchips into their employees (after agreement)\cite{website:lat_04_17}. The microchip enable an employee to open a door or to operate a printer by just a wave of the hand. Also it permits to track them inside the building and permits a colleague to know your whereabouts. \\
 
-The Internet of Things can be used in many different situations. Power grids can now be better controlled and managed with smart objects, the temperature in buildings and houses can now be monitored and smart objects control radiators and air conditioners to modify ambient temperature, and thus make a more efficient consumption of energy. Shipping containers could also be equipped with devices to better help monitor and modify the climate inside, thus making sure food, clothing, and various materials are better taken care of. Environments hard to analyse like glacier or mountains becomes easier to monitor as we only need to place sensors nodes that will periodically send us the data retrieved from the environment such as temperature. \\
+The Internet of Things can also be used in many more situations. Power grids can now be better controlled and managed with smart objects, the temperature in buildings and houses can now be monitored and smart objects control radiators and air conditioners to modify ambient temperature, and thus make a more efficient consumption of energy. Shipping containers could also be equipped with devices to better help monitor and modify the climate inside, thus making sure food, clothing, and various materials are better taken care of. Environments hard to analyse like glacier or mountains becomes easier to monitor as we only need to place sensors nodes that will periodically send us the data retrieved from the environment such as temperature. \\
 
 \todo[inline]{Speak about \textit{Industrial Revolution} and \textit{Industry 4.0}}
 
@@ -80,38 +80,18 @@ To go along with automation, the Internet of Things aims at \textit{optimizing} 
 https://datafloq.com/read/three-major-challenges-internet-of-things/83 : cet article parle de trois gros challenges pour l'iot : shared standards and infrastructures, data control and access, data security.\\
 
 \subsection{Lack of Standard Architecture}
+
+The main challenges of the Internet of Things is to define a standard architecture. This is actually the main reason why it has not been fully deployed yet. Several characteristics are needed for the IoT to be deployed, and they should be included in the standard infrastructure. The characteristics needed are distributivity, interoperability (devices from different companies being able to communicate, with standardized protocols), scalability (huge amount of smart objects communicating), resources scarcity (power and consumption are limited on each device), and security.
+
+
 Main source : architecting the internet of things : state of the art.\\
+
 
 "Its success relies greatly on a well-defined architecture that will provide scalable, dynamic, and secure basement to its deployment. In fact, several challenges stand between the conceptual idea of IoT, and the full deployement of its applications into our daily life. IoT deployment is closely related to the establishment of a standard architecture. This architecture should support future exten- sions, and covers IoT characteristics such as distributivity, interoperabil- ity, and scalability. A well defined, scalable, backward compatible, and secure architecture is required to bring the IoT concept closer to reality. In the literature, several architectures have been proposed. Nevertheless, each architecture brings a share of drawbacks, and fails covering all IoT characterisitcs. In this chapter, we review the main proposed architec- tures for the Internet of Things, highlighting their adequacy with respect to IoT requirements."\\
 
+\subsection{The IoT, Not Totally Deployed Yet?}
 
-
-(page 2 article : IoT : a survey (deuxième colonne) :
-It shall not be forgotten, anyway, that the words ‘‘Inter-
-144
-net” and ‘‘Things”, when put together, assume a meaning
-145
-which introduces a disruptive level of innovation into to-
-146
-day ICT world. In fact, ‘‘Internet of Things” semantically
-147
-means ‘‘a world-wide network of interconnected objects
-148
-uniquely addressable, based on standard communication
-149
-protocols”
-[3]. This implies a huge number of (heteroge-
-150
-neous) objects involved in the process.
-151
-The object unique addressing and the representation
-152
-and storing of the exchanged information become the most
-153
-challenging issues, bringing directly to a third, ‘‘
-Semantic
-154
-oriented”, perspective of IoT. "
+Most existing applications using the Internet of Things have been developed privately. Companies, developers, researchers have developed some specific solutions using the Internet of Things. However, those solutions are more specific, and hence optimized, for one particular application.\\
 
 \section{Network Organization}
 \todo[inline]{Talk about the different organizations that an iot network can take.}
@@ -134,9 +114,9 @@ The main challenges of WSNs are Data transmission, resource constraint, and secu
 
 ((((((Each such sensor network node has typically several parts: a radio transceiver with an internal antenna or connection to an external antenna, a microcontroller, an electronic circuit for interfacing with the sensors and an energy source, usually a battery or an embedded form of energy harvesting. A sensor node might vary in size from that of a shoebox down to the size of a grain of dust, although functioning "motes" of genuine microscopic dimensions have yet to be created. The cost of sensor nodes is similarly variable, ranging from a few to hundreds of dollars, depending on the complexity of the individual sensor nodes. Size and cost constraints on sensor nodes result in corresponding constraints on resources such as energy, memory, computational speed and communications bandwidth. The topology of the WSNs can vary from a simple star network to an advanced multi-hop wireless mesh network. The propagation technique between the hops of the network can be routing or flooding.)))))\\
 
-\section{The IoT, Not Totally Deployed Yet?}
-
-Most existing applications using the Internet of Things have been developed privately. Companies, developers, researchers have developed some specific solutions using the Internet of Things. However, those solutions are more specific, and hence optimized, for one particular application.\\
+(source : architecting the iot page 6)
+(((((
+Sensor networks consist of a certain number, which can be very high, of sens- ing nodes communicating in a wireless multi-hop fashion (Figure 2). In general, nodes report their sensing results to a small number of special nodes called sinks (or base stations). A lot of effort has been undertaken by the scientific commu- nity on sensor networks. Indeed, many work have addressed several problems at the different layers of the protocol stack. In these works, the main issues concern energy efficiency (which is a limited resource in WSN), scalability (the number of nodes can rise significantly), reliability (the system might be involved in critical applications), and robustness (nodes might be subject to failure) [17].
 
 
 \chapter{ContikiOS - Cooja - Softwares a portee de main}
