@@ -1,10 +1,8 @@
-\chapter{State of the art} \label{ch:state_art}
+\part{Start of the art} \label{part:state_art}
 
-In this section, we will go deeper into the world of the \textit{Internet of Things}, see what differs from the traditional networking domain and explain the impact of such differences. We will also give insight on what has been done in matter of monitoring IoT network.\\
+\chapter{What is the Internet of Things?}
 
-\section{What is the Internet of Things?}
-
-The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies"\cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks"\cite{ituitu}. Fig.\ref{fig:iot} shows examples of things.\\
+The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "\textit{a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies}"\cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "\textit{an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks}"\cite{ituitu}. Fig.\ref{fig:iot} shows examples of things.\\
 
 \todo[inline]{Give other examples as industry automation or smart cities, or healthcare. (see architecting iot article)}
 With IoT, we dispose of networks constituted by devices which have the ability to communicate between them to exchange data. Also those devices can interact with their environment with means of sensors or actuators. An illustration of such network would be the \textit{Smart Home}. With Smart Home, automation comes into our house. The idea is to have, for example, your door talking to the lights to tell them to light on or to light off depending on if you enter or leave the room. You could have that your alarm would tell the coffee machine to prepare some coffee when ringing in the morning or that your thermostat would regulate the heat of the house. Also, you could remotely manage your house by activating or deactivating the heat and so on. \\
@@ -12,7 +10,7 @@ With IoT, we dispose of networks constituted by devices which have the ability t
 \begin{figure}
   \label{fig:iot}
   \centering
-  \includegraphics[scale=0.3]{res/iot.png}
+  \includegraphics[width=\textwidth]{res/iot.png}
   \caption{Internet of Things (Source: \url{pixabay.com})}
 \end{figure}
 
@@ -27,7 +25,7 @@ Those examples show how much we could benefit from IoT. It could improve our eff
 \todo[inline]{Challenges of iot : preface of book (page xx) + slide 17 du premier cours de mobile.}
 
 
-\subsection{Smart Objects}
+\section{Smart Objects}
 
 Smart objects are the main components of an IoT Network. We will explain what makes them special and the purpose of their use.\\
 
@@ -95,11 +93,11 @@ and storing of the exchanged information become the most
 challenging issues, bringing directly to a third, ‘‘
 Semantic
 154
-oriented”, perspective of IoT. ")
-\subsection{Network Organization}
+oriented”, perspective of IoT. "
+\section{Network Organization}
 \todo[inline]{Talk about the different organizations that an iot network can take.}
 
-\subsubsection{Wireless Sensor Networks}
+\subsection{Wireless Sensor Networks}
 
 (en.wikipedia.org/wiki/Wireless\_sensor\_network),\\
 
@@ -117,27 +115,18 @@ The main challenges of WSNs are Data transmission, resource constraint, and secu
 
 ((((((Each such sensor network node has typically several parts: a radio transceiver with an internal antenna or connection to an external antenna, a microcontroller, an electronic circuit for interfacing with the sensors and an energy source, usually a battery or an embedded form of energy harvesting. A sensor node might vary in size from that of a shoebox down to the size of a grain of dust, although functioning "motes" of genuine microscopic dimensions have yet to be created. The cost of sensor nodes is similarly variable, ranging from a few to hundreds of dollars, depending on the complexity of the individual sensor nodes. Size and cost constraints on sensor nodes result in corresponding constraints on resources such as energy, memory, computational speed and communications bandwidth. The topology of the WSNs can vary from a simple star network to an advanced multi-hop wireless mesh network. The propagation technique between the hops of the network can be routing or flooding.)))))\\
 
-\subsection{The IoT, Not Totally Deployed Yet?}
+\section{The IoT, Not Totally Deployed Yet?}
 
 Most existing applications using the Internet of Things have been developed privately. Companies, developers, researchers have developed some specific solutions using the Internet of Things. However, those solutions are more specific, and hence optimized, for one particular application.\\
 
-\section{Netflow - A Traffic Collector}
-\textit{Netflow} is a feature that was created by Cisco Systems and introduced on Cisco Routers. Netflow allows the collection of the IP traffic in networks, and thus monitoring network traffic. Information such as Source and Destination addresses (defined as "Flows) and Traffic volume can be retrieved and further analyzed.\\
 
-There are three components when having Netflow set up : the Flow Exporter, the Flow Collector(s), and the analysis application (reference wikipedia/article). The Flow Exporter collects packets and forms what we call flows (having various definitions according to the version of Netflow used). Flows represent a stream of packets sharing common attributes (such as source and destination addresses). The exporter records the flows into Netlow records and sends passes them onto the Flow Collector. After reception, the Flow Collector will store the flow records received from the Exporter. The data stored can then be analyzed by applications, hence having statistics of traffic exchanges in a particular network.\\
-
-\todo{Ajouter des détails techniques ici sur Netflow}.\\
-
-Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Objective section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Solution section (fourth section?), we will describe in more details how we used Netflow in IoT Networks as a solution to our monitoring task.
-
-\section{ContikiOS - Cooja - Softwares a portee de main}
+\chapter{ContikiOS - Cooja - Softwares a portee de main}
 
 We will now discuss Operating Systems in the Internet of Things. As discussed earlier, objects in IoT Networks have limited capabilities, i.e. processing capacity and storage, and limited battery. It is thus preferred to have an operating system that is not demanding and as light as possible. \\
 
 Though not ideal, a light version of Linux could be used. However, one requirement of working with smart objects is having the ability to react to \textit{Real-Time events}. In a situation where a smart sensor is used in a car to make its airbags open when a car crash occurs, the software in the said sensor must react to the crash almost instantly. In this case, we need a maximum time reaction to an event, otherwise the purpose of the object (and thus the airbag) is not met. A few operating systems have been developed to answer to the requirements of IoT objects, they are light, have a minimal set of functionalities, plus they guarantee time-bounded reaction to events. (source : Mobile and embedded systems, prof Sadre)\\
 
 \subsection{The Contiki Operating System}
-(besoin de mettre une sous-section ou pas?)
 
 Among existing operating systems, we have chosen to use one that is called \textit{ContikiOS}. It is an open source operating system and it was developed in 2003. Contiki is quite light in terms of memory, processing speed, and communication bandwidth. It is preemptive.\\
 
@@ -151,18 +140,33 @@ wikipedia : "Contiki provides three network mechanisms: the uIP TCP/IP stack,[5]
 
 Rime is an alternative network stack, for use when the overhead of the IPv4 or IPv6 stacks is prohibitive. The Rime stack provides a set of communication primitives for low-power wireless systems. The default primitives are single-hop unicast, single-hop broadcast, multi-hop unicast, network flooding, and address-free data collection. The primitives can be used on their own or combined to form more complex protocols and mechanisms.[8]"
 
-\subsection{Cooja Simulating Software}
+\section{Cooja Simulating Software}
 An existing tool called \textit{Cooja} has been developed on Contiki. Cooja is a simulation software (partly an emulator too) for Internet of Things networks. It has many features, such as allowing to build networks with different types of components (Sky motes, Z1 motes). Those components are Contiki nodes, i.e. nodes working through ContikiOS. Cooja allows to upload code to virtual motes, the same way Contiki code may be uploaded on physical. Cooja can either emulate nodes (the hardware of each component is entirely emulated), or create "Cooja nodes" where Contiki code is uploaded on, compiled and then executed on a simulation host. (Cooja allows to use non-Contiki nodes as well. Pertinent?). Cooja presents itself as a very useful software for our thesis, as it allows us to simulate large networks, and is quite useful when it comes to testing, since the uploading and compilation time of Contiki codes on the nodes in the Network we are testing and analyzing is faster than on real hardware. It also avoids physical material restriction.
 
-\section{Monitoring tools for traditional networks}
+\chapter{Monitoring tools for traditional networks}
 
-\subsection{Netflow - A Traffic Collector}
+When speaking of monitoring for traditional networks, two techniques come to mind: \textit{Netflow} and \textit{sFlow}. The two approaches have the common goal to give network administrators informations about the traffic that passes through their networks. However, they differentiate in the way they do so. In our solution, we were mainly inspired by Netflow as it is more light than sFlow in term of memory used.
+
+\section{Netflow - A Traffic Collector}
 \textit{Netflow} is a feature that was created by Cisco Systems and introduced on Cisco Routers. Netflow allows the collection of the IP traffic in networks, and thus monitoring network traffic. Information such as Source and Destination addresses (defined as "Flows) and Traffic volume can be retrieved and further analyzed.\\
 
-There are three components when having Netflow set up : the Flow Exporter, the Flow Collector(s), and the analysis application (reference wikipedia/article). The Flow Exporter collects packets and forms what we call flows (having various definitions according to the version of Netflow used). Flows represent a stream of packets sharing common attributes (such as source and destination addresses). The exporter records the flows into Netlow records and sends passes them onto the Flow Collector. After reception, the Flow Collector will store the flow records received from the Exporter. The data stored can then be analyzed by applications, hence having statistics of traffic exchanges in a particular network.\\
+There are three components when having Netflow set up : the Flow Exporter, the Flow Collector(s), and the analysis application (reference wikipedia/article). The Flow Exporter collects packets and forms what we call flows (having various definitions according to the version of Netflow used). Flows represent a stream of packets sharing common attributes (such as source and destination addresses). The exporter records the flows into Netlow records and sends passes them onto the Flow Collector. After reception, the Flow Collector will store the flow records received from the Exporter. The data stored can then be analyzed by applications, hence having statistics of traffic exchanges in a particular network. The Fig.\ref{fig:netflow} illustrate the different parties in a Netflow process.\\
 
-Ajouter des détails techniques ici sur Netflow.\\
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{res/netflow.png}
+  \caption{Netflow}
+  \label{fig:netflow}
+\end{figure}
 
-Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Objective section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Solution section (fourth section?), we will describe in more details how we used Netflow in IoT Networks as a solution to our monitoring task.
+The version of Netflow that we are quite interested in, is the Netflow version 10 or \textit{IPFIX} \cite{claise2013rfc}. This version is an IETF (Internet Engineering Task Force) protocol whereas the previous versions are proprietaty protocols of Cisco. IPFIX is template based meaning that contrary to previous versions of Netflow (excluded version 9 which is also template based), the netflow records can vary to suit the need of the administrators or organizations. The template permit to define what we want to retrieve and by the same occasion define what we consider to be a flow. An organization could consider a flow to be 3-uple: source ipv6 address, destination ipv6 address, number of octets exchanged. While another one could consider a flow to be the 4-uple: source ipv6 address, destination ipv6 address, number of octets exchanged, number of packets exchanged. \\
 
-\section{Current Monitoring Tools for IoT}
+The IANA (Internet Assigned Numbers Authority)
+
+\todo[inline]{Ajouter des détails techniques ici sur Netflow}.\\
+
+Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Introduction section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Solution section (fourth section?), we will describe in more details how we used Netflow in IoT Networks as a solution to our monitoring task.
+
+\section{sFlow}
+
+\chapter{Current Monitoring Tools for IoT}
