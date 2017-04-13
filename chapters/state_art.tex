@@ -2,16 +2,16 @@
 
 \chapter{What is the Internet of Things?}
 
-The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "\textit{a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies}"\cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "\textit{an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks}"\cite{ituitu}. Fig.\ref{fig:iot} shows examples of things.\\
+The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "\textit{a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies}" \cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "\textit{an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks}" \cite{ituitu}. Fig.\ref{fig:iot} depicts the Internet of Things.\\
 
 \todo[inline]{Give other examples as industry automation or smart cities, or healthcare.}
 With IoT, we dispose of networks constituted by devices which have the ability to communicate between them to exchange data. Also those devices can interact with their environment with means of sensors or actuators. An illustration of such network would be the \textit{Smart Home}. With Smart Home, automation comes into our house. The idea is to have, for example, your door talking to the lights to tell them to light on or to light off depending on if you enter or leave the room. You could have that your alarm would tell the coffee machine to prepare some coffee when ringing in the morning or that your thermostat would regulate the heat of the house. Also, you could remotely manage your house by activating or deactivating the heat and so on. \\
 
 \begin{figure}
-  \label{fig:iot}
   \centering
   \includegraphics[width=\textwidth]{res/iot.png}
   \caption{Internet of Things (Source: \url{pixabay.com})}
+  \label{fig:iot}
 \end{figure}
 
 But IoT is not limited only to home. It is already deployed on organizations. For example, the start-up Epicenter injects microchips into their employees (after agreement)\cite{website:lat_04_17}. The microchip enable an employee to open a door or to operate a printer by just a wave of the hand. Also it permits to track them inside the building and permits a colleague to know your whereabouts. \\
@@ -20,7 +20,7 @@ The Internet of Things can be used in many different situations. Power grids can
 
 \todo[inline]{Speak about \textit{Industrial Revolution} and \textit{Industry 4.0}}
 
-Those examples show how much we could benefit from IoT. It could improve our efficiency in term of energy. But also could make our life easier by automating certain aspects of the life. In the following subsections, we will go deeper into some technical aspects of the Internet of Things. \\
+Those examples show how much we could benefit from IoT. It could improve our efficiency in term of energy but also in term of production. But also could make our life easier by automating certain aspects of the life. In the following subsections, we will go deeper into some technical aspects of the Internet of Things. \\
 
 \todo[inline]{Challenges of iot : preface of book (page xx) + slide 17 du premier cours de mobile.}
 
@@ -47,10 +47,29 @@ Smart objects, also called IoT Devices, smart devices or connected devices, are 
     \caption{Smart objects (Source: \url{pixabay.com})}\label{fig:smart_objects}
 \end{figure}
 
-While it seems pretty straightforward, there does not seem to be a fine line of what exactly smart objects refer to. They may refer to the actual small device with processing and interacting capacity, or the bigger entity that is a physical object made "smart" by the addition of a sensor or actuator. In our case we will consider the latter definition of what an IoT device is. Also in this thesis, we will often employ the terms motes, nodes, devices, smart objects or things to define the same concept. \\
+While it seems pretty straightforward, there does not seem to be a fine line of what exactly smart objects refer to. They may refer to the actual small device with processing and interacting capacity, or the bigger entity that is a physical object made "smart" by the addition of a sensor or actuator. In our case we will consider the latter definition of what an IoT device is. Also in this thesis, we will often employ the terms motes, nodes, devices, smart objects or things interchangeably. \\
 
 \todo[inline]{Add numbers}
 Those devices are quite limited also in term of resources. Those are small embedded devices with low power cpu and a limited memory size. Also they are not plugged meaning they rely mainly on their battery. To maximize the battery lifetime, they often switch between awake phases, where the mote is able to communicate and execute process, and sleep phases, where the mote does nothing. Additionally, their wireless range do not permit them to often communicate directly with all members of the network. This is why most of the IoT networks are organized in a hop-by-hop fashion. \\
+
+\todo[inline]{Verify number of sensors nodes}
+Tab.\ref{tab:sensors_char} gives some component characteristics about some devices. The raspberry pi 3 presents good specifications. This is typically the type of device that would be used as sink node or data aggregator or data analyser inside an IoT network. The other devices, the MTM-CM5000-MSP and Zolertia Firefly, are mainly sensor motes. They are used to sense the environment and transmit the values. They are not intended for intensive applications. They do not need high specifications and this is why they present low characteristics compare to the Raspberry. But when designing protocols for the Internet of Things, this is those low power devices that needs to be taken into account as they are the most restraining. Also they compose most of the objects used in IoT.
+
+\todo[inline]{Add sensors for table}
+\begin{table}
+  \centering
+  \begin{tabularx}{\textwidth}{|X|X|X|X|}
+    \hline
+    Model & MTM-CM5000-MSP & Zolertia Firefly & Raspberry pi 3 \\ \hline
+    CPU & 8MHz MSP430 & 32MHz ARM Cortex-M3 & 1.2GHz 64-bit quad-core ARMv8 CPU\\ \hline
+    RAM & 10KB & 32KB & 1 GB \\ \hline
+    Wireless & IEEE 802.15.4 2.4GHz Wireless Module (up to 250Kbps) & IEEE 802.15.4 2.4GHz Wireless Module (up to 250Kbps) & 802.11n Wireless LAN (up to 600Mbps)\\ \hline
+    Dimension & 84.4x36.25x13.30mm & 68x25mm & 85 x 56 x 17 mm \\ \hline
+  \end{tabularx}
+  \caption{Devices characteristics}
+  \label{tab:sensors_char}
+
+\end{table}
 
 (source : theinternetofthings.pdf, McKensey Quarterly)
 The main purpose of smart objects is automation, to replace human intervention for specific computations and data collection. Obviously, they allow the \textit{collection} of bigger loads of data at a faster pace. Once data is collected, the next step is to make actual conclusions about data information. From that point, according to those computations, instructions are passed through the IoT network and the network can enter the process of modifying the physical world through actuators, in an automated fashion and again with no human intervention once the IoT network is set up.\\
