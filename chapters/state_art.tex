@@ -102,7 +102,7 @@ An IoT network can serve different purposes leading to different topologies. Thr
 
 The mesh network was, when designing our solution, our main concern. The point-to-point and start topologies are quite easy to monitor as all traffic must pass through a known point. In the point-to-point it would be one the two nodes that shares the connection, while in the star it would be the central hub. For the latter one, star, we can consider the central hub to be a powerful device meaning it could be a netflow exporter if the need arise to analyze the network. But for the mesh topology, multiple distinct paths can exist for a node to reach another one. It is in need of an efficient solution. \\
 
-After having discussed about the main topologies of IoT networks, we will detail what is an Wireless Sensor Networks or WSN. 
+After having discussed about the main topologies of IoT networks, we would like to make en emphasis on what is called Wireless Sensor Networks or WSN.
 
 
 \subsection*{Wireless Sensor Networks}
@@ -162,6 +162,7 @@ The \textit{actuating building block} finds its importance when it comes to maki
 
 Even though no global standard infrastructure exists for the Internet of Things, some companies have nevertheless attempted to develop their own architecture, mainly for specific purposes answering to their local needs. We will take a look at some of the existing ones and see what they cannot be a general solution.\\
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% IOT OS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{ContikiOS - Cooja - Softwares a portee de main}
 
@@ -169,7 +170,7 @@ We will now discuss Operating Systems in the Internet of Things. As discussed ea
 
 Though not ideal, a light version of Linux could be used. However, one requirement of working with smart objects is having the ability to react to \textit{Real-Time events}. In a situation where a smart sensor is used in a car to make its airbags open when a car crash occurs, the software in the said sensor must react to the crash almost instantly. In this case, we need a maximum time reaction to an event, otherwise the purpose of the object (and thus the airbag) is not met. A few operating systems have been developed to answer to the requirements of IoT objects, they are light, have a minimal set of functionalities, plus they guarantee time-bounded reaction to events. (source : Mobile and embedded systems, prof Sadre)\\
 
-\subsection{The Contiki Operating System}
+\section{The Contiki Operating System}
 
 Among existing operating systems, we have chosen to use one that is called \textit{ContikiOS}. It is an open source operating system and it was developed in 2003. Contiki is quite light in terms of memory, processing speed, and communication bandwidth. It is preemptive.\\
 
