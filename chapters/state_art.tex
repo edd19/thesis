@@ -49,7 +49,6 @@ Smart objects, also called IoT Devices, smart devices or connected devices, are 
 
 While it seems pretty straightforward, there does not seem to be a fine line of what exactly smart objects refer to. They may refer to the actual small device with processing and interacting capacity, or the bigger entity that is a physical object made "smart" by the addition of a sensor or actuator. In our case we will consider the latter definition of what an IoT device is. Also in this thesis, we will often employ the terms motes, nodes, devices, smart objects or things interchangeably. \\
 
-\todo[inline]{Add numbers}
 Those devices are quite limited also in term of resources. Those are small embedded devices with low power cpu and a limited memory size. Also they are not plugged meaning they rely mainly on their battery. To maximize the battery lifetime, they often switch between awake phases, where the mote is able to communicate and execute process, and sleep phases, where the mote does nothing. Additionally, their wireless range do not permit them to often communicate directly with all members of the network. This is why most of the IoT networks are organized in a hop-by-hop fashion. \\
 
 \todo[inline]{Verify number of sensors nodes}
@@ -76,9 +75,37 @@ As \cite{chui2010internet} states, the main purpose of smart objects is automati
 To go along with automation, the Internet of Things aims at \textit{optimizing} how it affects the physical world, in terms of energy consumption efficiency, timing, accuracy, etc.
 
 \section{Network Organization}
-\todo[inline]{Talk about the different organizations that an iot network can take.}
 
-\subsection{Wireless Sensor Networks}
+An IoT network can serve different purposes leading to different topologies. Three topologies are worth to mention as seen in \cite{website:3topo}. Those are:
+\begin{itemize}
+  \item \textit{Point-to-Point} where a direct connection is configured between two points. An example would be a bluetooth pairing between a laptop and a hi-fi station. It is not widely deployed in industrial IoT as the network cannot scale outside of the two nodes.
+  \item \textit{Star} (see Fig.\ref{fig:star}) topology where all nodes communicate via a central hub. All the nodes dispose of a direct link to the central hub. This topology of network is easy to analyze as all traffic must pass through the central hub. However the major disadvantage of it is that the network is limited to the range of communication of the weakest node.
+  \item \textit{Mesh} (see Fig.\ref{fig:mesh}) networks are composed of three types of nodes. First, we have simple sensors nodes that only transmit their data. Then we have sensor/router nodes that act as simple sensors nodes but must act as relay for packets of other nodes. Finally, the gateway node that is the intermediary between the network and Internet. This topology is characterized by a communication done in hop-by-hop fashion. It is quite difficult to analyze as we do not know in advance how the routing will be done. Still, the big advantage is the wide surface that the network can occupy and the resiliency due to the number of paths available.\\
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+      \includegraphics[width=\textwidth]{res/star.png}
+      \caption{Star topology}
+      \label{fig:star}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{res/mesh.png}
+        \caption{Mesh topology}
+        \label{fig:mesh}
+    \end{subfigure}
+    \caption{Network topologies (Source: \url{en.wikipedia.org/wiki/Network_topology})}
+    \label{fig:topology}
+\end{figure}
+
+The mesh network was, when designing our solution, our main concern. The point-to-point and start topologies are quite easy to monitor as all traffic must pass through a known point. In the point-to-point it would be one the two nodes that shares the connection, while in the star it would be the central hub. For the latter one, star, we can consider the central hub to be a powerful device meaning it could be a netflow exporter if the need arise to analyze the network. But for the mesh topology, multiple distinct paths can exist for a node to reach another one. It is in need of an efficient solution. \\
+
+After having discussed about the main topologies of IoT networks, we will detail what is an Wireless Sensor Networks or WSN. 
+
+
+\subsection*{Wireless Sensor Networks}
 
 (en.wikipedia.org/wiki/Wireless\_sensor\_network),\\
 
@@ -203,7 +230,7 @@ The fact that exporters need to store packets makes this solution too heavy for 
 
 \section{IoT networks}
 
-A plethora of tools exist to monitor Internet of Things networks. Yet, a preponderant part of those tools are data visualization centric. In this section, some tools will presented. For a more exhaustive survey, see \cite{parbat2010data}.
+A plethora of tools exist to monitor Internet of Things networks. Yet, a preponderant part of those tools are data visualization centric. In this section, some tools will be presented. For a more exhaustive survey, see \cite{parbat2010data}.
 
 \subsection{Octopus}
 
@@ -250,7 +277,7 @@ The Fig.\ref{fig:foren6} shows the GUI interface of Foren6. Foren6 dispose of th
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{res/foren6.png}
-  \caption{Foren6 GUI}
+  \caption{Foren6 GUI (source: \url{cetic.github.io/foren6/})}
   \label{fig:foren6}
 \end{figure}
 
