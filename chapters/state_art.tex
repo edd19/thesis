@@ -210,3 +210,27 @@ The architecture of Octopus, Fig.\ref{fig:octopus_archi}, is straightforward. Th
     \caption{Octopus (Source: \url{www.researchgate.net/publication/220098661_Octopus_Monitoring_visualization_and_control_of_sensor_networks})}
     \label{fig:octopus}
 \end{figure}
+
+\subsection{Spyglass}
+\todo[inline]{Explain}
+\textit{Spyglass} \cite{buschmann2005spyglass}.
+
+\subsection{Foren6}
+
+The approach taken by Cetic with their tool \textit{Foren6} \cite{website:foren6} is quite different than the other tools presented. Foren6 use a sniffer to retrieve information of the network. Passive sniffers are scattered over the network and retransmit the traffic they observe. \\
+
+The Fig.\ref{fig:foren6} shows the GUI interface of Foren6. Foren6 dispose of the following features:
+\begin{itemize}
+  \item Display logical topology of the motes.
+  \item Analyze of previous records packet traces.
+  \item Possibility to analyze simulated network like with Cooja. \\
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{res/foren6.png}
+  \caption{Foren6 GUI}
+  \label{fig:foren6}
+\end{figure}
+
+To be as efficient as possible, the solution offered by Cetic needs nodes to be solely focused on sniffing and also present enough processing power and battery to be able to sniff and transmit the packets captured. If the network is deployed on a large surface, there will be a need to have enough sniffers, well placed, so as to not miss traffic. Also should those motes, sniffers send the packets captured using IoT network monitored, it would increase the burden on the latter network.
