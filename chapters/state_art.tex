@@ -153,6 +153,7 @@ This chapter will be the occasion to present what has been done in matter of mon
 When speaking of monitoring for traditional networks, two techniques come to mind: \textit{Netflow} and \textit{sFlow}. The two approaches have the common goal to give network administrators informations about the traffic that passes through their networks. However, they differentiate in the way they do so. In our solution, we were mainly inspired by Netflow as it is lighter than sFlow in term of memory used.
 
 \subsection{Netflow - A Traffic Collector}
+
 \textit{Netflow} is a feature that was created by Cisco Systems and introduced on Cisco Routers. Netflow allows the collection of the IP traffic in networks, and thus monitoring network traffic. Information such as Source and Destination addresses (defined as "Flows) and Traffic volume can be retrieved and further analyzed.\\
 
 There are three components when having Netflow set up : the Flow Exporter, the Flow Collector(s), and the analysis application. The Flow Exporter collects packets and forms what we call flows (having various definitions according to the version of Netflow used). Flows represent a stream of packets sharing common attributes (such as source and destination addresses). The exporter records the flows into Netlow records and sends passes them onto the Flow Collector. After reception, the Flow Collector will store the flow records received from the Exporter. The data stored can then be analyzed by applications, hence having statistics of traffic exchanges in a particular network. This process is illustrated in Fig.\ref{fig:netflow}.\\
@@ -167,10 +168,20 @@ There are three components when having Netflow set up : the Flow Exporter, the F
 The version of Netflow that we are quite interested in, is the Netflow version 10 or \textit{IPFIX} \cite{claise2013rfc}. This version is an IETF (Internet Engineering Task Force) protocol whereas the previous versions are proprietaty protocols of Cisco. IPFIX is template based meaning that contrary to previous versions of Netflow (excluded version 9 which is also template based), the netflow records can vary to suit the need of the administrators or organizations. The template permit to define what we want to retrieve and by the same occasion define what we consider to be a flow. An organization could consider a flow to be 3-uple: source ipv6 address, destination ipv6 address, number of octets exchanged. While another one could consider a flow to be the 4-uple: source ipv6 address, destination ipv6 address, number of octets exchanged, number of packets exchanged. \\
 
 \todo[inline]{Ajouter figure de IPFIX}.\\
-The IANA (Internet Assigned Numbers Authority) defined already some record fields like the Ipv6 source/destination address, the source transport port, and so on \cite{website:ipfix_entities}. However, the power of IPFIX lies in the possibility to define ourself record fields (called entreprise fields). And that is the main reason we were so interested in it. We could define for example a record field for battery left of the source for example. Furthermore, even if they suggest size for some record fields, they offer the possibility to redefine the size to a smaller one. The suggested field is only considered as an upper-bound, meaning we cannot propose a bigger size.\\
+The IANA (Internet Assigned Numbers Authority) defined already some record fields like the Ipv6 source/destination address, the source transport port, and so on \cite{website:ipfix_entities}. However, the power of IPFIX lies in the possibility to define ourself record fields (called entreprise fields). And that is the main reason we were so interested in it. It is thus possible to define for example a record field for battery remaining of the sender for example. Furthermore, even if they suggest size for record fields, they offer the possibility to redefine the size to a smaller one. The suggested field is only considered as an upper-bound, meaning we cannot propose a bigger size.\\
 
 Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Introduction section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Part \ref{part:solution}, we will describe in more details how we used Netflow in IoT Networks as a solution to our monitoring task.
 
+\subsubsection*{Nfdump/Nfsen}
+
+
+
 \subsection{sFlow}
+
+\textit{sFlow} (for sampled flow) was initially proposed by the company HP. It is maintained by the sFlow.org consortium. The approach taken by SFlow is different than the one taken by Netflow. The two solutions shares the notion of exporter, collector and analysis application. But the difference is in the records that are sent by the exporter. \\
+
+Whereas Netflow sends only informations on the flows observerd, sFlow sends original packets that pass through the network. sFlow is characterized by the \textit{polling interval} and the \textit{sampling rate}. The polling interval defines the periods at which the collector must report the number of occurences of packets that pass through. The sampling rate defines how much packets need to be sampled on a set number of packets. \\
+
+The fact that exporters need to store packets makes this solution too heavy for majority of IoT devices. Another issue with sFlow is that we can miss peculiar packets by having a sampling rate different than 1:1 and so lose important informations.
 
 \chapter{Current Monitoring Tools for IoT}
