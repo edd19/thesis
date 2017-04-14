@@ -186,16 +186,65 @@ The IANA (Internet Assigned Numbers Authority) defined already some record field
 
 Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Introduction section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Part \ref{part:solution}, we will describe in more details how we used Netflow in IoT Networks as a solution to our monitoring task.
 
-\subsubsection*{Nfdump/Nfsen}
-
-
-
 \subsection{sFlow}
 
-\textit{sFlow} (for sampled flow) was initially proposed by the company HP. It is maintained by the sFlow.org consortium. The approach taken by SFlow is different than the one taken by Netflow. The two solutions shares the notion of exporter, collector and analysis application. But the difference is in the records that are sent by the exporter. \\
+\textit{sFlow} (for sampled flow) was initially proposed by the company HP. It is maintained by the sFlow.org consortium \cite{website:sflow}. The approach taken by SFlow is different than the one taken by Netflow. The two solutions shares the notion of exporter, collector and analysis application. But the difference is in the records that are sent by the exporter. \\
 
 Whereas Netflow sends only informations on the flows observerd, sFlow sends original packets that pass through the network. sFlow is characterized by the \textit{polling interval} and the \textit{sampling rate}. The polling interval defines the periods at which the collector must report the number of occurences of packets that pass through. The sampling rate defines how much packets need to be sampled on a set number of packets. \\
 
 The fact that exporters need to store packets makes this solution too heavy for majority of IoT devices. Another issue with sFlow is that we can miss peculiar packets by having a sampling rate different than 1:1 and so lose important informations.
 
-\chapter{Current Monitoring Tools for IoT}
+\section{IoT networks}
+
+A plethora of tools exist to monitor Internet of Things networks. Yet, a preponderant part of those tools are data visualization centric. In this section, some tools will presented. For a more exhaustive survey, see \cite{parbat2010data}.
+
+\subsection{Octopus}
+
+\textit{Octopus} \cite{jurdak2011octopus} is a software that permits to monitor and visualize WSN networks. It offers also the possibility to control those networks by giving command. The software was written in Java. \\
+
+The GUI interface, Fig.\ref{fig:octopus_gui}, display a logical topology of the sensor nodes as well as charts reporting the retrieved values from the nodes. It also enable an user to modify the sampling rate at which nodes report the environmental values. \\
+
+To effectively do so, Octopus needs the motes to send message in a specific format so as to be able to parse them. Also the motes need to be configured to be able to interpret messages coming from the software.\\
+
+The architecture of Octopus, Fig.\ref{fig:octopus_archi}, is straightforward. The sensors nodes send periodically messages to a gateway which will be in charge to transmit those messages to distant Octopus client. The Scout can be seen as collector that will listen for incoming messages. When it received a message, it will update the Mote DB who is in charge to maintain the status of the motes and also log the message. It will also trigger an update of the GUI interface, Panels.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.5\textwidth}
+      \includegraphics[width=\textwidth]{res/octopus.png}
+      \caption{Octopus GUI}
+      \label{fig:octopus_gui}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{res/octopus_archi.png}
+        \caption{Octopus architecture}
+        \label{fig:octopus_archi}
+    \end{subfigure}
+    \caption{Octopus (Source: \url{www.researchgate.net/publication/220098661_Octopus_Monitoring_visualization_and_control_of_sensor_networks})}
+    \label{fig:octopus}
+\end{figure}
+
+\subsection{Spyglass}
+\todo[inline]{Explain}
+\textit{Spyglass} \cite{buschmann2005spyglass}.
+
+\subsection{Foren6}
+
+The approach taken by Cetic with their tool \textit{Foren6} \cite{website:foren6} is quite different than the other tools presented. Foren6 use a sniffer to retrieve information of the network. Passive sniffers are scattered over the network and retransmit the traffic they observe. \\
+
+The Fig.\ref{fig:foren6} shows the GUI interface of Foren6. Foren6 dispose of the following features:
+\begin{itemize}
+  \item Display logical topology of the motes.
+  \item Analyze of previous records packet traces.
+  \item Possibility to analyze simulated network like with Cooja. \\
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{res/foren6.png}
+  \caption{Foren6 GUI}
+  \label{fig:foren6}
+\end{figure}
+
+To be as efficient as possible, the solution offered by Cetic needs nodes to be solely focused on sniffing and also present enough processing power and battery to be able to sniff and transmit the packets captured. If the network is deployed on a large surface, there will be a need to have enough sniffers, well placed, so as to not miss traffic. Also should those motes, sniffers send the packets captured using IoT network monitored, it would increase the burden on the latter network.
