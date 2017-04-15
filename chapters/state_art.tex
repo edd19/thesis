@@ -1,4 +1,4 @@
-\part{Start of the art} \label{part:state_art}
+\part{State of the art} \label{part:state_art}
 
 \chapter{What is the Internet of Things?}
 
@@ -51,10 +51,8 @@ While it seems pretty straightforward, there does not seem to be a fine line of 
 
 Those devices are quite limited also in term of resources. Those are small embedded devices with low power cpu and a limited memory size. Also they are not plugged meaning they rely mainly on their battery. To maximize the battery lifetime, they often switch between awake phases, where the mote is able to communicate and execute process, and sleep phases, where the mote does nothing. Additionally, their wireless range do not permit them to often communicate directly with all members of the network. This is why most of the IoT networks are organized in a hop-by-hop fashion. \\
 
-\todo[inline]{Verify number of sensors nodes}
-Tab.\ref{tab:sensors_char} gives some component characteristics about some devices. The raspberry pi 3 presents good specifications. This is typically the type of device that would be used as sink node or data aggregator or data analyser inside an IoT network. The other devices, the MTM-CM5000-MSP and Zolertia Firefly, are mainly sensor motes. They are used to sense the environment and transmit the values. They are not intended for intensive applications. They do not need high specifications and this is why they present low characteristics compare to the Raspberry. But when designing protocols for the Internet of Things, this is those low power devices that must be taken into account as they are the most restraining. Also they compose most of the objects used in IoT. \\
+Tab.\ref{tab:sensors_char} gives some component characteristics about some devices. The raspberry pi 3 presents good specifications. This is typically the type of device that would be used as sink node or data aggregator or data analyser inside an IoT network. The other devices, the MTM-CM5000-MSP and Zolertia Firefly, are mainly sensor motes. They are used to sense the environment and transmit the values. They are not intended for intensive applications. They do not need high specifications and this is why they present low characteristics compare to the Raspberry. But when designing protocols for the Internet of Things, this is those low power devices that must be taken into account as they are the most restraining. \\
 
-\todo[inline]{Add sensors for table}
 \begin{table}
   \centering
   \begin{tabularx}{\textwidth}{|X|X|X|X|}
@@ -107,17 +105,20 @@ After having discussed about the main topologies of IoT networks, we would like 
 
 \subsection*{Wireless Sensor Networks}
 
-(en.wikipedia.org/wiki/Wireless\_sensor\_network),\\
+The main kind of IoT network we have focused on are Wireless Sensor Networks (WSN in shortened form). While our solution fits most types of IoT networks, we have decided to mainly focus on WSNs because they are the most constraining types.\\
 
-The main kind of IoT network we have focused on are Wireless Sensor Networks. While our solution fits most types of IoT networks, we have decided to mainly focus on WSNs because they are the most constraining types(développer?).\\
+As explained in \cite{vasseur2010interconnecting}, the idea behind \textit{Wireless Sensor Networks} is having small sensors collecting pertinent data from the physical world, communicating wirelessly to other sensors and in the end to a base station where all the data is collected and stored for further processing. Sensors not capable of directly transmitting information to the base station send their data to other sensors capable of relaying the information towards it, in a hop by hop fashion as illustrated in Fig.\ref{fig:wsn}. In that sense, WSNs present mesh topology.\\
 
-(per Connecting iot objets with IP book)
-The idea behind \textit{Wireless Sensor Networks} (\textit{WSN} in shortened form) is having small sensors collecting pertinent data from the physical world, communicating wirelessly to other sensors and in the end to a base station where all the data is collected and stored for further processing. Sensors not capable of directly transmitting information to the base station send their data to other sensors capable of relaying the information towards it (AJOUTER UNE IMAGE DE WSN?), in a hop by hop fashion.\\
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{res/wsn.png}
+  \caption{Wireless Sensor Networks (source: \url{commons.wikimedia.org/wiki/File:WSN.svg} )}
+  \label{fig:wsn}
+\end{figure}
 
 Wireless Sensor Networks are regularly used for environmental conditions monitoring such as wild fire tracking, agriculture management, humidity and temperature monitoring in forests, effect of global warming on glacier structures, air pollution monitoring, and many more. They are also used in the industrial field such as in data centers, mainly to monitor the temperature of racks.  \\
 
-(en.wikipedia.org/wiki/Sensor\_node),
-The components of WSNs are "\textit{Wireless Nodes}" or "Motes". WSNs may be composed of a few hundreds to thousands of nodes, each node being conneted to one or several sensors. In addition to sensors, those nodes are also equipped with a microcontroller, a radio transceiver, memory, and a power source (a battery). The sensors are responsible for capturing data from the environment, especially when there is a change in an environmental condition such as temperature or humidity. (The continual analog signal produced by the sensors is digitized by an analog-to-digital converter and sent to controllers for further processing). Sensors are usually very small and thus consume a very low amount of battery power. The \textit{microcontroller} is responsible for peforming specific tasks and processing the data collected by the sensor, but also controlling other components of the node. The transceiver is used for communication purposes, mainly sending and receiving data using specific. It is often of the form of a radio or infrared. Transceivers have the particularity of both being able to send and receive data. Finally, the power source provides power supply instead of mains supply. The power source is thus in the form of a battery, it is consumed when the node is sending the environment, communicating with other sensor nodes, and doing some data processing. All of the components are designed to be as little power-consuming as possible. Having nodes not connected to mains power is an advantage because of not having to be plugged to a power supply (when the physical world makes it hard to have some, in moutains for example), but with such an advantage come resource constraints as we will explain later.  \\
+The components of WSNs are "\textit{Wireless Nodes}" or "Motes". WSNs may be composed of a few hundreds to thousands of nodes, each node being connected to one or several sensors. In addition to sensors, those nodes are also equipped with a microcontroller, a radio transceiver, memory, and a power source (eg. battery). The sensors are responsible for capturing data from the environment, especially when there is a change in an environmental condition such as temperature or humidity. (The continual analog signal produced by the sensors is digitized by an analog-to-digital converter and sent to controllers for further processing). Sensors are usually very small and thus consume a very low amount of battery power. The \textit{microcontroller} is responsible for performing specific tasks and processing the data collected by the sensor, but also controlling other components of the node. The transceiver is used for communication purposes, mainly sending and receiving data using specific. It is often of the form of a radio or infrared. Transceivers have the particularity of both being able to send and receive data. Finally, the power source provides power supply instead of mains supply. The power source is thus in the form of a battery, it is consumed when the node is sending the environment, communicating with other sensor nodes, and doing some data processing. All of the components are designed to be as little power-consuming as possible. Having nodes not connected to mains power is an advantage because of not having to be plugged to a power supply (when the physical world makes it hard to have some, in moutains for example), but with such an advantage come resource constraints as we will explain later.  \\
 
 The main challenges of WSNs are Data transmission, resource constraint, and security. First, nodes must send their data to the server. As discussed earlier, each node may not have the server in their sending range because of a lack of power, thus they must send their data to an intermediate node relaying the information. Moreover, limited battery, must stay idle, ENERGY HARVESTING etc. Puis security.\\
 
@@ -133,7 +134,7 @@ Radio-frequency identification or RFID uses radio signals to record the presence
 
 Tags are associated to products, animals, or people if their identification is needed for tracking for instance. The tracking is done using radio waves. There are two kinds of RFID tags, the active RFID tags that are battery-powered, and the passive RFID tags that have no batteries and work using signal power from other tags requesting information.\\
 
-The RFID technology has a main advantage that is its limited cost and thus allow its deployment on a huge amount of devices. 
+The RFID technology has a main advantage that is its limited cost and thus allow its deployment on a huge amount of devices.
 \section{Challenges of The IoT}
 
 https://datafloq.com/read/three-major-challenges-internet-of-things/83 : cet article parle de trois gros challenges pour l'iot : shared standards and infrastructures, data control and access, data security.\\
