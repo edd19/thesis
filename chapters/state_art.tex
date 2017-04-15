@@ -182,11 +182,14 @@ We will now discuss Operating Systems in the Internet of Things. As discussed ea
 
 Though not ideal, a light version of Linux could be used. However, one requirement of working with smart objects is having the ability to react to \textit{Real-Time events}. In a situation where a smart sensor is used in a car to make its airbags open when a car crash occurs, the software in the said sensor must react to the crash almost instantly. In this case, we need a maximum time reaction to an event, otherwise the purpose of the object (and thus the airbag) is not met. A few operating systems have been developed to answer to the requirements of IoT objects, they are light, have a minimal set of functionalities, plus they guarantee time-bounded reaction to events. (source : Mobile and embedded systems, prof Sadre)\\
 
+\todo[inline]{Cite different OS like Tiny OS, RIOT OS}
+There exists quite a number of Operating Systems for IoT devices nowadays \cite{website:iot_os}.
+
 \section{The Contiki Operating System}
 
 Among existing operating systems, we have chosen to use one that is called \textit{ContikiOS}. It is an open source operating system and it was developed in 2003. Contiki is quite light in terms of memory, processing speed, and communication bandwidth. It is preemptive.\\
 
-\todo{WHY WE HAVE CHOSEN CONTIKI?}
+The reason we have chosen Contiki as OS for testing our idea is due to the simulation software, Cooja, which facilitates the debugging and the tests. Another reason, is that we are quite familiar with it having already programmed using Contiki. However, our solution should be easily ported to other OSes. The OS is just used to program the motes.\\
 
 \begin{itemize}
 \item protothreads
