@@ -129,12 +129,7 @@ The components of WSNs are "\textit{Wireless Nodes}" or "Motes" (see Fig.\ref{fi
 
 The main challenges of WSNs are Data transmission, resource constraint, and security. First, nodes must send their data to the server. As discussed earlier, each node may not have the server in their sending range because of a lack of power, thus they must send their data to an intermediate node relaying the information. Moreover, limited battery, must stay idle, ENERGY HARVESTING etc. Puis security.\\
 
-((((((Each such sensor network node has typically several parts: a radio transceiver with an internal antenna or connection to an external antenna, a microcontroller, an electronic circuit for interfacing with the sensors and an energy source, usually a battery or an embedded form of energy harvesting. A sensor node might vary in size from that of a shoebox down to the size of a grain of dust, although functioning "motes" of genuine microscopic dimensions have yet to be created. The cost of sensor nodes is similarly variable, ranging from a few to hundreds of dollars, depending on the complexity of the individual sensor nodes. Size and cost constraints on sensor nodes result in corresponding constraints on resources such as energy, memory, computational speed and communications bandwidth. The topology of the WSNs can vary from a simple star network to an advanced multi-hop wireless mesh network. The propagation technique between the hops of the network can be routing or flooding.)))))\\
-
 (source : architecting the iot page 6)
-(((((
-Sensor networks consist of a certain number, which can be very high, of sens- ing nodes communicating in a wireless multi-hop fashion (Figure 2). In general, nodes report their sensing results to a small number of special nodes called sinks (or base stations). A lot of effort has been undertaken by the scientific commu- nity on sensor networks. Indeed, many work have addressed several problems at the different layers of the protocol stack. In these works, the main issues concern energy efficiency (which is a limited resource in WSN), scalability (the number of nodes can rise significantly), reliability (the system might be involved in critical applications), and robustness (nodes might be subject to failure) [17].
-
 \subsection{Radio Frequency IDentification - RFID}
 
 Radio-frequency identification or RFID uses radio signals to record the presence of specific objects. Its purpose is the identification of a person or an item, using a system of tags. Tags are small transponders (combined radio receiver and transmitter). The transponders can transmit identity information when requested to. There also are tag readers to process the identification.\\
@@ -169,10 +164,28 @@ The \textit{actuating building block} finds its importance when it comes to maki
 
 \subsection{Potential Architecture Design}
 
+Though global architecture has yet to be decided in the Networking world, an architecture design has been proposed to be a base of the future global IoT architecture. \\
 
-\subsection{Existing Architectures}
+There is a three-layer architecture that is commonly accepted. It consists of the \textit{Perception Layer}, the \textit{Network Layer}, and the \textit{Application Layer}. \\
 
-Even though no global standard infrastructure exists for the Internet of Things, some companies have nevertheless attempted to develop their own architecture, mainly for specific purposes answering to their local needs. We will take a look at some of the existing ones and see what they cannot be a general solution.\\
+The \textit{Perception Layer} is used to sense the world via the sensors used in objects that are part of the IoT network. It uses technologies such as RFID and WSNs that we described earlier. This layer is also responsible for the conversion of the information into digital signals for transmission. The \textit{Network Layer} is where the processing of the data is done after collection through the Perception Layer, and it is responsible for the transmission of data to the application layer using network technologies such as WSN and LAN. In the networks, the media for transmission may be 3G/4G, Wifi, Bluetooth, etc. The \textit{Application Layer} constitutes the front end of the IoT Architecture, it uses the processed data from the previous layers.\\
+
+
+\subsection{Attempted Architectures}
+
+Even though no global standard infrastructure exists for the Internet of Things, some companies have nevertheless attempted to develop their own architecture, mainly for specific purposes answering to their local needs. We will take a look at a few of the existing ones. \\
+
+There are usually two approaches for IoT Architectures, the first one is to use an existing architecture and adapt it to the IoT context, the second one is to create a new IoT architecture from scratch.\\
+
+\todo[inline]{besoin de + de détails?}
+
+First, there is the \textbf{IETF protocol suite}. Considering the protocol stack of TCP/IP makes sense since it is widely deployed on the internet. However, applying it to the IoT context make the deployment challenging because of resources scarcity of IoT devices, the instable wireless communication, and the heterogeneity of the traffic data and the devices. Knowing those difficulties, the IETF is trying to work with specific protocols of the IoT and standardizing them  for each layer of the stack. Namely, they use 802.15.4 for the data link layer, 6LoWPAN (Low power Wireless Personal Area Networks) as the Network Layer for an addressing scheme, RPL (Routing Protocol for Low Power and Lossy Networks) as a routing protocol, and CoAP (Constrained Application Protocol) as the application layer.\\
+
+The \textbf{Server based approach}, called Server-Based Internet of Things Architecture. The idea behind this approach is to develop protocols and services based on a gateaway server such that the constrained devices in computation and communication capabilities are still part of the IoT in a secure and efficient way. For the \textit{physical and link layer}, each small devices is connected to a single server, connecting the device and the internet and acting as a gateway. The \textit{Network Layer} is based on IPv6, by communicating with 6LoWPAN between the devices and the server. For the \textit{Transport Layer}, the server will comumunicate with the devices using UDP (UDP being lighter than TCP/IP) over 6LoWPAN. As for everything related to the application layer functions, the goal is to have each device offer a HTTP web-server interface for authorized users to use the functionalities of the said device. Those web-servers will be hosted on the gateway server.\\
+
+As for creating a new IoT architecture from Scratch, a \textbf{Cloud Based approach} could be used. As we know, a considerable amount of data is generated from the devices. This data has to be stored and processed, as well as being retrieved in an efficient way. Cloud Computing aims at offering high reliability and scalability, along with providing data access for the IoT applications. A Cloud Computing platform for the IoT would thus receive the data collected from the sensors, analyze and intepret the data, as well as providing web visualizations. The Cloud not only reduces costs of deploying applications, but is also highly scalable. Indeed, sensing service providers can join the network and offer their data using a storage cloud, analytic tool developers can provide their software tools, artificial intelligence experts can provide their data mining and machine learning tools, and finally computer graphics designer can offer a variety of visualization tools.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% IOT OS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
