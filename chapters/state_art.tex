@@ -184,19 +184,19 @@ Though not ideal, a light version of Linux could be used. However, one requireme
 
 There exists quite a number of Operating Systems for IoT devices nowadays \cite{website:iot_os}:
 \begin{itemize}
-\item Contiki OS
-\item RIOT OS
-\item Tiny OS
-\item Windows 10 IoT, ...
+\item \textbf{Contiki OS}: discussed further.
+\item \textbf{RIOT OS}: Developped in 2008, RIOT OS \cite{website:riot} \cite{baccelli2013riot} is an Operating System for Internet of Things. The goal of RIOT is to offer a platform to develop applications for the wide range IOT devices. It presents a memory footprint of 1.5KB of RAM and 5KB of ROM. RIOT offers the possibility to write applications in C or C++. Contrary to Contiki who supports a subset of C, RIOT support fully the C language with its standard libraries. It supports full multi-threading and real-time programming. Also contrary to other IoT OSs, it offers hardware abstraction. Like Contiki, it supports the recent protocols of IETF like RPL, 6lowpan and so on.
+\item \textbf{TinyOS}: It's first version was deployed in 200. TinyOS \cite{website:tinyos} is an OS for low-power wireless embedded devices. It is event-driven like Contiki. It also present a small memory footprint. It was written in NesC, a dialect of C. 
+\item Others like Windows 10 IoT (not suited for sensors nodes as it required a minimum of 256MB RAM) and Linux distributions.
 \end{itemize}
 
 \section{The Contiki Operating System}
 
 Among existing operating systems, we have chosen to use one that is called \textit{ContikiOS} \cite{website:contiki}. It is an open source operating system and it was developed in 2003. Contiki is quite light in terms of memory, processing speed, and communication bandwidth. It is preemptive.\\
 
-The reason we have chosen Contiki as OS for testing our idea is due to the simulation software, Cooja, which facilitates the debugging and the tests. Another reason, is that we are quite familiar with it having already programmed using Contiki. However, our solution should be easily ported to other OSes. The OS is just used to program the motes.\\
+The reason we have chosen Contiki as OS for testing our idea is due to the simulation software, Cooja, which facilitates the debugging and the tests. Another reason, is that we are quite familiar with it having already programmed using Contiki. However, our solution should be easily ported to other OSes. The OS is just used to program the motes and as a proof of concept.\\
 
-Contiki main goal is to offer an OS for sensor nodes. Contiki applications are \textit{written in C} (example in Listing \ref{contiki_prog}) with a set of libraries written for Contiki purpose (memb for memory allocation for example). It is \textit{event-driven} as applications are mainly programmed by reacting to event. They use \textit{protothreads} which are "\textit{extremely lightweight, stackless threads that provides a blocking context on top of an event-driven system, without the overhead of per-thread stacks}" \cite{website:protothread}. Protothreads use the same stack, they only require two bytes of overhead by protothread and they cannot block when calling C functions. They offer advantages for embedded devices with small memory. \\
+Contiki main goal is to offer an OS for sensor nodes. Contiki applications are \textit{written in a subset of C} (example in Listing \ref{contiki_prog}) with a set of libraries written for Contiki purpose (memb for memory allocation for example). It is \textit{event-driven} as applications are mainly programmed by reacting to event. They use \textit{protothreads} which are "\textit{extremely lightweight, stackless threads that provides a blocking context on top of an event-driven system, without the overhead of per-thread stacks}" \cite{website:protothread}. Protothreads use the same stack, they only require two bytes of overhead by protothread and they cannot block when calling C functions. They offer advantages for embedded devices with small memory. \\
 
 \begin{lstlisting}[language=C, frame=single, caption={Hello world program}, label=contiki_prog]
 #include "contiki.h"
@@ -223,7 +223,7 @@ Contiki implements the recent IETF protocols for low-power IPv6 networking such 
 \end{itemize}
 
 
-\subsection*{Cooja Simulating Software}
+\section{Cooja Simulating Software}
 
 \begin{figure}
   \centering
@@ -235,12 +235,6 @@ Contiki implements the recent IETF protocols for low-power IPv6 networking such 
 An existing tool called \textit{Cooja} (see Fig.\ref{fig:cooja}) has been developed on Contiki. Cooja is a simulation software (partly an emulator too) for Internet of Things networks. It has many features, such as allowing to build networks with different types of components (Sky motes, Z1 motes). Those components are Contiki nodes, i.e. nodes working through ContikiOS. Cooja allows to upload code to virtual motes, the same way Contiki code may be uploaded on physical. Cooja can either emulate nodes (the hardware of each component is entirely emulated), or create "Cooja nodes" where Contiki code is uploaded on, compiled and then executed on a simulation host. Cooja allows to use non-Contiki nodes as well. Cooja presents itself as a very useful software for our thesis, as it allows us to simulate large networks, and is quite useful when it comes to testing, since the uploading and compilation time of Contiki codes on the nodes in the Network we are testing and analyzing is faster than on real hardware. It also avoids physical material restriction. One great aspect of Cooja is also that it offers to modify the environment to be, for example, more lossy, with higher transmission failure. It also dispose of useful plugins like a powertracker that keeps track of the amount of time a node send or receive messages.\\
 
 With such a powerful simulation software, our decision to use the couple Contiki and Cooja was easy to take. Cooja was proven a useful tool to debug our code and analyze our solution.
-
-\section{RIOT OS}
-
-\section{Tiny OS}
-
-\section{Others}
 
 %%%%%%%%%%%%%%%%%% MONITORING TOOLS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
