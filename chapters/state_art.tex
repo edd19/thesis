@@ -303,11 +303,15 @@ The architecture of Octopus, Fig.\ref{fig:octopus_archi}, is straightforward. Th
     \label{fig:octopus}
 \end{figure}
 
-Our solution differs from Octopus as we want to use existing protocols so as to integrate easily existent infrastructures. Indeed, Octopus has its own packet format, meaning that monitoring infrastructure need to be modified as to accept it. An other difference lies in that we focus mainly on information on the internal traffic whereas Octopus is a data visualization tool. It is used to show with a GUI interface the values reported by the sensor nodes as temperature, humidity, light, etc.
-
 \subsection{Spyglass}
 \todo[inline]{Explain}
 \textit{Spyglass} \cite{buschmann2005spyglass}.
+
+\subsection{MoteView}
+
+\subsection{SensMap}
+
+\subsection{Proviz}
 
 \subsection{Foren6}
 
@@ -330,3 +334,12 @@ The Fig.\ref{fig:foren6} shows the GUI interface of Foren6. Foren6 dispose of th
 To be as efficient as possible, the solution offered by Cetic needs nodes to be solely focused on sniffing and also present enough processing power and battery to be able to sniff and transmit the packets captured. If the network is deployed on a large surface, there will be a need to have enough sniffers, well placed, so as to not miss traffic. Also should those motes, sniffers send the packets captured using IoT network monitored, it would increase the burden on the latter network. \\
 
 \subsection{Tiny IPFIX}
+
+TinyIPFIX \cite{schmitt2016tinyipfix} is not a monitoring tool but a technique. It was designed as to retrieve the sensors values as main goal. TinyIPFIX is a light version of the IPFIX protocol which was discussed before.\\
+
+TinyIPFIX works by having the sensors nodes play the role of exporters. They export their values in the TinyIPFIX format which will be translated into IPFIX format by the gateway. The TinyIPFIX format is essentially the same as the original IPFIX format only that a compression of the message header is done. With that, the original header size of 20 bytes can be reduced to 3 bytes, saving 17 bytes.\\
+
+One big advantage of TinyIPFIX is that by using templates like IPFIX, users can define their own templates depending on the values they want to retrieved. Another asset is that messages that goes out of the IoT network are in IPFIX format. Organizations using already IPFIX to monitor their network do not need to modify their infrastructure.
+
+
+\subsection{Comparison}
