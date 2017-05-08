@@ -2,17 +2,10 @@
 
 \chapter{What is the Internet of Things?}
 
-The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "\textit{a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies}" \cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "\textit{an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks}" \cite{ituitu}. Fig.\ref{fig:iot} depicts the Internet of Things.\\
+The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "\textit{a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies}" \cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "\textit{an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks}" \cite{ituitu}. \\
 
 \todo[inline]{Give other examples as industry automation or smart cities, or healthcare. (see architecting iot article)}
 With the IoT, we dispose of networks constituted by devices which have the ability to communicate between them to exchange data. Also those devices can interact with their environment with means of sensors or actuators. An illustration of such network would be the \textit{Smart Home}. With Smart Home, automation comes into our house. The idea is to have, for example, your door talking to the lights to tell them to light on or to light off depending on if you enter or leave the room. You could have that your alarm would tell the coffee machine to prepare some coffee when ringing in the morning or that your thermostat would regulate the heat of the house. Also, you could remotely manage your house by activating or deactivating the heat and so on. While discussing the presence of the IoT in homes, one field that could largely benefit from the IoT is the field of \textit{e-health}, thanks to the medical monitoring of elderly, ill, and disabled patients, while they would still be in their house and keep their autonomy in their daily life. Smart objects could either be implanted in or around the patient, and information is retrieved from their situation to have regular checkups on their condition(s). The information is then sent and analyzed by specialized staff, ready to intervene if needed. The advantage here is having the ability to remotely monitor patients' situation. (source : architecting the iot).\\
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{res/iot.png}
-  \caption{Internet of Things (Source: \url{pixabay.com})}
-  \label{fig:iot}
-\end{figure}
 
 But IoT is not limited only to home. It is already deployed on organizations. For example, the start-up Epicenter injects microchips into their employees (after agreement)\cite{website:lat_04_17}. The microchip enable an employee to open a door or to operate a printer by just a wave of the hand. Also it permits to track them inside the building and permits a colleague to know your whereabouts. \\
 
@@ -177,7 +170,7 @@ Even though no global standard infrastructure exists for the Internet of Things,
 
 There are usually two approaches for IoT Architectures, the first one is to use an existing architecture and adapt it to the IoT context, the second one is to create a new IoT architecture from scratch.\\
 
-\todo[inline]{besoin de + de détails?}
+\todo[inline]{besoin de + de details?}
 
 First, there is the \textbf{IETF protocol suite}. Considering the protocol stack of TCP/IP makes sense since it is widely deployed on the internet. However, applying it to the IoT context make the deployment challenging because of resources scarcity of IoT devices, the instable wireless communication, and the heterogeneity of the traffic data and the devices. Knowing those difficulties, the IETF is trying to work with specific protocols of the IoT and standardizing them  for each layer of the stack. Namely, they use 802.15.4 for the data link layer, 6LoWPAN (Low power Wireless Personal Area Networks) as the Network Layer for an addressing scheme, RPL (Routing Protocol for Low Power and Lossy Networks) as a routing protocol, and CoAP (Constrained Application Protocol) as the application layer.\\
 
