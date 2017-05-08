@@ -2,27 +2,28 @@
 
 \chapter{What is the Internet of Things?}
 
+<<<<<<< HEAD
 The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "\textit{a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies}" \cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "\textit{an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks}" \cite{ituitu}. \\
 
 \todo[inline]{Give other examples as industry automation or smart cities, or healthcare. (see architecting iot article)}
 With the IoT, we dispose of networks constituted by devices which have the ability to communicate between them to exchange data. Also those devices can interact with their environment with means of sensors or actuators. An illustration of such network would be the \textit{Smart Home}. With Smart Home, automation comes into our house. The idea is to have, for example, your door talking to the lights to tell them to light on or to light off depending on if you enter or leave the room. You could have that your alarm would tell the coffee machine to prepare some coffee when ringing in the morning or that your thermostat would regulate the heat of the house. Also, you could remotely manage your house by activating or deactivating the heat and so on. While discussing the presence of the IoT in homes, one field that could largely benefit from the IoT is the field of \textit{e-health}, thanks to the medical monitoring of elderly, ill, and disabled patients, while they would still be in their house and keep their autonomy in their daily life. Smart objects could either be implanted in or around the patient, and information is retrieved from their situation to have regular checkups on their condition(s). The information is then sent and analyzed by specialized staff, ready to intervene if needed. The advantage here is having the ability to remotely monitor patients' situation. (source : architecting the iot).\\
+=======
+The Internet of Things or IoT, also called Internet of Everything, Web of Things, can be viewed as the interconnection of things, often referred as objects, motes or smart objects. The Global Standards Initiative on Internet of Things (IoT-GSI) defined \textit{Internet of Things} as "\textit{a global infrastructure for the information society, enabling advanced services by interconnecting (physical and virtual) things based on existing and evolving interoperable information and communication technologies}" \cite{ituitu}. They also give an explanation about what they consider a \textit{"thing"} to be. A thing is "\textit{an object of the physical world (physical things) or the information world (virtual things), that is capable of being identified and integrated into communication networks}" \cite{ituitu}.\\
+
+With the IoT, we dispose of networks constituted by devices which have the ability to communicate between them to exchange data. Also those devices can interact with their environment with means of sensors or actuators. An illustration of such network would be the \textit{Smart Home}. With Smart Home, automation comes into our house. The idea is to have, for example, your door talking to the lights to tell them to light on or to light off depending on if you enter or leave the room. You could have that your alarm would tell the coffee machine to prepare some coffee when ringing in the morning or that your thermostat would regulate the heat of the house. Also, you could remotely manage your house by activating or deactivating the heat and so on. While discussing the presence of the IoT in homes, one field that could largely benefit from the IoT is the field of \textit{e-health}, thanks to the medical monitoring of elderly, ill, and disabled patients, while they would still be in their house and keep their autonomy in their daily life. Smart objects could either be implanted in or around the patient, and information is retrieved from their situation to have regular checkups on their condition(s). The information is then sent and analyzed by specialized staff, ready to intervene if needed. The advantage here is having the ability to remotely monitor patients' situation.\\
+>>>>>>> 1bcf6450a92324771d474403226ca92b31226f49
 
 But IoT is not limited only to home. It is already deployed on organizations. For example, the start-up Epicenter injects microchips into their employees (after agreement)\cite{website:lat_04_17}. The microchip enable an employee to open a door or to operate a printer by just a wave of the hand. Also it permits to track them inside the building and permits a colleague to know your whereabouts. \\
 
 The Internet of Things can also be used in many more situations. Power grids can now be better controlled and managed with smart objects, the temperature in buildings and houses can now be monitored and smart objects control radiators and air conditioners to modify ambient temperature, and thus make a more efficient consumption of energy. Shipping containers could also be equipped with devices to better help monitor and modify the climate inside, thus making sure food, clothing, and various materials are better taken care of. Environments hard to analyse like glacier or mountains becomes easier to monitor as we only need to place sensors nodes that will periodically send us the data retrieved from the environment such as temperature. \\
 
-\todo[inline]{Speak about \textit{Industrial Revolution} and \textit{Industry 4.0}}
-
 Those examples show how much we could benefit from IoT. It could improve our efficiency in term of energy but also in term of production. But also could make our life easier by automating certain aspects of the life. In the following subsections, we will go deeper into some technical aspects of the Internet of Things. \\
-
-\todo[inline]{Challenges of iot : preface of book (page xx) + slide 17 du premier cours de mobile.}
-
 
 \section{Smart Objects}
 
 Smart objects are the main components of an IoT Network. We will explain what makes them special and the purpose of their use.\\
 
-Smart objects, also called IoT Devices, smart devices or connected devices, are physical objects, that are embedded with an electronical component, that allows them to communicate with other objects. Those objects are composed of a software, are equipped with a microprocessor, a sensor or an actuator that allows them to interact with the physical environment and modify/control it, and network connectivity to allow exchange and collection of data. Thanks to network connectivity, devices can sense and exchange sense data of the physical world with each other. They are also often equipped with a small battery, that provides a power source to the device. The connectivity is assured by wireless in most cases. Fig.\ref{fig:smart_objects} shows examples of smart objects.\\
+Smart objects, also called IoT Devices, smart devices or connected devices, are physical objects, that are embedded with an electronic component, that allows them to communicate with other objects. Those objects are composed of a software, are equipped with a microprocessor, a sensor or an actuator that allows them to interact with the physical environment and modify/control it, and network connectivity to allow exchange and collection of data. Thanks to network connectivity, devices can sense and exchange sense data of the physical world with each other. They are also often equipped with a small battery, that provides a power source to the device. The connectivity is assured by wireless in most cases. Fig.\ref{fig:smart_objects} shows examples of smart objects.\\
 
 \begin{figure}
     \centering
@@ -69,7 +70,7 @@ To go along with automation, the Internet of Things aims at \textit{optimizing} 
 
 An IoT network can serve different purposes leading to different topologies. Three topologies are worth to mention as seen in \cite{website:3topo}. Those are:
 \begin{itemize}
-  \item \textit{Point-to-Point} where a direct connection is configured between two points. An example would be a bluetooth pairing between a laptop and a hi-fi station. It is not widely deployed in industrial IoT as the network cannot scale outside of the two nodes.
+  \item \textit{Point-to-Point} where a direct connection is configured between two points. An example would be a Bluetooth pairing between a laptop and a hi-fi station. It is not widely deployed in industrial IoT as the network cannot scale outside of the two nodes.
   \item \textit{Star} (see Fig.\ref{fig:star}) topology where all nodes communicate via a central hub. All the nodes dispose of a direct link to the central hub. This topology of network is easy to analyze as all traffic must pass through the central hub. However the major disadvantage of it is that the network is limited to the range of communication of the weakest node.
   \item \textit{Mesh} (see Fig.\ref{fig:mesh}) networks are composed of three types of nodes. First, we have simple sensors nodes that only transmit their data. Then we have sensor/router nodes that act as simple sensors nodes but must act as relay for packets of other nodes. Finally, the gateway node that is the intermediary between the network and Internet. This topology is characterized by a communication done in hop-by-hop fashion. It is quite difficult to analyze as we do not know in advance how the routing will be done. Still, the big advantage is the wide surface that the network can occupy and the resiliency due to the number of paths available.\\
 \end{itemize}
@@ -91,7 +92,7 @@ An IoT network can serve different purposes leading to different topologies. Thr
     \label{fig:topology}
 \end{figure}
 
-The mesh network was, when designing our solution, our main concern. The point-to-point and start topologies are quite easy to monitor as all traffic must pass through a known point. In the point-to-point it would be one the two nodes that shares the connection, while in the star it would be the central hub. For the latter one, star, we can consider the central hub to be a powerful device meaning it could be a netflow exporter if the need arise to analyze the network. But for the mesh topology, multiple distinct paths can exist for a node to reach another one. It is in need of an efficient solution. \\
+The mesh network was, when designing our solution, our main concern. The point-to-point and star topologies are quite easy to monitor as all traffic must pass through a known point. In the point-to-point it would be one the two nodes that shares the connection, while in the star it would be the central hub. For the latter one, star, we can consider the central hub to be a powerful device meaning it could be a netflow exporter if the need arise to analyze the network. But for the mesh topology, multiple distinct paths can exist for a node to reach another one. It is in need of an efficient solution. \\
 
 After having discussed about the main topologies of IoT networks, we would like to make en emphasis on what is called Wireless Sensor Networks or WSN.
 
@@ -120,9 +121,9 @@ The components of WSNs are "\textit{Wireless Nodes}" or "Motes" (see Fig.\ref{fi
   \label{fig:xm1000}
 \end{figure}
 
-The main challenges of WSNs are Data transmission, resource constraint, and security. First, nodes must send their data to the server. As discussed earlier, each node may not have the server in their sending range because of a lack of power, thus they must send their data to an intermediate node relaying the information. Moreover, limited battery, must stay idle, ENERGY HARVESTING etc. Puis security.\\
+The main challenges of WSNs are data transmission, resource constraint, and security. First, nodes must send their data to the server. As discussed earlier, each node may not have the server in their sending range because of a lack of power, thus they must send their data to an intermediate node relaying the information. Secondly, as stated before, the motes that composed a WSN present light components (weak CPU, small memory, etc). Moreover, because they are not plugged, they are quite limited in battery. Thus, they switch between idle state and active state, which also impacts data transmission as packets could be missed when sending on idle motes. Finally, the security issues are a consequences of the two first challenges. Because of the low characteristics of sensor nodes, it is difficult to implement security measures as sophisticated that on our laptops for example. This would drain the battery due to the added CPU usage. Also there would be no sufficient memory to implement all those security measures.\\
 
-(source : architecting the iot page 6)
+\todo[inline]{Is it necessary ?}
 \subsection{Radio Frequency IDentification - RFID}
 
 Radio-frequency identification or RFID uses radio signals to record the presence of specific objects. Its purpose is the identification of a person or an item, using a system of tags. Tags are small transponders (combined radio receiver and transmitter). The transponders can transmit identity information when requested to. There also are tag readers to process the identification.\\
@@ -132,7 +133,7 @@ Tags are associated to products, animals, or people if their identification is n
 The RFID technology has a main advantage that is its limited cost and thus allow its deployment on a huge amount of devices.
 \section{Challenges of The IoT}
 
-https://datafloq.com/read/three-major-challenges-internet-of-things/83 : cet article parle de trois gros challenges pour l'iot : shared standards and infrastructures, data control and access, data security.\\
+IoT is still an emerging technology and need to resolve some challenges \cite{website:iot_challenge}. This section will be the occasion to discuss about such challenges that IoT is confronted to.
 
 \subsection{Lack of Standard Architecture}
 
@@ -140,7 +141,7 @@ The main challenges of the Internet of Things is to define a standard architectu
 
 Most existing applications using the Internet of Things have been developed privately. Companies, developers, researchers have developed some specific solutions using the Internet of Things. However, those solutions are more specific, and hence optimized, for one particular application.\\
 
-
+\todo[inline]{Reference it via bibliography}
 Main source : architecting the internet of things : state of the art.\\
 
 \subsection{Three Aspects of The IoT Building Blocks}
@@ -170,7 +171,11 @@ Even though no global standard infrastructure exists for the Internet of Things,
 
 There are usually two approaches for IoT Architectures, the first one is to use an existing architecture and adapt it to the IoT context, the second one is to create a new IoT architecture from scratch.\\
 
+<<<<<<< HEAD
 \todo[inline]{besoin de + de details?}
+=======
+\todo[inline]{explain 6lowpan and IEEE 802.15.4 and RPL (reference papers)}
+>>>>>>> 1bcf6450a92324771d474403226ca92b31226f49
 
 First, there is the \textbf{IETF protocol suite}. Considering the protocol stack of TCP/IP makes sense since it is widely deployed on the internet. However, applying it to the IoT context make the deployment challenging because of resources scarcity of IoT devices, the instable wireless communication, and the heterogeneity of the traffic data and the devices. Knowing those difficulties, the IETF is trying to work with specific protocols of the IoT and standardizing them  for each layer of the stack. Namely, they use 802.15.4 for the data link layer, 6LoWPAN (Low power Wireless Personal Area Networks) as the Network Layer for an addressing scheme, RPL (Routing Protocol for Low Power and Lossy Networks) as a routing protocol, and CoAP (Constrained Application Protocol) as the application layer.\\
 
@@ -182,31 +187,71 @@ As for creating a new IoT architecture from Scratch, a \textbf{Cloud Based appro
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% IOT OS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{ContikiOS - Cooja - Softwares a portee de main}
+\chapter{ContikiOS - Cooja}
 
 We will now discuss Operating Systems in the Internet of Things. As discussed earlier, objects in IoT Networks have limited capabilities, i.e. processing capacity and storage, and limited battery. It is thus preferred to have an operating system that is not demanding and as light as possible. \\
 
-Though not ideal, a light version of Linux could be used. However, one requirement of working with smart objects is having the ability to react to \textit{Real-Time events}. In a situation where a smart sensor is used in a car to make its airbags open when a car crash occurs, the software in the said sensor must react to the crash almost instantly. In this case, we need a maximum time reaction to an event, otherwise the purpose of the object (and thus the airbag) is not met. A few operating systems have been developed to answer to the requirements of IoT objects, they are light, have a minimal set of functionalities, plus they guarantee time-bounded reaction to events. (source : Mobile and embedded systems, prof Sadre)\\
+Though not ideal, a light version of Linux could be used. However, one requirement of working with smart objects is having the ability to react to \textit{Real-Time events}. In a situation where a smart sensor is used in a car to make its airbags open when a car crash occurs, the software in the said sensor must react to the crash almost instantly. In this case, we need a maximum time reaction to an event, otherwise the purpose of the object (and thus the airbag) is not met. A few operating systems have been developed to answer to the requirements of IoT objects, they are light, have a minimal set of functionalities, plus they guarantee time-bounded reaction to events.\\
 
-\todo[inline]{Cite different OS like Tiny OS, RIOT OS}
-There exists quite a number of Operating Systems for IoT devices nowadays \cite{website:iot_os}.
+There exists quite a number of Operating Systems for IoT devices nowadays \cite{website:iot_os}:
+\begin{itemize}
+\item Contiki OS
+\item RIOT OS
+\item Tiny OS
+\item Windows 10 IoT, ...
+\end{itemize}
 
 \section{The Contiki Operating System}
 
-Among existing operating systems, we have chosen to use one that is called \textit{ContikiOS}. It is an open source operating system and it was developed in 2003. Contiki is quite light in terms of memory, processing speed, and communication bandwidth. It is preemptive.\\
+Among existing operating systems, we have chosen to use one that is called \textit{ContikiOS} \cite{website:contiki}. It is an open source operating system and it was developed in 2003. Contiki is quite light in terms of memory, processing speed, and communication bandwidth. It is preemptive.\\
 
 The reason we have chosen Contiki as OS for testing our idea is due to the simulation software, Cooja, which facilitates the debugging and the tests. Another reason, is that we are quite familiar with it having already programmed using Contiki. However, our solution should be easily ported to other OSes. The OS is just used to program the motes.\\
 
+Contiki main goal is to offer an OS for sensor nodes. Contiki applications are \textit{written in C} (example in Listing \ref{contiki_prog}) with a set of libraries written for Contiki purpose (memb for memory allocation for example). It is \textit{event-driven} as applications are mainly programmed by reacting to event. They use \textit{protothreads} which are "\textit{extremely lightweight, stackless threads that provides a blocking context on top of an event-driven system, without the overhead of per-thread stacks}" \cite{website:protothread}. Protothreads use the same stack, they only require two bytes of overhead by protothread and they cannot block when calling C functions. They offer advantages for embedded devices with small memory. \\
+
+\begin{lstlisting}[language=C, frame=single, caption={Hello world program}, label=contiki_prog]
+#include "contiki.h"
+#include <stdio.h> 
+/*-----------------------------------------------------------*/
+PROCESS(hello_world_process, "Hello world process");
+AUTOSTART_PROCESSES(&hello_world_process);
+/*-----------------------------------------------------------*/
+PROCESS_THREAD(hello_world_process, ev, data)
+{
+  PROCESS_BEGIN();
+
+  printf("Hello, world\n");
+  
+  PROCESS_END();
+}
+\end{lstlisting}
+
+Contiki implements the recent IETF protocols for low-power IPv6 networking such as 6lowpan and RPL. It provides three network mechanisms:
 \begin{itemize}
-\item protothreads
-\item Reduced C
+\item uIP TCP/IP stack for IPv4 networking.
+\item uIPv6 stack for IPv6 networking which is comprised of RPL and 6lowpan.
+\item Rime stack which is an alternative to the two mentioned above.
 \end{itemize}
-wikipedia : "Contiki provides three network mechanisms: the uIP TCP/IP stack,[5] which provides IPv4 networking, the uIPv6 stack,[6] which provides IPv6 networking, and the Rime stack, which is a set of custom lightweight networking protocols designed for low-power wireless networks. The IPv6 stack was contributed by Cisco and was, when released, the smallest IPv6 stack to receive the IPv6 Ready certification.[7] The IPv6 stack also contains the Routing Protocol for Low power and Lossy Networks (RPL) routing protocol for low-power lossy IPv6 networks and the 6LoWPAN header compression and adaptation layer for IEEE 802.15.4 links.
 
-Rime is an alternative network stack, for use when the overhead of the IPv4 or IPv6 stacks is prohibitive. The Rime stack provides a set of communication primitives for low-power wireless systems. The default primitives are single-hop unicast, single-hop broadcast, multi-hop unicast, network flooding, and address-free data collection. The primitives can be used on their own or combined to form more complex protocols and mechanisms.[8]"
 
-\section{Cooja Simulating Software}
-An existing tool called \textit{Cooja} has been developed on Contiki. Cooja is a simulation software (partly an emulator too) for Internet of Things networks. It has many features, such as allowing to build networks with different types of components (Sky motes, Z1 motes). Those components are Contiki nodes, i.e. nodes working through ContikiOS. Cooja allows to upload code to virtual motes, the same way Contiki code may be uploaded on physical. Cooja can either emulate nodes (the hardware of each component is entirely emulated), or create "Cooja nodes" where Contiki code is uploaded on, compiled and then executed on a simulation host. (Cooja allows to use non-Contiki nodes as well. Pertinent?). Cooja presents itself as a very useful software for our thesis, as it allows us to simulate large networks, and is quite useful when it comes to testing, since the uploading and compilation time of Contiki codes on the nodes in the Network we are testing and analyzing is faster than on real hardware. It also avoids physical material restriction.
+\subsection*{Cooja Simulating Software}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{res/cooja.png}
+  \caption{Cooja a simulation software (Source: \url{https://commons.wikimedia.org/wiki/File:Contiki-ipv6-rpl-cooja-simulation.png})}
+  \label{fig:cooja}
+\end{figure}
+
+An existing tool called \textit{Cooja} (see Fig.\ref{fig:cooja}) has been developed on Contiki. Cooja is a simulation software (partly an emulator too) for Internet of Things networks. It has many features, such as allowing to build networks with different types of components (Sky motes, Z1 motes). Those components are Contiki nodes, i.e. nodes working through ContikiOS. Cooja allows to upload code to virtual motes, the same way Contiki code may be uploaded on physical. Cooja can either emulate nodes (the hardware of each component is entirely emulated), or create "Cooja nodes" where Contiki code is uploaded on, compiled and then executed on a simulation host. Cooja allows to use non-Contiki nodes as well. Cooja presents itself as a very useful software for our thesis, as it allows us to simulate large networks, and is quite useful when it comes to testing, since the uploading and compilation time of Contiki codes on the nodes in the Network we are testing and analyzing is faster than on real hardware. It also avoids physical material restriction. One great aspect of Cooja is also that it offers to modify the environment to be, for example, more lossy, with higher transmission failure. It also dispose of useful plugins like a powertracker that keeps track of the amount of time a node send or receive messages.\\
+
+With such a powerful simulation software, our decision to use the couple Contiki and Cooja was easy to take. Cooja was proven a useful tool to debug our code and analyze our solution.
+
+\section{RIOT OS}
+
+\section{Tiny OS}
+
+\section{Others}
 
 %%%%%%%%%%%%%%%%%% MONITORING TOOLS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -247,7 +292,7 @@ Whereas Netflow sends only informations on the flows observerd, sFlow sends orig
 The fact that exporters need to store packets makes this solution too heavy for majority of IoT devices. Another issue with sFlow is that we can miss peculiar packets by having a sampling rate different than 1:1 and so lose important informations.
 
 \section{IoT networks}
-
+\todo[inline]{ipfix}
 A plethora of tools exist to monitor Internet of Things networks. Yet, a preponderant part of those tools are data visualization centric. In this section, some tools will be presented. For a more exhaustive survey, see \cite{parbat2010data}.
 
 \subsection{Octopus}
