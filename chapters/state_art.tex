@@ -261,7 +261,6 @@ There are three components when having Netflow set up : the Flow Exporter, the F
 
 The version of Netflow that we are quite interested in, is the Netflow version 10 or \textit{IPFIX} \cite{claise2013rfc}. This version is an IETF (Internet Engineering Task Force) protocol whereas the previous versions are proprietaty protocols of Cisco. IPFIX is template based meaning that contrary to previous versions of Netflow (excluded version 9 which is also template based), the netflow records can vary to suit the need of the administrators or organizations. The template permit to define what we want to retrieve and by the same occasion define what we consider to be a flow. An organization could consider a flow to be 3-uple: source ipv6 address, destination ipv6 address, number of octets exchanged. While another one could consider a flow to be the 4-uple: source ipv6 address, destination ipv6 address, number of octets exchanged, number of packets exchanged. \\
 
-\todo[inline]{Ajouter figure de IPFIX}.\\
 The IANA (Internet Assigned Numbers Authority) defined already some record fields like the Ipv6 source/destination address, the source transport port, and so on \cite{website:ipfix_entities}. However, the power of IPFIX lies in the possibility to define ourself record fields (called entreprise fields). And that is the main reason we were so interested in it. It is thus possible to define for example a record field for battery remaining of the sender for example. Furthermore, even if they suggest size for record fields, they offer the possibility to redefine the size to a smaller one. The suggested field is only considered as an upper-bound, meaning we cannot propose a bigger size.\\
 
 Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Introduction section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Part \ref{part:solution}, we will describe in more details how we used Netflow in IoT Networks as a solution to our monitoring task.
@@ -275,7 +274,7 @@ Whereas Netflow sends only informations on the flows observerd, sFlow sends orig
 The fact that exporters need to store packets makes this solution too heavy for majority of IoT devices. Another issue with sFlow is that we can miss peculiar packets by having a sampling rate different than 1:1 and so lose important informations.
 
 \section{IoT networks}
-\todo[inline]{ipfix}
+
 A plethora of tools exist to monitor Internet of Things networks. Yet, a preponderant part of those tools are data visualization centric. In this section, some tools will be presented. For a more exhaustive survey, see \cite{parbat2010data}.
 
 \subsection{Octopus}
@@ -286,7 +285,7 @@ The GUI interface, Fig.\ref{fig:octopus_gui}, display a logical topology of the 
 
 To effectively do so, Octopus needs the motes to send message in a specific format so as to be able to parse them. Also the motes need to be configured to be able to interpret messages coming from the software.\\
 
-The architecture of Octopus, Fig.\ref{fig:octopus_archi}, is straightforward. The sensors nodes send periodically messages to a gateway which will be in charge to transmit those messages to distant Octopus client. The Scout can be seen as collector that will listen for incoming messages. When it received a message, it will update the Mote DB who is in charge to maintain the status of the motes and also log the message. It will also trigger an update of the GUI interface, Panels.
+The architecture of Octopus, Fig.\ref{fig:octopus_archi}, is straightforward. The sensors nodes send periodically messages to a gateway which will be in charge to transmit those messages to distant Octopus client. The Scout can be seen as collector that will listen for incoming messages. When it received a message, it will update the Mote DB who is in charge to maintain the status of the motes and also log the message. It will also trigger an update of the GUI interface, Panels. \\
 
 \begin{figure}
     \centering
@@ -304,6 +303,8 @@ The architecture of Octopus, Fig.\ref{fig:octopus_archi}, is straightforward. Th
     \caption{Octopus (Source: \url{www.researchgate.net/publication/220098661_Octopus_Monitoring_visualization_and_control_of_sensor_networks})}
     \label{fig:octopus}
 \end{figure}
+
+Our solution differs from Octopus as we want to use existing protocols so as to integrate easily existent infrastructures. Indeed, Octopus has its own packet format, meaning that monitoring infrastructure need to be modified as to accept it. An other difference lies in that we focus mainly on information on the internal traffic whereas Octopus is a data visualization tool. It is used to show with a GUI interface the values reported by the sensor nodes as temperature, humidity, light, etc. 
 
 \subsection{Spyglass}
 \todo[inline]{Explain}
@@ -327,4 +328,6 @@ The Fig.\ref{fig:foren6} shows the GUI interface of Foren6. Foren6 dispose of th
   \label{fig:foren6}
 \end{figure}
 
-To be as efficient as possible, the solution offered by Cetic needs nodes to be solely focused on sniffing and also present enough processing power and battery to be able to sniff and transmit the packets captured. If the network is deployed on a large surface, there will be a need to have enough sniffers, well placed, so as to not miss traffic. Also should those motes, sniffers send the packets captured using IoT network monitored, it would increase the burden on the latter network.
+To be as efficient as possible, the solution offered by Cetic needs nodes to be solely focused on sniffing and also present enough processing power and battery to be able to sniff and transmit the packets captured. If the network is deployed on a large surface, there will be a need to have enough sniffers, well placed, so as to not miss traffic. Also should those motes, sniffers send the packets captured using IoT network monitored, it would increase the burden on the latter network. \\
+
+\subsection{Tiny IPFIX}
