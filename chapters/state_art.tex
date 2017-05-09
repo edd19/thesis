@@ -304,7 +304,26 @@ Mote-view \cite{turon2005mote}.
 
 \subsection{SensMap}
 
-SensMap \cite{mraz2014visualization}
+SensMap \cite{mraz2014visualization} is a web-based monitoring and visualization tool for sensor devices. It offers the possibility to display the nodes in three perspectives: Outdoor, Indoor and Topology. The Outdoor perspective display the locations of the nodes using Google maps. It leverage the possibility to display different nodes placed in different countries. The Indoor view shows the deployments of nodes inside a building (see Fig.\ref{fig:sensmap}). Finally the Topology shows the logical topology of WSN.\\
+
+Some features of SensMap are:
+
+\begin{itemize}
+  \item visualize the health of sensor devices;
+  \item show the locations of nodes in three different perspectives as described before;
+  \item display sensors data in real-time;
+  \item show link quality between nodes;
+  \item export data and much more.
+\end{itemize}
+
+The data that used SensMap needs to be stored in the Xively public cloud \cite{website:xively}. This means that the sensor devices need to send their values to Xively. Then SensMap will have access to them via the REST api offered by Xively.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{res/sensmap.jpg}
+  \caption{Indoor perspective of SensMap}
+  \label{fig:sensmap}
+\end{figure}
 
 \subsection{Foren6}
 
