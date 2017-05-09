@@ -303,9 +303,26 @@ The architecture of Octopus, Fig.\ref{fig:octopus_archi}, is straightforward. Th
     \label{fig:octopus}
 \end{figure}
 
-\subsection{MoteView}
+\subsection{Mote-View}
 
-Mote-view \cite{turon2005mote}.
+Mote-View \cite{turon2005mote} is a tool designed to simplify the administration of sensor networks (see Fig.\ref{fig:moteview}). They emphasis the visualization of data so as to be as user-friendly as possible. Mote-View is a client application. It offers the possibility to view the logical topology of nodes as well as their values. It provides  means to visualize the health of node which can be set based on different criterias like the last time data was sent or quality of link or congestion. An alert manager is made at the disposal of users to define their own alerts conditions. Another feature is the conversion of different physical measurements units. \\
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{res/moteview.png}
+  \caption{Mote-View (Source: \url{www.researchgate.net/publication/4157258_MOTE-VIEW_A_sensor_network_monitoring_and_management_tool})}
+  \label{fig:moteview}
+\end{figure}
+
+Mote-View is composed of four layers:
+\begin{itemize}
+  \item Data layer: mainly gives access to the database which store logs of the data sent by nodes.
+  \item Node layer: stores the nodes status and also caches the results of queries done on the database.
+  \item Conversion layer: applies the conversion of different units in the preferred choice of the user.
+  \item Visualization layer: displays the data in form of graphs, topology, ...
+\end{itemize}
+
+Each layer offers abstraction and lets users make their own plug-ins to extend the functionalities of Mote-View. Mote-View can thus be viewed as a framework for monitoring tool for WSN.
 
 \subsection{SensMap}
 
@@ -332,13 +349,14 @@ The data that used SensMap needs to be stored in the Xively public cloud \cite{w
 
 \subsection{Foren6}
 
-The approach taken by Cetic with their tool \textit{Foren6} \cite{website:foren6} is quite different than the other tools presented. Foren6 use a sniffer to retrieve information of the network. Passive sniffers are scattered over the network and retransmit the traffic they observe. \\
+The approach taken by Cetic with their tool \textit{Foren6} \cite{website:foren6} is quite different than the other tools presented. Foren6 use sniffers to retrieve information of the network. Passive sniffers are scattered over the network and retransmit the traffic they observe. \\
 
 The Fig.\ref{fig:foren6} shows the GUI interface of Foren6. Foren6 dispose of the following features:
 \begin{itemize}
   \item Display logical topology of the motes.
   \item Analyze of previous records packet traces.
-  \item Possibility to analyze simulated network like with Cooja. \\
+  \item Possibility to analyze simulated network like with Cooja.
+  \item Exportation of data in pcap format. \\
 \end{itemize}
 
 \begin{figure}
@@ -358,5 +376,12 @@ TinyIPFIX works by having the sensors nodes play the role of exporters. They exp
 
 One big advantage of TinyIPFIX is that by using templates like IPFIX, users can define their own templates depending on the values they want to retrieved. Another asset is that messages that goes out of the IoT network are in IPFIX format. Organizations using already IPFIX to monitor their network do not need to modify their infrastructure.
 
+\subsection{Discussion}
 
-\subsection{Comparison}
+Most of the monitoring solutions for Internet of Things networks are essentially client applications. All of them focus on Wireless Sensors Networks and essentially visualization of the readings of the sensors networks. However apart of the Foren6 solution that exports the data from nodes in pcap format, the others impose their own specific format of data or simply do not state the format they intend to receive. But our guess is that they also require their own format of message so as to be able to understand the data received. This means that users or organizations disposing of administration infrastructures need to severely update them to make use of those tools. \\
+
+The drawbacks of having such disparity of format for data are that users cannot switch freely between those tools, nor they have the convenience to use multiple tools at the same time. The motes would need to be reprogrammed to deliver new data format. Also it would impose too much charge on them if they had to send their values in multiple format. One solution would be to have a service that reformat data in the desired format but it would not resolve the problem. There is a need for protocol that would suit the need of all organizations in the values that they would like to retrieved. This is why our attention was focused on TinyIPFIX as we consider it to be the solution to this particular issue. \\
+
+Like stated before, majority of the tools focused on showing the readings of the sensors. In that sense, they do not give informations about how traffic is generated by the network. We cannot detect abnormal behaviors such as nodes contacting a surprising number of other nodes. Also we lack statistics to improve our network. For instance, by knowing that a certain node is highly solicited we can replace it by a more powerful device. Organizations, if not already, will be in need of powerful tools to diagnose their networks so as to correct issues more rapidly or improve the efficiency of their networks. Our monitoring tool has as goal to solve this issue and provide meaningful insights about IoT networks. \\
+
+However, all those tools share some common functionalities which must be considered as basis when developing new softwares of such. One important functionality is the display of logical topology of the motes showing the links formed between the motes. Another feature is the storing of the data for later analyzing. One also common requirement is the modularity of those tools and the ease to produce plug-ins. Those basic functionalities should be included when designing such softwares.
