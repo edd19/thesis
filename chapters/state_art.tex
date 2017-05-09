@@ -126,7 +126,7 @@ Tags are associated to products, animals, or people if their identification is n
 The RFID technology has a main advantage that is its limited cost and thus allow its deployment on a huge amount of devices.
 \section{Challenges of The IoT}
 
-IoT is still an emerging technology and need to resolve some challenges \cite{website:iot_challenge}. This section will be the occasion to discuss about such challenges that IoT is confronted to.
+IoT is still an emerging technology and need to resolve some challenges \cite{website:iot_challenge}. This section will be the occasion to discuss about such challenges that the IoT is confronted to.
 
 \subsection{Lack of Standard Architecture}
 
@@ -149,7 +149,7 @@ The middleware block could be taken care of by what we call \textit{Service-Orie
 
 The \textit{actuating building block} finds its importance when it comes to making "dumb" objects "smart". Once information is gathered from sensing in a specific situation, it is sent to the middleware infrastructure. After data processing from the middleware, a decision can be made through the actuator. In our e-health example discussed earlier where an ill person is equipped with an IoT node, in a hypoglycemia situation, the actuator could potentially save this person's life by automatically injecting sugar in the patient, the automation of the injection being faster than the wait needed for external intervention. \\
 
-\subsection{Potential Architecture Design}
+\subsection{Potential and Existing Architecture Design}
 
 Though global architecture has yet to be decided in the Networking world, an architecture design has been proposed to be a base of the future global IoT architecture. \\
 
@@ -157,18 +157,13 @@ There is a three-layer architecture that is commonly accepted. It consists of th
 
 The \textit{Perception Layer} is used to sense the world via the sensors used in objects that are part of the IoT network. It uses technologies such as RFID and WSNs that we described earlier. This layer is also responsible for the conversion of the information into digital signals for transmission. The \textit{Network Layer} is where the processing of the data is done after collection through the Perception Layer, and it is responsible for the transmission of data to the application layer using network technologies such as WSN and LAN. In the networks, the media for transmission may be 3G/4G, Wifi, Bluetooth, etc. The \textit{Application Layer} constitutes the front end of the IoT Architecture, it uses the processed data from the previous layers.\\
 
-
-\subsection{Attempted Architectures}
-
-Even though no global standard infrastructure exists for the Internet of Things, some companies have nevertheless attempted to develop their own architecture, mainly for specific purposes answering to their local needs. We will take a look at a few of the existing ones. \\
-
-There are usually two approaches for IoT Architectures, the first one is to use an existing architecture and adapt it to the IoT context, the second one is to create a new IoT architecture from scratch.\\
+Even though no global standard infrastructure exists for the Internet of Things, some companies have nevertheless attempted to develop their own architecture, mainly for specific purposes answering to their local needs. There are usually two approaches for IoT Architectures, the first one is to use an existing architecture and adapt it to the IoT context, the second one is to create a new IoT architecture from scratch.\\
 
 First, there is the \textbf{IETF protocol suite}. Considering the protocol stack of TCP/IP makes sense since it is widely deployed on the internet. However, applying it to the IoT context make the deployment challenging because of resources scarcity of IoT devices, the instable wireless communication, and the heterogeneity of the traffic data and the devices. Knowing those difficulties, the IETF is trying to work with specific protocols of the IoT and standardizing them  for each layer of the stack. Namely, they use 802.15.4 \cite{molisch2004ieee} for the data link layer, 6LoWPAN \cite{montenegro2007transmission} (Low power Wireless Personal Area Networks) as the Network Layer for an addressing scheme, RPL \cite{winter2012rpl} (Routing Protocol for Low Power and Lossy Networks) as a routing protocol, and CoAP \cite{shelby2014constrained} (Constrained Application Protocol) as the application layer.\\
 
 The \textbf{Server based approach}, called Server-Based Internet of Things Architecture. The idea behind this approach is to develop protocols and services based on a gateaway server such that the constrained devices in computation and communication capabilities are still part of the IoT in a secure and efficient way. For the \textit{physical and link layer}, each small devices is connected to a single server, connecting the device and the internet and acting as a gateway. The \textit{Network Layer} is based on IPv6, by communicating with 6LoWPAN between the devices and the server. For the \textit{Transport Layer}, the server will comumunicate with the devices using UDP (UDP being lighter than TCP/IP) over 6LoWPAN. As for everything related to the application layer functions, the goal is to have each device offer a HTTP web-server interface for authorized users to use the functionalities of the said device. Those web-servers will be hosted on the gateway server.\\
 
-As for creating a new IoT architecture from Scratch, a \textbf{Cloud Based approach} could be used. As we know, a considerable amount of data is generated from the devices. This data has to be stored and processed, as well as being retrieved in an efficient way. Cloud Computing aims at offering high reliability and scalability, along with providing data access for the IoT applications. A Cloud Computing platform for the IoT would thus receive the data collected from the sensors, analyze and intepret the data, as well as providing web visualizations. The Cloud not only reduces costs of deploying applications, but is also highly scalable. Indeed, sensing service providers can join the network and offer their data using a storage cloud, analytic tool developers can provide their software tools, artificial intelligence experts can provide their data mining and machine learning tools, and finally computer graphics designer can offer a variety of visualization tools.
+As for creating a new IoT architecture from Scratch, a \textbf{Cloud Based approach} could be used. As we know, a considerable amount of data is generated from the devices. This data has to be stored and processed, as well as being retrieved in an efficient way. Cloud Computing aims at offering high reliability and scalability, along with providing data access for the IoT applications. A Cloud Computing platform for the IoT would thus receive the data collected from the sensors, analyze and intepret the data, as well as providing web visualizations. One advantage of the cloud is that it reduces the deploying costs for applications, but it is also scalable in essence. Indeed, sensing service providers can join the network and offer their data using a storage cloud, analytic tool developers can provide their software tools, artificial intelligence experts can provide their data mining and machine learning tools, and finally computer graphics designer can offer a variety of visualization tools.
 
 
 
