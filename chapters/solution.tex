@@ -1,6 +1,6 @@
 \part{Solution} \label{part:solution}
 
-\chapter{Design}
+\chapter{IoT Monitoring Tool}
 
 This chapter will be the occasion to detail the architecture of our solution. We will explain the technologies employed to achieve our goal, a monitoring software for Internet of Things networks. It is also in this chapter that we will justify the choices made during the development of it.
 
@@ -33,6 +33,49 @@ HTML, CSS and Javascript which are the core means to present web pages proved to
 
 For the database, \textbf{PostgreSQL} \cite{website:postgresql} was used. It is an open-source relational database system. With more than 15 years of development, it do not have to prove anything anymore in term of reliability. It is SQL compliant. It recently added the support of JSON as field which enabled us to save IPFIX messages as JSON objects and not simply binary data.
 
+\section{The monitoring tool}
+
+This section will detail the different modules that compose our application plus the features that are offered by our application.
+
+\subsection{Modules}
+
+The application is comprised of four different modules :
+\begin{itemize}
+	\item Collector
+	\item Log
+	\item Nodes Status
+	\item Web \\
+\end{itemize}
+
+The \textit{Collector} consists of an UDP server that listens for incoming IPFIX messages. Upon reception of a message, the Collector parses the binary data into an IPFIX object representing the original message. The object created is what will be used for the application to work with. It offers methods to read records contained in the original IPFIX object. The Collector emits an event each time it creates an object from a received message. Modules can then listen and react to this particular event and treat the newly created object. \\
+
+The \textit{Log} module offers logging capabilities of IPFIX message. It also give the possibility to query it. The storing is done in a PostgreSQL database. However users can freely switch to its SQL prefered database as long it offers also the possibilty to create JSON field. To log an IPFIX message, it listens on the Collector's event mentioned before. It then store in the database the JSON representation of the object. The module proposes methods to query the database like to have the different flows between two nodes as example. As to enhance the reactivity of our application, other tables are created apart from the ones that contained the IPFIX objects. One such table is the different flows.\\
+
+To keep track of the status of the nodes, we deemed necessary to create a \textit{Nodes Status} module. This particular module listens also on the Collector's event for incoming IPFIX object. It will then update the status of the nodes accordingly to the content of the object. The status of a node comprises its parent, its battery, its number of bytes sent and number of packets sent to name a few. The Nodes Status module offers the current state of the different nodes contained in the IoT network. For having past values, it is necessary to pass via the Log module. \\
+
+The final module is the \textit{Web} one. This module is essentially an HTTP server. Users interact with our tool mainly via this module. It permits users to visualize the status of their network via their browser by launching HTTP requests to which the server will reply by delivering the requested content. This module is an intermediate between the users and the Nodes Status module but also between the users and Log module. The reason is that to deliver content to the users, this module need to gather data which are contained by the two aforementioned modules. This module can be seen as the frontend of our application whereas the other can be viewed as composing the backend of our solution.\\
+
+The reasons behind using multiple modules is to achieve one of the requirement we imposed on ourselves, the modularity of our program. We stated that an user should easily extend our software to add new features. By separating our applications into four different modules we achieved to meet this requirement. Each module offers different functionalities and abstraction. The Collector is responsible of collecting the IPFIX messages, the Log module to log those messages and provide means to query the logs, the Nodes Status keep track of the status of the IoT network and finally the Web module permits users to interact and visualize the data. Users wanted to add another web page will mostly only look into the Web module by adding another route to which the server will respond by replying by an HTML page. \\
+
+The Fig.\ref{fig:modules} depicts the different modules presented and their interactions. As shown in the figure, the modules occupy different layers. The first layer is occupied by the Collector. The second one is occupied by the Nodes Status and Log modules. And finally the third one is composed solely of the Web module.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{res/modules.png}
+	\caption{Modules interactions}
+	\label{fig:modules}
+\end{figure}
+
+\subsection{Features}
+
+The features offered by our monitoring applications are what we considered to be the basic ones.
+
+\todo[inline]{Add screenshots of the sotware + detail more + add features}
+\begin{description}
+	\item[Topology Map] Display the logical topology of the WSN. The topology represents the RPL routing. A link represents a relation of parent-child between two nodes. The root is colored differently to distinguish it from leaf nodes, which do not have children.
+	\item[Node values] Offers the possibility to see more in depth the values sent by a particular node. With these features, an administrator have the possibility to see how the different values evolved in time. It also gives meaningful statistics as the average number of bytes sent by interval of time, how often it is addressed and so on.
+	\item[Network statistics] Gives statistics which are general to the whole network. This comprises the amount of traffic generated by the network. But also gives meaningful insight about the node having the less battery or the node sending the most data. This gives a broad view to the administrator.
+\end{description}
 
 \chapter{Alternatives}
 
