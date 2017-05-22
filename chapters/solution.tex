@@ -80,7 +80,6 @@ The features offered by our monitoring applications are what we considered to be
 \chapter{Alternatives}
 
 \section{Nfsen, A Graphical Web Tool}
-\todo{Ou placer, Avant/apres notre solution?}
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{res/nfsen.png}
@@ -109,3 +108,14 @@ As seen in the next figure, the next important component is \textit{nfdump}. Nfd
 Once the data is processed, it is displayed by Nfsen with the help of graphs. Nfsen displays the collected netflow data, either in flows, packets, or bytes. As you can see in figure \ref{fig:nfsen}, it can display various types of data, for example data sent through different protocols such as UDP, TCP, etc. It also uses time spans to select which data traffic is to be displayed (being the same time spans where nfdump did all the processing).\\
 
 As stated earlier, Nfsen can also be extended, by creating plugins. There exist two kinds of plugins. There are the backend plugins that are written in Perl, that are created to add more functions and functionalities such as alerting conditions and data processing. On the other hand, frontend plugins are written in PHP and used to create new display fashions that the original Nfsen application would lack. In our case, we wanted to display the topology of the network under analysis, which Nfsen is not showing in its original state. Note that each backend plugin should be associated with its respective frontend plugin.
+
+\section{Nfsen \& Nfdump, not best suited?}
+
+In section 5.1, we talked about Nfsen and how it is possible to create plugins to have further monitoring capabilities. As stated, the first description of the thesis was to create an \textit{Nfsen plugin} to visualize an IoT network in an Ad Hoc manner, with devices having Netflow activated.\\ 
+
+At the beginning of this school year, once we started working on our thesis, we dug into Nfsen and its functionalities, trying to get familiar with it. First of all, setting up the Nfsen tool showed itself to be very tedious and challenging, as many installation tutorials did not work for all computers and OSs, and had different instructions.\\
+
+The main reason why Nfsen is useful is that it easily and immediately treats the netflow information retrieved by nfcapd and nfdump, with little to no addition and/or modification needed. However, as we had decided in our case to modify the netflow structure to visualize IoT networks according to our needs, we also had to modify nfdump. Digging into nfdump seems to require quite some time and some knowledge of the Perl language. Entering the last year of our master thesis, we also had never used nor learned the PHP and perl languages in contrary to Javascript with the Node.js framework. Thinking of using the Node.js framework seemed reasonably more practical in our case, since we required to modify the netflow information retrivied from networks. We thus proceeded to write a Javascript program that played the role of Nfdump to efficiently parse and store the netflow information captured.
+
+\todo[inline]{explications techniques en plus ?}
+
