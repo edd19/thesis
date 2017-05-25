@@ -161,8 +161,8 @@ Another purpose of that feature is that it can be used to move the nodes in such
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{res/nfsen.png}
-	\caption{The Nfsen interface (source : http://nfdump.sourceforge.net/)}
-	\label{fig:nfdump}
+	\caption{The Nfsen interface (source : \url{nfsen.sourceforge.net})}
+	\label{fig:nfsen}
 \end{figure}
 
 The subject of our master thesis having been proposed by Professor Sadre last year and being about monitoring flows in IoT networks, the first tool that was presenting itself to us was Nfsen. Per its official website, \textit{Nfsen is a graphical web based front end for the nfdump netflow tools}. The Nfsen tool uses various graphes and charts to display the traffic of data varying with a specified time span or time interval. It works with the processing capabilities of Nfdump, a data processing tool using Netflow flows that have been retrieved from a network. Specifically, the Nfsen interface also allows to create plugins to have more ways of displaying data information. At first, it was proposed in the description of the subject of the thesis to use Nfsen along with Nfdump, particularly creating an Nfsen addon to show further information along with what Nfsen already is displaying in terms of graphical content. By plugin, one graphical content that Nfsen is lacking is the current topology of the monitored network, which can be added by making a plugin which extends the graphical tool.\\
@@ -179,7 +179,7 @@ As seen in the next figure, the next important component is \textit{nfdump}. Nfd
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{res/nfdump.png}
-	\caption{The Nfdump Structure (source : http://nfdump.sourceforge.net/-)}
+	\caption{The Nfdump Structure (source : \url{nfdump.sourceforge.net})}
 	\label{fig:nfdump}
 \end{figure}
 
@@ -197,10 +197,6 @@ The main reason why Nfsen is useful is that it easily and immediately treats the
 
 Thinking of using the Node.js framework seemed reasonably more practical in our case in terms of time allocation, since we required to modify the netflow information retrieved from networks. With further discussion, we decided to write a Javascript program that played the role of Nfdump to efficiently parse and store the netflow information captured. Similarly, instead of using nfsen as the graphical interface, we programmed a web tool with Node.js to be able to visualize information in which we are interested in. Of course, our graphical interface is less complete than nfsen's, but it contains a topology showcase that nfsen does not, that we have programmed using the D3.js framework as explained earlier.\\
 
-<<<<<<< HEAD
-In the end, Nfsen used with Nfdump present a lot of advantages, as most of the work is already present in its core, only a few things have to be added, i.e. the topology here. It contains a lot of graphical information on how much traffic passes through the network, with many filters such as graphs split according to which protocols send the information. But for the reasons we have cited above, we have decided not to use it and opt for a solution using Node.js.
-=======
-In the end, Nfsen used with Nfdump present a lot of advantages, as most of the work is already present in its core, only a few things have to be added, i.e. the topology here. It contains a lot of graphical information on how much traffic passes through the network, with many filters such as graphs split according to which protocols send the information. But for the reasons we have cited above, we have decided not to use it and opted for a solution using Node.js. 
->>>>>>> ea6b02964f6e785e62ac35149b35d0714493db7d
+In the end, Nfsen used with Nfdump present a lot of advantages, as most of the work is already present in its core, only a few things have to be added, i.e. the topology here. It contains a lot of graphical information on how much traffic passes through the network, with many filters such as graphs split according to which protocols send the information. But for the reasons we have cited above, we have decided not to use it and opted for a solution using Node.js.
 
 \todo[inline]{explications techniques en plus ?}
