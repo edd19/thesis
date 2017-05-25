@@ -1,8 +1,37 @@
-\part{Analaysis}  \label{part:analysis}
+\part{Analysis}  \label{part:analysis}
 
 \chapter{Testbed}
 
+In this chapter, we will present the methodology used to analyze our solution. Our tests were focused on the data retrieval as we considered it to be the part that needed to be evaluated the most. This is mainly due to the fact that our solution will be considered viable only if it do not stress intensively the network. Because we are talking about Internet of Things, and particularly Wireless Sensors Network, preserving the battery life of nodes is a must. This can be done by maximizing the CPU sleep time, or reducing the transmission or reception time. For those particular reasons, four criteria designed our tests:
+
 \begin{itemize}
-	\item Explain how we implemented our tests (benchmark)
-	\item Performance (power usage, augmentation of traffic)
+  \item CPU sleep time or its inverse the CPU duty time
+  \item Radio transmission time (Tx)
+  \item Radio reception time(Rx)
+  \item Amount of packets induced by our solution \\
 \end{itemize}
+
+\todo[inline]{Add formula for energy consumption}
+The three first arguments can give an estimate of the energy consumption. With that we can build a model to tell whether if our solution depletes the battery too much.\\
+
+To implement our benchmarks, we used the couple Contiki-OS and Cooja. The former was used to configure the nodes while the latter was used to simulate those nodes. For more details on those two, see Chap.\ref{chap:contiki}.\\
+
+This chapter will be organized in two sections. First, we will explain the different configurations (number and role of nodes) used for our benchmarks. Secondly, we will explain in more detail the mechanisms used for nodes to send their data.
+
+\section{Configurations}
+
+Four different configurations were used for the purpose of our tests. They all differ by the roles played by the nodes.
+
+\begin{description}
+  \item[Simple] In this configuration, the nodes do not send information about the flows they observed. They only occupied the role of sensor nodes, meaning only sending sensors values.
+  \item[Ipfix] This configuration is an upgrade of the previous one where the nodes now send informations about the flows they observerd. Those informations are used using the full IPFIX format.
+  \item[TinyIpfix] This configuration is also an upgrade of the \textit{Simple} configuration. The nodes send flows informations but using the TinyIPFIX format. This imply that the gateway node do conversion of TinyIPFIX to IPFIX.
+  \item[Aggregation] This last configuration adds aggregators to the \textit{TinyIpfix} configuration. Aggreagators collects TinyIPFIX messages and merge them in one message. They then send those merged messages to the gateway who will convert them to compliant IPFIX messages.
+\end{description}
+
+\section{Sending of data}
+
+
+\chapter{Results}
+
+After having presented our methodology used when testing our solution, this chapter will present and discuss the results obtained from it.
