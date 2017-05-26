@@ -129,35 +129,27 @@ As for the three different colors for regular nodes, we have decided to use them
 We have decided to implement a dragging feature. That is, by clicking on a node and holding the click, it is possible to move the topology with the direction of the user's mouse. While this feature seems insignificant, it finds its use when the topology gets populated. When there are more than 30 nodes (figure \ref{fig:populated}), the topology may expand further than the borders of the zone dedicated to the topology, as seen in figure \ref{fig:outnode}.
 
 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.6\textwidth]{res/outnode.png}
-	\caption{Out of borders nodes}
-	\label{fig:outnode}
-\end{figure}
 
+\begin{figure}
+    \centering
+    \begin{subfigure}[h]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{res/outnode.png}
+        \caption{Out of borders nodes}
+        \label{fig:outnode}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[h]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{res/visible.png}
+        \caption{Visible with dragging}
+        \label{fig:visible}
+    \end{subfigure}
+    \caption{Dragging result}\label{fig:dragging}
+\end{figure}
 As you can see in figure \ref{fig:visible}, it is thus possible to fully see any group of nodes, since the topology zone is not unlimited in size. \\
 
-Another purpose of that feature is that it can be used to move the nodes in such a way to show how the topology looks as a tree by isolating the node that acts as the root, as we recall that the network should be organized a tree. You can see in figure \ref{fig:tree} how it may look like. Once the dragging is stopped, the nodes get back to their initial position in the topology. \\
 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.3\textwidth]{res/visible.png}
-	\caption{Making group of nodes visible with dragging}
-	\label{fig:visible}
-\end{figure}
+\chapter{Nfsen, A Graphical Web Tool}
 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.4\textwidth]{res/dragtree.png}
-	\caption{Making topology look as a tree}
-	\label{fig:tree}
-\end{figure}
-
-
-\chapter{Alternatives}
-
-\section{Nfsen, A Graphical Web Tool}
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{res/nfsen.png}
@@ -198,5 +190,3 @@ The main reason why Nfsen is useful is that it easily and immediately treats the
 Thinking of using the Node.js framework seemed reasonably more practical in our case in terms of time allocation, since we required to modify the netflow information retrieved from networks. With further discussion, we decided to write a Javascript program that played the role of Nfdump to efficiently parse and store the netflow information captured. Similarly, instead of using nfsen as the graphical interface, we programmed a web tool with Node.js to be able to visualize information in which we are interested in. Of course, our graphical interface is less complete than nfsen's, but it contains a topology showcase that nfsen does not, that we have programmed using the D3.js framework as explained earlier.\\
 
 In the end, Nfsen used with Nfdump present a lot of advantages, as most of the work is already present in its core, only a few things have to be added, i.e. the topology here. It contains a lot of graphical information on how much traffic passes through the network, with many filters such as graphs split according to which protocols send the information. But for the reasons we have cited above, we have decided not to use it and opted for a solution using Node.js.
-
-\todo[inline]{explications techniques en plus ?}
