@@ -51,6 +51,27 @@ Four different configurations were used for the purpose of our tests. They all d
   \item[Aggregation] This last configuration adds aggregators to the \textit{TinyIpfix} configuration. Aggreagators collect TinyIPFIX messages and merge them in one message. They then send those merged messages to the gateway who will convert them to compliant IPFIX messages. In return the gateway node will send the converted messages directly to the collector. \\
 \end{description}
 
+The Tab.\ref{table:configurations} resumes the different configurations used during our benchmarks. \\
+
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Configuration & Monitoring deployed & Aggregator \\
+    \hline
+    Simple & None & No \\
+    \hline
+    Ipfix & IPFIX & No \\
+    \hline
+    TinyIpfix & TinyIPFIX & No \\
+    \hline
+    Aggregation & TinyIPFIX & Yes \\
+    \hline
+  \end{tabular}
+  \caption{Configurations used}
+  \label{table:configurations}
+\end{table}
+
 We tested each configuration with an increasing number of nodes of 5, 10, 15 and 20. Each configuration was tested for 25 minutes. The number of nodes was limited by the computer used during benchmarking as it proved unable to simulate more than 20 nodes with Cooja. We also tested the influence of the sending time of the IPFIX messages with a 1 and 5 minutes interval between each message.\\
 
 Also for each simulation we keep track of the following informations:
