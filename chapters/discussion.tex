@@ -7,11 +7,7 @@
 	\item What's next
 \end{itemize}
 
-
-
-\newpage
-
-\chapter{Nfsen, A Graphical Web Tool}
+\section{Nfsen, A Graphical Web Tool}
 
 \begin{figure}[!h]
 	\centering
@@ -42,7 +38,7 @@ Once the data is processed, it is displayed by Nfsen with the help of graphs. Nf
 
 As stated earlier, Nfsen can also be extended, by creating plugins. There exist two kinds of plugins. There are the backend plugins that are written in Perl, that are created to add more functions and functionalities such as alerting conditions and data processing. On the other hand, frontend plugins are written in PHP and used to create new display fashions that the original Nfsen application would lack. In our case, we wanted to display the topology of the network under analysis, which Nfsen is not showing in its original state. Note that each backend plugin should be associated with its respective frontend plugin.
 
-\section{Nfsen \& Nfdump, not best suited?}
+\subsection{Nfsen \& Nfdump, not best suited?}
 
 In section 5.1, we talked about Nfsen and how it is possible to create plugins to have further monitoring capabilities. As stated, the first description of the thesis was to create an \textit{Nfsen plugin} to visualize an IoT network in an Ad Hoc manner, with devices having Netflow activated.\\
 
@@ -54,21 +50,21 @@ Thinking of using the Node.js framework seemed reasonably more practical in our 
 
 In the end, Nfsen used with Nfdump present a lot of advantages, as most of the work is already present in its core, only a few things have to be added, i.e. the topology here. It contains a lot of graphical information on how much traffic passes through the network, with many filters such as graphs split according to which protocols send the information. But for the reasons we have cited above, we have decided not to use it and opted for a solution using Node.js.
 
-\chapter{Other Possible Solutions}
-
-After having explained the architecture of our monitoring tool and the technologies we have used to implement it, we have also introduced Nfsen along with Nfdump, that was supposed to be the first technology that we were going to use to develop our solution.\\
+\section{Other Possible Solutions}
 
 In this section, we will discuss other possible technologies that could have been used in the place of those that are part of our solution.
 
 TinyOS, RIOT ? 
 
+\todo[inline]{Yavait vraiment d'autres solutions que NFSEN en soi?}
+
 \newpage
-\chapter{Possible Extensions}
+\section{Possible Extensions}
 
 
-Data traffic for a specific node, added on a panel, more specific data information for links in the network (with the help of opacity ?), data information for applications in the IoT Network (for now, no application layer?), security (crypted packet, authentication, ...?)
+Data traffic for a specific node, added on a panel, data information for applications in the IoT Network (for now, no application layer?)
 
-\section{Load of data on Links} 
+\subsection{Load of data on Links} 
 
 In this master thesis, we have mostly focused on data creation from nodes and passing through nodes, since Netflow is activated on the said nodes. We have not implemented features allowing to monitor traffic passing through specific links, as it would require a few modifications in the way we process data, and would also add more traffic load in the IoT network. (Note : est-ce que netflow permet d'enregistrer des données spécifiques aux links?). \\
 
@@ -81,6 +77,12 @@ In the situation where we would have implemented monitoring mechanisms for data 
 	\label{fig:nfsen}
 \end{figure}
 
+\subsection{Topology according to real location} 
+
+As of now, the topology feature showcases a network toplogy that only depends on which motes are communicating to each other, no matter what is the relative position of those motes according to others in the network. \\
+
+A possible extension could be to showcase a topology where its nodes are positioned as in real life, with a corresponding proportional distance. However, that would imply adding complexity on each mote to have a feature computing the distances and angles formed from each three nodes, and that would also induct a raise in traffic volume since more packets containing position information are to be exchanged.
+
 \section{Security}
 
 Throughout the thesis, security has not been the main point of focus. Indeed, we have not implemented any security mechanism, inside the IoT network nor between the gateway node and our server. Data not being encrypted may be an issue as the communication between devices in the network becomes a target for sniffing and packets tempering. Of course, one direct impact of such insecurity is that data to be processed that is sent to the server may be tempered and thus, later on, the monitoring software would showcase wrong information about the traffic load and the topology for example.\\
@@ -89,7 +91,7 @@ Purely from a theoretical point of view, there is also a lack of security betwee
 
 Authentication mechanisms and encryption are the way to go to solve these problems. We would thus have authentication between motes (only gateway mote and server?), and encryption of data when creating packets from motes. However, those mechanisms add lines of codes uploaded on motes, which must be taken into account when analyzing and optimizing performances of the IoT network. In consequence, the mechanisms also add more traffic load to the network.\\
 
-All those points are to be taken into account if the purpose is to monitor a network and showcase accurate data. In our case though, no tempering was possible, as we know exactly what kind of data passes through the network and which device creates the flows.
+All those points are to be taken into account if the purpose is to monitor a network and showcase accurate data. In our case though, no tempering was possible, as we knew exactly what kind of data passes through the network and which device creates the flows.
 
 
 
