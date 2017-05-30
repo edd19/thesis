@@ -12,7 +12,7 @@ In this chapter, we will present the methodology used to analyze our solution. O
   \item Amount of packets induced by our solution \\
 \end{itemize}
 
-The three first arguments can give an estimate of the energy consumption. With that we can build a model to tell whether if our solution depletes the battery too much. Dunkel et al. \cite{dunkels2007software} demonstrate that energy consumption can be given by the following formula
+The four first arguments can give an estimate of the energy consumption. With that we can build a model to tell whether if our solution depletes the battery too much. Dunkel et al. \cite{dunkels2007software} demonstrate that energy consumption can be given by the following formula
 
 \begin{equation}
   E = (I_m t_m + I_l t_l + I_t t_t + I_r t_r) * V
@@ -84,8 +84,99 @@ Our tests were done solely on simulation using the Cooja simulation software. Th
 
 \section{Sending of data}
 
-This section will answer the questions relative on how the motes send IPFIX/TinyIPFIX messages, what triggers the sending of those meta informations and what particular informations are sent.
+This section will answer the questions relative on how the motes send IPFIX/TinyIPFIX messages, what triggers the sending of those meta informations and what particular informations are sent. Distinction must be done on the three types of motes: exporter, aggregator and gateway.\\
 
+\begin{description}
+  \item[Exporter] It is straighforward. It first send the templates then set a timer. When the timer expired or when the flows table reached its maximum capacity, the exporter exports the records. All packets, templates or data, are sent whether directly to the gateway or to an aggregator node depending on the configuration. The Alg.\ref{algo:exporter} is the algorithm corresponding to an exporter.
+
+  \begin{algorithm}
+    \textbf{Function} Exporter:\\
+    send templates\;
+    set timer\;
+    \While{true}{
+      yield process until event\;
+      \If{timer timeout or flows table is full}{
+        send data/records\;
+        empty flows table\;
+        reset timer\;
+      }
+    }
+   \caption{Exporter algorithm}
+   \label{algo:exporter}
+  \end{algorithm}
+
+  \item[Aggregator] It is an extension of the Exporter. It both merge and send TinyIPFIX messages. At first it send the templates used then also set a timer. When the aggregator received an TinyIPFIX message, it merged that one with previous ones if any. When a timeout of the timer occured or when the flows table of the aggregator reached its limit, it will merge its records with the ones received then will send the new formed message to the gateway. This behavior is shown by the Alg.\ref{algo:aggregator}.
+
+  \begin{algorithm}
+    \textbf{Function} Aggregator:\\
+    send templates\;
+    set timer\;
+    \While{true}{
+      yield process until event\;
+      \If{received TinyIPFIX message}{
+        merge message with previous ones\;
+      }
+      \If{timer timeout or flows table is full}{
+        merge aggregator data/records with received ones\;
+        send merged messages\;
+        empty flows table\;
+        reset timer\;
+      }
+    }
+   \caption{Aggregator algorithm}
+   \label{algo:aggregator}
+  \end{algorithm}
+
+  \item[Gateway] It convert TinyIPFIX messages received into IPFIX message. The converted messages are sent directly to the collector. This is shown by Alg.\ref{algo:gateway}.
+
+  \begin{algorithm}
+    \textbf{Function} Gateway:\\
+    \While{true}{
+      yield process until event\;
+      \If{received TinyIPFIX message}{
+        convert into IPFIX message;
+        send converted message;
+      }
+    }
+   \caption{Gateway algorithm}
+   \label{algo:gateway}
+  \end{algorithm}
+
+\end{description}
+
+Two templates were used during our tests. The first template (Tab.\ref{table:traffic_template}) was used to send traffic information about the network while the second one (Tab.\ref{table:meta_info_template}) to obtain meta-information about nodes. The first template considers records of size of 8 bytes. Each record contains the source node id, the destination node id which is the receiving end of a flow and also the number of octets for that particular flows plus the number of packets. This template is the most often used. The second template with records of size of 5 bytes is comprised of the source node id but also the parent node id (in RPL routing) and also the remaining battery of the node. This template is not sent often. It must be sent on update of the parent or at interval of one hour. The fields source node id, destination node id, parent node id and battery were defined for the purpose of this thesis. They are not standard ones.
+
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Source Node Id & 2 bytes \\
+    \hline
+    Destination Node Id & 2 bytes \\
+    \hline
+    Octets delta count & 2 bytes \\
+    \hline
+    Packets delta count & 2 bytes \\
+    \hline
+  \end{tabular}
+  \caption{Traffic template}
+  \label{table:traffic_template}
+\end{table}
+
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Source Node Id & 2 bytes \\
+    \hline
+    Parent node id & 2 bytes \\
+    \hline
+    Battery & 1 byte \\
+    \hline
+  \end{tabular}
+  \caption{Meta-information template}
+  \label{table:meta_info_template}
+\end{table}
 
 \chapter{Results}
 
