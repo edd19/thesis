@@ -68,4 +68,18 @@ TinyOS, RIOT ?
 \chapter{Possible Extensions}
 
 
-Data traffic for a specific node, added on a panel, more specific data information for links in the network (with the help of opacity ?), data information for applications in the IoT Network (for now, no application layer?), security (crypted packet, authentication, ...?) 
+Data traffic for a specific node, added on a panel, more specific data information for links in the network (with the help of opacity ?), data information for applications in the IoT Network (for now, no application layer?), security (crypted packet, authentication, ...?)
+
+\section{Load of data on Links} 
+
+In this master thesis, we have mostly focused on data creation from nodes and passing through nodes, since Netflow is activated on the said nodes. We have not implemented features allowing to monitor traffic passing through specific links, as it would require a few modifications in the way we process data, and would also add more traffic load in the IoT network. (Note : est-ce que netflow permet d'enregistrer des données spécifiques aux links?). \\
+
+In the situation where we would have implemented monitoring mechanisms for data passing through links, we could have used the topology and an opacity chart to show where loads of data are mostly generated from and flowing through, as you can see in figure \ref{fig:opacity}. Using tresholds for bytes of data passing through links, we would use a darker opacity for huge loads of data, and a lighter opacity if not much data passes through a certain link.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{res/opacity.png}
+	\caption{Opacity on links (source : \url{(source : http://bl.ocks.org/d3noob/5155181))}}
+	\label{fig:nfsen}
+\end{figure}
+
