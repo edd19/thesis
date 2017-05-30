@@ -84,7 +84,55 @@ Our tests were done solely on simulation using the Cooja simulation software. Th
 
 \section{Sending of data}
 
-This section will answer the questions relative on how the motes send IPFIX/TinyIPFIX messages, what triggers the sending of those meta informations and what particular informations are sent.
+This section will answer the questions relative on how the motes send IPFIX/TinyIPFIX messages, what triggers the sending of those meta informations and what particular informations are sent.\\
+
+\begin{algorithm}
+  \textbf{Function} Exporter:\\
+  send templates\;
+  set timer\;
+  \While{true}{
+    yield process until event\;
+    \If{timer timeout or flows table is full}{
+      send data/records\;
+      empty flows table\;
+    }
+  }
+ \caption{Exporter algorithm}
+ \label{algo:exporter}
+\end{algorithm}
+
+
+\begin{algorithm}
+  \textbf{Function} Aggregator:\\
+  send templates\;
+  set timer\;
+  \While{true}{
+    yield process until event\;
+    \If{received TinyIPFIX message}{
+      merge message with previous ones\;
+    }
+    \If{timer timeout or flows table is full}{
+      merge aggregator data/records with received ones\;
+      send merged messages\;
+      empty flows table\;
+    }
+  }
+ \caption{Aggregator algorithm}
+ \label{algo:aggregator}
+\end{algorithm}
+
+\begin{algorithm}
+  \textbf{Function} Gateway:\\
+  \While{true}{
+    yield process until event\;
+    \If{received TinyIPFIX message}{
+      convert into IPFIX message;
+      send converted message;
+    }
+  }
+ \caption{Gateway algorithm}
+ \label{algo:gateway}
+\end{algorithm}
 
 
 \chapter{Results}
