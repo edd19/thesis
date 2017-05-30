@@ -61,8 +61,6 @@ After having explained the architecture of our monitoring tool and the technolog
 In this section, we will discuss other possible technologies that could have been used in the place of those that are part of our solution.
 
 TinyOS, RIOT ? 
-\newpage
-\chapter{Security}
 
 \newpage
 \chapter{Possible Extensions}
@@ -79,7 +77,19 @@ In the situation where we would have implemented monitoring mechanisms for data 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{res/opacity.png}
-	\caption{Opacity on links (source : \url{(source : http://bl.ocks.org/d3noob/5155181))}}
+	\caption{Opacity on links (source : \url{http://bl.ocks.org/d3noob/5155181})}
 	\label{fig:nfsen}
 \end{figure}
+
+\section{Security}
+
+Throughout the thesis, security has not been the main point of focus. Indeed, we have not implemented any security mechanism, inside the IoT network nor between the gateway node and our server. Data not being encrypted may be an issue as the communication between devices in the network becomes a target for sniffing and packets tempering. Of course, one direct impact of such insecurity is that data to be processed that is sent to the server may be tempered and thus, later on, the monitoring software would showcase wrong information about the traffic load and the topology for example.\\
+
+Purely from a theoretical point of view, there is also a lack of security between devices inside the network, but also between the gateway mote and the server, communicating via UDP. The sniffing of exchanged packets can be an issue, as well as identity theft (spoofing) where a third party could act as, for instance, being the gateway mote and send data to the server, because of the lack of authentication when communication is opened. \\
+
+Authentication mechanisms and encryption are the way to go to solve these problems. We would thus have authentication between motes (only gateway mote and server?), and encryption of data when creating packets from motes. However, those mechanisms add lines of codes uploaded on motes, which must be taken into account when analyzing and optimizing performances of the IoT network. In consequence, the mechanisms also add more traffic load to the network.\\
+
+All those points are to be taken into account if the purpose is to monitor a network and showcase accurate data. In our case though, no tempering was possible, as we know exactly what kind of data passes through the network and which device creates the flows.
+
+
 
