@@ -2,17 +2,40 @@
 
 \chapter{Testbed}
 
-In this chapter, we will present the methodology used to analyze our solution. Our tests were focused on the data retrieval as we considered it to be the part that needed to be evaluated the most. This is mainly due to the fact that our solution will be considered viable only if it do not stress intensively the network. Because we are talking about Internet of Things, and particularly Wireless Sensors Network, preserving the battery life of nodes is a must. This can be done by maximizing the CPU sleep time, or reducing the transmission or reception time. For those particular reasons, four criteria designed our tests:
+In this chapter, we will present the methodology used to analyze our solution. Our tests were focused on the data retrieval as we considered it to be the part that needed to be evaluated the most. This is mainly due to the fact that our solution will be considered viable only if it do not stress intensively the network. Because we are talking about Internet of Things, and particularly Wireless Sensors Network, preserving the battery life of nodes is a must. This can be done by maximizing the CPU sleep time, or reducing the transmission or reception time. For those particular reasons, five criteria designed our tests:
 
 \begin{itemize}
-  \item CPU sleep time or its inverse the CPU duty time
+  \item CPU duty time
+  \item CPU low power mode time
   \item Radio transmission time (Tx)
   \item Radio reception time(Rx)
   \item Amount of packets induced by our solution \\
 \end{itemize}
 
-\todo[inline]{Add formula for energy consumption}
-The three first arguments can give an estimate of the energy consumption. With that we can build a model to tell whether if our solution depletes the battery too much.\
+The three first arguments can give an estimate of the energy consumption. With that we can build a model to tell whether if our solution depletes the battery too much. Dunkel et al. \cite{dunkels2007software} demonstrate that energy consumption can be given by the following formula
+
+\begin{equation}
+  E = (I_m t_m + I_l t_l + I_t t_t + I_r t_r) * V
+\end{equation}
+
+where $I_m$ and $t_m$ represents the current draw of the microprocessor when running and the time in which it has been running respectively. $I_l$ and $t_l$  are the current draw and the time of the microprocessor in low power mode. $I_t$ and $t_t$ are the current draw and the time of the communication device in transmit mode while $I_r$ and $t_r$ are the current draw and the time of the communication device in receive mode. Finally, $V$ is the supply voltage. The $I_m$, $I_l$, $I_t$, $I_r$ and $V$ values are device dependent. Different models can present different values. The Tab.\ref{table:device_consumption} shows such values for different models.\\
+
+\begin{table}
+  \centering
+
+  \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    Model & $I_m$ (mA) & $I_l$ (mA) & $I_t$ (mA) & $I_r$ (mA) & $V$ (V)\\
+    \hline
+    Zolertia Z1 & 5 & 0.0005 & 17.4 & 18.8 & 3 \\
+    \hline
+    Tmote Sky & 1.8 & 0.0545 & 19.5 & 21.8 & 3 \\
+    \hline
+  \end{tabular}
+  \caption{Devices electrical characteristics}
+  \label{table:device_consumption}
+\end{table}
+
 To implement our benchmarks, we used the couple Contiki-OS and Cooja. The former was used to configure the nodes while the latter was used to simulate those nodes. For more details on those two, see Chap.\ref{chap:contiki}.\\
 
 This chapter will be organized in two sections. First, we will explain the different configurations (number and role of nodes) used for our benchmarks. Secondly, we will explain in more detail the mechanisms used for nodes to send their data. The code used to implement those parts can be found on our public repository \textit{\href{https://github.com/edd19/netflow_contiki}{netflow\_contiki}}.
