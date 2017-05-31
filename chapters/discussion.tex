@@ -1,11 +1,12 @@
-\part{Discussion} \label{part:discussion}
-\chapter{Discussion} 
+\chapter{Discussion}
 
-\begin{itemize}
-	\item Other solutions
-	\item Security
-	\item What's next
-\end{itemize}
+The topics covered by this chapter will be about :
+
+\begin{description}
+	\item[Nfsen] We began our master thesis by trying to implement a plug in for that particular software. Details will be given on how this tool work and reasons will be given on why we abandoned the idea of of implementing a plug in. However, as you will see, our architecture resembles a lot to Nfsen.
+	\item[Possible extensions] Those are features that could be added to our current software as to improve it.
+	\item[Security] Issues about security will be addressed.
+\end{description}
 
 \section{Nfsen, A Graphical Web Tool}
 
@@ -22,7 +23,6 @@ In this section, we will explain all the underlying layers of Nfsen, from data e
 
 The first step towards monitoring is data collecting. As we explained in Chapter 3, Netflow is used for collecting flows we are interested in, according to some specific attributes such as the source and destination addresses. Once the flow are captured, they are stored and waiting to be processed. \\
 
-(source : http://nfdump.sourceforge.net/, https://www.first.org/conference/2006/papers/haag-peter-papers.pdf)
 In reality, when the structure of the Netflow data is defined, the flows are actually captured by \textit{nfcapd}, a \textit{netflow capture deamon}. With nfcapd, the flows are read from the network and the collected data is stored into files, data being split in files according to time slices. Each five minutes, nfcapd outputs a new file where data is stored, named with the current timestamp. One nfcapd process is used for each existing netflow stream that we want to capture.\\
 
 As seen in the next figure, the next important component is \textit{nfdump}. Nfdump is a command line based tool that provides further data processing. Basically, it reads the data that was previously captured and stored by nfcapd. With Nfdump, data is aggregated and it provides further statistics about the traffic. Nfdump can either analyze the data coming from a single file, or from several of them by concatenating them before analyzing. One strength of nfdump is that it can filter out the attributes in the data that are not needed during the processing. Afterwards, the data is output either as a text file or binary data, thus being ready for further analysis. Nfdump aggregates and then creates statistics about the flows information stored, such as traffic volume sent during a timelapse. Nfdump thus acts as the backend of Nfsen.\\
@@ -44,27 +44,15 @@ In section 5.1, we talked about Nfsen and how it is possible to create plugins t
 
 At the beginning of this school year, once we started working on our thesis, we dug into Nfsen and its functionalities, trying to get familiar with it. First of all, setting up the Nfsen tool showed itself to be very tedious and challenging, as many installation tutorials did not work for all computers and OSs, and had different instructions.\\
 
-The main reason why Nfsen is useful is that it easily and immediately treats the netflow information retrieved by nfcapd and nfdump, with little to no addition and/or modification needed. However, as we had decided to modify the netflow structure to visualize IoT networks according to our needs, we also had to modify nfdump. Namely, two fields that the original netflow structure does not monitor, and hence are not standardized fields, are the battery level of devices and the parent of each mote in the IoT networks. Digging into nfdump seems to require quite some time and some knowledge of the Perl language. Entering the last year of our master thesis, we also had never used nor learned the PHP and perl languages in contrary to Javascript with the Node.js framework. \\
+The main reason why Nfsen is useful is that it easily and immediately treats the netflow information retrieved by nfcapd and nfdump, with little to no addition and/or modification needed. However, as we had decided to design our own IPFIX fields to visualize IoT networks according to our needs, we also had to modify nfdump. Namely, two fields that the original IPFIX structure does not monitor, and hence are not standardized fields, are the battery level of devices and the parent of each mote in the IoT networks. Digging into nfdump seems to require quite some time and some knowledge of the Perl language. Entering the last year of our master thesis, we also had never used nor learned the PHP and perl languages in contrary to Javascript with the Node.js framework. \\
 
-Thinking of using the Node.js framework seemed reasonably more practical in our case in terms of time allocation, since we required to modify the netflow information retrieved from networks. With further discussion, we decided to write a Javascript program that played the role of Nfdump to efficiently parse and store the netflow information captured. Similarly, instead of using nfsen as the graphical interface, we programmed a web tool with Node.js to be able to visualize information in which we are interested in. Of course, our graphical interface is less complete than nfsen's, but it contains a topology showcase that nfsen does not, that we have programmed using the D3.js framework as explained earlier.\\
+Thinking of using the Node.js framework seemed reasonably more practical in our case in terms of time allocation, since we required to modify the netflow information retrieved from networks. With further discussion, we decided to write a Javascript program that played the role of Nfdump to efficiently parse and store the netflow information captured. Similarly, instead of using nfsen as the graphical interface, we programmed a web tool with Node.js to be able to visualize information in which we are interested in. Of course, our graphical interface is less complete than nfsen's, but it contains a topology showcase that nfsen does not, that we have programmed using the D3.js library as explained earlier.\\
 
 In the end, Nfsen used with Nfdump present a lot of advantages, as most of the work is already present in its core, only a few things have to be added, i.e. the topology here. It contains a lot of graphical information on how much traffic passes through the network, with many filters such as graphs split according to which protocols send the information. But for the reasons we have cited above, we have decided not to use it and opted for a solution using Node.js.
 
-\section{Other Possible Solutions}
-
-In this section, we will discuss other possible technologies that could have been used in the place of those that are part of our solution.
-
-TinyOS, RIOT ? 
-
-\todo[inline]{Yavait vraiment d'autres solutions que NFSEN en soi?}
-
-\newpage
 \section{Possible Extensions}
 
-
-Data traffic for a specific node, added on a panel, data information for applications in the IoT Network (for now, no application layer?)
-
-\subsection{Load of data on Links} 
+\subsection{Load of data on Links}
 
 In this master thesis, we have mostly focused on data creation from nodes and passing through nodes, since Netflow is activated on the said nodes. We have not implemented features allowing to monitor traffic passing through specific links, as it would require a few modifications in the way we process data, and would also add more traffic load in the IoT network. (Note : est-ce que netflow permet d'enregistrer des données spécifiques aux links?). \\
 
@@ -77,19 +65,23 @@ In the situation where we would have implemented monitoring mechanisms for data 
 	\label{fig:nfsen}
 \end{figure}
 
-\subsection{Topology according to real location} 
+\subsection{Topology according to real location}
 
 As of now, the topology feature showcases a network toplogy that only depends on which motes are communicating to each other, no matter what is the relative position of those motes according to others in the network. \\
 
 A possible extension could be to showcase a topology where its nodes are positioned as in real life, with a corresponding proportional distance. However, that would imply adding complexity on each mote to have a feature computing the distances and angles formed from each three nodes, and that would also induct a raise in traffic volume since more packets containing position information are to be exchanged.
 
-\subsection{Network failure} 
+\subsection{Network failure}
 
-When developing the software, we have not made any assumption that links and nodes may potentially fail. As of now, the way the topology updates itself is by refreshing the page and thus showcasing the topology. The topology is built according to netflow packets that are sent from the network to the server, which is everytime the server receives a flow of netflow packets. In reality, a topology change may come from a link failure, i.e. two nodes may have difficulties communicating together, or node failures if a mote runs out of battery or is accidently broken. \\ 
+When developing the software, we have not made any assumption that links and nodes may potentially fail. As of now, the way the topology updates itself is by refreshing the page and thus showcasing the topology. The topology is built according to netflow packets that are sent from the network to the server, which is everytime the server receives a flow of netflow packets. In reality, a topology change may come from a link failure, i.e. two nodes may have difficulties communicating together, or node failures if a mote runs out of battery or is accidently broken. \\
 
 A potential extension could be to have a panel showcasing the \textit{previous topology} after an update of topology, allowing to make comparisons between the current and the previous network state, and thus see if there potentially was an important change in the network.\\
 
 One important aspect to take into account is the fact that the topology is organized as a tree, meaning for each node or link failing, there is a cascade of nodes down branches that will consequently not be able to communicate with the gateway node.\\
+
+\subsection{Protocols distribution}
+
+As of now, our software do not have the possibility to sort the flows by protocols (RPL, UDP, TCP, ...). An improvement of our solution could permit to differentiate flows depending on the protocols. However to effectively enable such feature, the records sent by the nodes should contain more data. This imply that the nodes would send more data and a study of the impact on the nodes battery life would be necessary.
 
 \section{Security}
 
@@ -100,6 +92,3 @@ Purely from a theoretical point of view, there is also a lack of security betwee
 Authentication mechanisms and encryption are the way to go to solve these problems. We would thus have authentication between motes (only gateway mote and server?), and encryption of data when creating packets from motes. However, those mechanisms add lines of codes uploaded on motes, which must be taken into account when analyzing and optimizing performances of the IoT network. In consequence, the mechanisms also add more traffic load to the network.\\
 
 All those points are to be taken into account to showcase accurate data. In our case though, no tempering was possible, as we knew exactly what kind of data passes through the network and which device creates the flows.
-
-
-
