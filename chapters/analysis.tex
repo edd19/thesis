@@ -181,3 +181,93 @@ Two templates were used during our tests. The first template (Tab.\ref{table:tra
 \chapter{Results}
 
 After having presented our methodology used when testing our solution, this chapter will present and discuss the results obtained from it.
+
+\section*{Energy consumption}
+
+The Fig.\ref{fig:average_energy} shows the average energy consumption in term of mJ by minute for the nodes. The bar charts shows the evolution of the energy consumption with increasing number of nodes (5, 10, 15 and 20) for the three configurations \textit{simple}, \textit{tipfix} and \textit{aggrega}. As a reminder, the \textit{simple} configuration has no monitoring done with TinyIPFIX while the two has monitoring activated by the mean of TinyIPFIX messages. The different between \textit{tipfix} and \textit{aggrega} configurations lies in the fact that the \textit{aggrega} has aggregator nodes that merge TinyIPFIX messages into one. \\
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{res/average_energy.png}
+  \caption{Average energy consumption in mJ by minute}
+  \label{fig:average_energy}
+\end{figure}
+
+From the chart we can conclude that by using aggregators inside the network we can reduce the added energy consumption induced by the usage of TinyIPFIX messages for monitoring purposes. As can be clearly seen when introducing more nodes, the energy consumption increases much more when not using aggregators. The graph on Fig.\ref{fig:increase_energy} shows exactly how the monitoring increase the energy consumption. The increase was computed by comparing the simple and aggrega configurations on their counterpart the simple configuration which do not send any information about the status of the network. As one may notice, the tipfix configuration consumes  relatively more energy when the number of nodes increases. However, it appears not to be the case with the aggrega one. Reasons may be due to the positions of the aggregators who impact greatly how the network behaves and thus weight on the power consumption. By placing intelligently the aggregators it is therefore possible to stress less the network.\\
+
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{res/increase_energy.png}
+  \caption{Increase in energy consumption induced by monitoring}
+  \label{fig:increase_energy}
+\end{figure}
+
+\todo[inline]{explain why for 5 nodes exporters consume more}
+One of the big advantage of also using aggregators is that it reduced drastically the load on the nodes that simply exports data and do not merge messages. This is depicted in Fig.\ref{fig:aggrega_energy}. The bar chart represents the energy consumption for the exporters and the aggregators in the aggrega configuration. Apart from the case with 5 number of nodes, all the case shows clearly that the exporters consume less energy than the aggregators with almost 20 mJ of difference for 15 nodes.\\
+
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{res/energy_aggrega}
+  \caption{Energy consumption between aggregators and exporters}
+  \label{fig:aggrega_energy}
+\end{figure}
+
+With those results, one may wonder how it affects the battery life of the nodes. The estimated lifetime of the battery is indicated in Tab.\ref{tab:battery_lifetime}. To compute those estimations we used the following formula
+
+\begin{equation}
+  lifetime = \frac{2400 mAh * 2}{X mW * 24 hours}
+\end{equation}
+
+where $X$ is the power consumption of a node. We used $2400mAh$ as we considered that the nodes were powered by AA battery. We multiply it by $2$ as the \textit{Zolertia Z1} uses 2 batteries. \\
+
+The table shows clearly that to preserve the battery lifetime, aggregators become a must the more nodes are present in the IoT network.
+
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    configuration & 5 nodes & 10 nodes & 15 nodes & 20 nodes \\
+    \hline
+    simple & 317 days & 240 days & 204 days & 190 days\\
+    \hline
+    tipfix & 300 days & 224 days & 168 days & 156 days\\
+    \hline
+    aggrega (exporters) & 294 days & 240 days & 186 days & 174 days \\
+    \hline
+  \end{tabular}
+  \caption{Battery lifetime for different configurations}
+  \label{tab:battery_lifetime}
+\end{table}
+
+\section*{Nodes usage time}
+
+So as to more understand the power consumption induced by our solution, there is a need to see how often the nodes are active, and when it is the case what are they doing. To do so, we kept track on the time the nodes spend with their microprocessor active or in low power mode but also the time they were transmitting or receiving data via radio. This is what Fig.\ref{fig:time_all} shows. The Fig.\ref{fig:cpu_time} shows the average time the microprocessor is active by minute while Fig.\ref{fig:lpm_time} shows the average time the microprocessor is in low power mode. Fig.\ref{fig:tx_time} and Fig.\ref{fig:rx_time} shows average transmission time and receiving time by minute for a node. \\
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{res/average_cpu}
+        \caption{Average time spent with CPU active}
+        \label{fig:cpu_time}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{res/average_lpm}
+        \caption{Average time spent with CPU in low power mode}
+        \label{fig:lpm_time}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{res/average_tx}
+        \caption{Average time spent in transmission mode}
+        \label{fig:tx_time}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{res/average_rx}
+        \caption{Average time spent in receiving mode}
+        \label{fig:rx_time}
+    \end{subfigure}
+    \caption{Average components time of nodes}
+    \label{fig:time_all}
+\end{figure}
+
+The differences between the three configurations is highly visible for the transmission time and receiving time. In Fig.\ref{fig:tx_time} who shows the transmission time, we can clearly see than by monitoring, nodes pass more time transmitting data which influence the receiving time of the nodes. On Fig.\ref{fig:rx_time}, who shows receiving time, we can see that nodes receive more data which needs to be routed. It is however in the transmission time than there is the most gap between the configurations without and with TinyIPFIX.
