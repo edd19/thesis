@@ -182,7 +182,7 @@ Two templates were used during our tests. The first template (Tab.\ref{table:tra
 
 After having presented our methodology used when testing our solution, this chapter will present and discuss the results obtained from it.
 
-\section*{Energy consumption}
+\section{Energy consumption}
 
 The Fig.\ref{fig:average_energy} shows the average energy consumption in term of mJ by minute for the nodes. The bar charts shows the evolution of the energy consumption with increasing number of nodes (5, 10, 15 and 20) for the three configurations \textit{simple}, \textit{tipfix} and \textit{aggrega}. As a reminder, the \textit{simple} configuration has no monitoring done with TinyIPFIX while the two has monitoring activated by the mean of TinyIPFIX messages. The different between \textit{tipfix} and \textit{aggrega} configurations lies in the fact that the \textit{aggrega} has aggregator nodes that merge TinyIPFIX messages into one. \\
 
@@ -237,7 +237,7 @@ The table shows clearly that to preserve the battery lifetime, aggregators becom
   \label{tab:battery_lifetime}
 \end{table}
 
-\section*{Nodes usage time}
+\section{Nodes usage time}
 
 So as to more understand the power consumption induced by our solution, there is a need to see how often the nodes are active, and when it is the case what are they doing. To do so, we kept track on the time the nodes spend with their microprocessor active or in low power mode but also the time they were transmitting or receiving data via radio. This is what Fig.\ref{fig:time_all} shows. The Fig.\ref{fig:cpu_time} shows the average time the microprocessor is active by minute while Fig.\ref{fig:lpm_time} shows the average time the microprocessor is in low power mode. Fig.\ref{fig:tx_time} and Fig.\ref{fig:rx_time} shows average transmission time and receiving time by minute for a node. \\
 
@@ -270,4 +270,10 @@ So as to more understand the power consumption induced by our solution, there is
     \label{fig:time_all}
 \end{figure}
 
-The differences between the three configurations is highly visible for the transmission time and receiving time. In Fig.\ref{fig:tx_time} who shows the transmission time, we can clearly see than by monitoring, nodes pass more time transmitting data which influence the receiving time of the nodes. On Fig.\ref{fig:rx_time}, who shows receiving time, we can see that nodes receive more data which needs to be routed. It is however in the transmission time than there is the most gap between the configurations without and with TinyIPFIX.
+The differences between the three configurations is highly visible for the transmission time and receiving time. In Fig.\ref{fig:tx_time} who shows the transmission time, we can clearly see than by monitoring, nodes pass more time transmitting data which influence the receiving time of the nodes. On Fig.\ref{fig:rx_time}, who shows receiving time, we can see that nodes receive more data which needs to be routed. It is however in the transmission time than there is the most gap between the configurations without and with TinyIPFIX.\\
+
+However when analyzing the time spent with the CPU active on Fig.\ref{fig:cpu_time}, we can only notice than there is only a marginal difference between configurations with and without TinyIPFIX. This is also seen of Fig.\ref{fig:lpm_time} that shows the time the CPU is in low power mode. We can only conclude than the differential of energy consumption lies in the radio usage of the nodes induced by the sending of monitoring data. Increasing the interval at which nodes send their data could be a solution for network imposing as requirement a high battery lifespan.\\
+
+We must emphasize the fact that using aggregators reduced the average time spent by the nodes transmitting or receiving but also with CPU active or in low power mode. The fact that TinyIPFIX messages are concentrated into one aggregator that merge them into one packets save the overhead caused by multiple headers from TinyIPFIX itself but also 6lowPan.
+
+\section{Traffic overhead}
