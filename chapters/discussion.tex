@@ -88,7 +88,7 @@ A potential extension could be to have a panel showcasing the \textit{previous t
 
 As stated, the topology is updated according to netflow packets and information retrieval. In the network's current state, a mote that has not sent information for a while or a mote that has failed and that has consequently not sent any information would be interpeted the same way in our topology. \\
 
-Further mechanisms are needed to be able to distinguish the two situations, such as adding some field in our TinyIPFIX structure in combination with \textit{Hello packet} exchanges between a parent node and its childs to be able to have some information on downstream nodes and send that information to the gateway node. Those solutions require more lines of code on each mote, and a modified netflow structure with added fields.
+Further mechanisms are needed to be able to distinguish the two situations, such as adding some field in our TinyIPFIX structure in combination with \textit{Hello packet} exchanges between a parent node and its childs to test reachability and to be able to have some information on downstream nodes and send that information to the gateway node. Those solutions require more lines of code on each mote, and a modified netflow structure with added fields.
 
 
 
