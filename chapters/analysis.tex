@@ -2,7 +2,7 @@
 
 \chapter{Methodology}
 
-In this chapter, we will present the methodology used to analyze our solution. Our tests were focused on the data retrieval as we considered it to be the part that needed to be evaluated the most. This is mainly due to the fact that our solution will be considered viable only if it do not stress intensively the network. Because we are talking about Internet of Things, and particularly Wireless Sensors Network, preserving the battery life of nodes is a must. This can be done by maximizing the CPU sleep time, or reducing the transmission or reception time. For those particular reasons, four criteria designed our tests:
+In this chapter, we will present the methodology used to analyze our solution. Our tests were focused on data retrieval, as we considered it to be the part that needed to be evaluated the most. This is mainly due to the fact that our solution will be considered viable only if it does not stress intensively the network. Because we are talking about Internet of Things and particularly Wireless Sensors Network, preserving the battery life of nodes is a must. This can be done by maximizing the CPU sleep time, or reducing the transmission or reception time. For those particular reasons, four criteria designed our tests:
 
 \begin{itemize}
   \item CPU duty time
@@ -11,13 +11,13 @@ In this chapter, we will present the methodology used to analyze our solution. O
   \item Radio reception time(Rx)\\
 \end{itemize}
 
-Those criteria can give an estimate of the energy consumption. With that we can build a model to tell whether if our solution depletes the battery too much. Dunkel et al. \cite{dunkels2007software} demonstrate that energy consumption can be given by the following formula
+Those criteria can give an estimate of the energy consumption. With that, we can build a model to tell whether our solution depletes the battery too much. Dunkel et al. \cite{dunkels2007software} demonstrates that energy consumption can be given by the following formula
 
 \begin{equation}
   E = (I_m t_m + I_l t_l + I_t t_t + I_r t_r) * V
 \end{equation}
 
-where $I_m$ and $t_m$ represents the current draw of the microprocessor when running and the time in which it has been running respectively. $I_l$ and $t_l$  are the current draw and the time of the microprocessor in low power mode. $I_t$ and $t_t$ are the current draw and the time of the communication device in transmit mode while $I_r$ and $t_r$ are the current draw and the time of the communication device in receive mode. Finally, $V$ is the supply voltage. The $I_m$, $I_l$, $I_t$, $I_r$ and $V$ values are device dependent. Different models can present different values. The Tab.\ref{table:device_consumption} shows such values for different models.\\
+where $I_m$ and $t_m$ represent the current draw of the microprocessor when running and the time in which it has been running respectively. $I_l$ and $t_l$  are the current draw and the time of the microprocessor in low power mode. $I_t$ and $t_t$ are the current draw and the time of the communication device in transmit mode while $I_r$ and $t_r$ are the current draw and the time of the communication device in receive mode. Finally, $V$ is the supply voltage. The $I_m$, $I_l$, $I_t$, $I_r$ and $V$ values are device dependent. Different models can present different values. The Tab.\ref{table:device_consumption} shows such values for different models.\\
 
 \begin{table}
   \centering
@@ -37,18 +37,18 @@ where $I_m$ and $t_m$ represents the current draw of the microprocessor when run
 
 To implement our benchmarks, we used the couple Contiki-OS and Cooja. The former was used to configure the nodes while the latter was used to simulate those nodes. For more details on those two, see Chap.\ref{chap:contiki}.\\
 
-This chapter will be organized in two sections. First, we will explain the different configurations (number and role of nodes) used for our benchmarks. Secondly, we will explain in more detail the mechanisms used for nodes to send their data. The code used to implement those parts can be found on our public repository \textit{\href{https://github.com/edd19/netflow_contiki}{netflow\_contiki}} on github.
+This chapter will be organized in two sections. Firstly, we will explain the different configurations (number and role of nodes) used for our benchmarks. Secondly, we will explain in more detail the mechanisms used for nodes to send their data. The code used to implement those parts can be found on our public repository \textit{\href{https://github.com/edd19/netflow_contiki}{netflow\_contiki}} on github.
 
 \section{Configurations}
-Three different configurations were used for the purpose of our tests. They all differ by the facts that nodes send IPFIX messages or TinyIPFIX messages  or simply none. However they all share the common components of WSN: sensor nodes and gateway node.
+Three different configurations were used for the purpose of our tests. They all differ by the facts that nodes send IPFIX messages or TinyIPFIX messages, or simply none. However, they all share the common components of WSN: sensor nodes and gateway node.
 
 \begin{description}
-  \item[simple] In this configuration, the nodes do not send information about the flows they observed or any meta information about their network. They only occupy the role of sensor nodes, meaning sensing the environment and transmitting the values observed. To effectively simulate that, we made nodes send by periods of 1 minute a message of 10 bytes to the gateway node.
-  \item[tipfix] This configuration is also an upgrade of the \textit{simple} configuration. The nodes send flows informations but using the TinyIPFIX format. This imply that the gateway node do conversion of TinyIPFIX to IPFIX before transmitting the data to the collector.
-  \item[aggrega] This last configuration adds aggregators to the \textit{tipfix} configuration. Aggregators collect TinyIPFIX messages and merge them in one message. They then send those merged messages to the gateway who will convert them to compliant IPFIX messages. In return the gateway node will send the converted messages directly to the collector. \\
+  \item[simple] In this configuration, the nodes do not send information about the flows they observed or any meta information about their network. They only occupy the role of sensor nodes, meaning sensing the environment and transmitting the values observed. To effectively simulate that, we made nodes send, by periods of one minute, a message of 10 bytes to the gateway node.
+  \item[tipfix] This configuration is also an upgrade of the \textit{simple} configuration. The nodes send flows information but using the TinyIPFIX format. This implies that the gateway node does the conversion of TinyIPFIX to IPFIX before transmitting the data to the collector.
+  \item[aggrega] This last configuration adds aggregators to the \textit{tipfix} configuration. Aggregators collect TinyIPFIX messages and merge them in one message. They then send those merged messages to the gateway who will convert them to compliant IPFIX messages. In return, the gateway node will send the converted messages directly to the collector. \\
 \end{description}
 
-The Tab.\ref{table:configurations} resumes the different configurations used during our benchmarks. \\
+The Tab.\ref{table:configurations} summarizes the different configurations used during our benchmarks. \\
 
 \begin{table}
   \centering
@@ -67,18 +67,18 @@ The Tab.\ref{table:configurations} resumes the different configurations used dur
   \label{table:configurations}
 \end{table}
 
-We tested each configuration with an increasing number of nodes of 5, 10, 15 and 20. Each configuration was tested for 30 minutes. The number of nodes was limited by the computer used during benchmarking as it proved unable to simulate more than 20 nodes with Cooja. The packet rate was fixed at an interval of 5 minutes for TinyIPFIX messages. However in case of having their flows table full, it could occured that some motes send their data earlier.\\
+We tested each configuration with an increasing number of nodes of 5, 10, 15 and 20. Each configuration was tested for 30 minutes. The number of nodes was limited by the computer used during benchmarking, as it proved unable to simulate more than 20 nodes with Cooja. The packet rate was fixed at an interval of 5 minutes for TinyIPFIX messages. However, in the case of having their flows table full, it could occure that some motes send their data earlier.\\
 
-Also for each simulation we keep track of the 4-uple ($t_r$, $t_t$, $t_m$, $t_l$) where $t_r$ is the radio reception time, $t_t$ the radio transmission time, $t_m$ the time the Cpu is working and $t_l$ the time the Cpu is in low power mode. This 4-uple was recorded for each minute. This gave an idea on how the energy consumption evolves minute by minute.\\
+Also, for each simulation, we keep track of the 4-uple ($t_r$, $t_t$, $t_m$, $t_l$) where $t_r$ is the radio reception time, $t_t$ the radio transmission time, $t_m$ the time the Cpu is working, and $t_l$ the time the Cpu is in low power mode. This 4-uple was recorded for each minute. This gave an idea on how the energy consumption evolved minute by minute.\\
 
-Our tests were done solely on simulation using the Cooja simulation software. The nodes used during the simulations were the \textit{Zolertia Z1} as they proved to have sufficient memory for our code. However we do want to emphasize that we did not set as a goal to minimize the memory footprint of our code. Optimizations are thus possible to further decrease the code size and thus maybe reduce the cpu load also. We also considered a setup for all configurations were the radio loss was null. Also all motes were fixed meaning they did not move during the simulation.
+Our tests were done solely on simulation using the Cooja simulation software. The nodes used during the simulations were the \textit{Zolertia Z1} as they proved to have sufficient memory for our code. However, we do want to emphasize that we did not set as a goal to minimize the memory footprint of our code. Optimizations are thus possible to further decrease the code size, and thus maybe reduce the cpu load also. We also considered a setup for all configurations where the radio loss was null. Additionally, all motes were fixed by position, meaning they did not move during the simulation.
 
 \section{Sending of data}
 
-This section will answer the questions relative on how the motes send IPFIX/TinyIPFIX messages, what triggers the sending of those meta informations and what particular informations are sent. Distinction must be done on the three types of motes: exporter, aggregator and gateway.\\
+This section will answer the questions relative on how the motes send IPFIX/TinyIPFIX messages, what triggers the sending of those meta information and what particular information is sent. Distinction must be done on the three types of motes: exporter, aggregator and gateway.\\
 
 \begin{description}
-  \item[Exporter] It is straighforward. It first send the templates then set a timer. When the timer expired or when the flows table reached its maximum capacity, the exporter exports the records. All packets, templates or data, are sent whether directly to the gateway or to an aggregator node depending on the configuration. The Alg.\ref{algo:exporter} is the algorithm corresponding to an exporter.
+  \item[Exporter] It is straighforward. It first sends the templates then sets a timer. When the timer has expired or when the flows table has reached its maximum capacity, the exporter exports the records. All packets, templates or data, are sent either directly to the gateway or to an aggregator node depending on the configuration. The Alg.\ref{algo:exporter} is the algorithm corresponding to an exporter.
 
   \begin{algorithm}
     \textbf{Function} Exporter:\\
@@ -96,7 +96,7 @@ This section will answer the questions relative on how the motes send IPFIX/Tiny
    \label{algo:exporter}
   \end{algorithm}
 
-  \item[Aggregator] It is an extension of the Exporter. It both merge and send TinyIPFIX messages. At first it send the templates used then also set a timer. When the aggregator received an TinyIPFIX message, it merged that one with previous ones if any. When a timeout of the timer occured or when the flows table of the aggregator reached its limit, it will merge its records with the ones received then will send the new formed message to the gateway. This behavior is shown by the Alg.\ref{algo:aggregator}.
+  \item[Aggregator] It is an extension of the Exporter. It both merges and sends TinyIPFIX messages. At first, it sends the templates used then set a timer as well. When the aggregator has received an TinyIPFIX message, it merges that one with previous ones if any. When a timeout of the timer has occured or when the flows table of the aggregator has reached its limit, it will merge its records with the ones received then will send the new formed message to the gateway. This behavior is shown by the Alg.\ref{algo:aggregator}.
 
   \begin{algorithm}
     \textbf{Function} Aggregator:\\
@@ -118,7 +118,7 @@ This section will answer the questions relative on how the motes send IPFIX/Tiny
    \label{algo:aggregator}
   \end{algorithm}
 
-  \item[Gateway] It convert TinyIPFIX messages received into IPFIX message. The converted messages are sent directly to the collector. This is shown by Alg.\ref{algo:gateway}.
+  \item[Gateway] It converts TinyIPFIX messages received into IPFIX messages. The converted messages are sent directly to the collector. This is shown by Alg.\ref{algo:gateway}.
 
   \begin{algorithm}
     \textbf{Function} Gateway:\\
@@ -135,7 +135,7 @@ This section will answer the questions relative on how the motes send IPFIX/Tiny
 
 \end{description}
 
-The templates used during our tests is represented in Tab.\ref{table:traffic_template}. It was used to send traffic information about the network. This template considers records of size of 8 bytes. Each record contains the source node id, the destination node id which is the receiving end of a flow and also the number of octets for that particular flows plus the number of packets. All the fields mentioned are occupy 2 bytes which let the possibility of having values up to 65535 which appears to be sufficient for majority of WSN. Indeed WSN, appart for discovering the neighbors or organizing the routing topology, rarely communicate between themselves for most majority of usages. Thus having 2 bytes for the number of octets appears to be a judicious choice. However with IPFIX, the size of fields can be defined with the template and thus adapted to the network. The fields source node id, destination node id were defined for the purpose of this thesis. They are not standard ones, meaning IANA defined. They are entreprise fields defined for this thesis.
+The template used during our tests is represented in Tab.\ref{table:traffic_template}. It was used to send traffic information about the network. This template considers records of size of 8 bytes. Each record contains the source node id, the destination node id which is the receiving end of a flow and also the number of octets for that particular flows, plus the number of packets. All the fields mentioned occupy 2 bytes which leaves the possibility of having values up to 65535, which appears to be sufficient for the majority of WSNs. Indeed, appart for discovering the neighbors or organizing the routing topology, WSNs rarely communicate between themselves for the majority of usages. Thus, having 2 bytes for the number of octets appears to be a judicious choice. However, with IPFIX, the size of fields can be defined with the template and thus adapted to the network. The fields source node id and destination node id were defined for the purpose of this thesis. They are not standard ones, meaning not IANA defined. They are entreprise fields defined for this thesis.
 
 \begin{table}
   \centering
@@ -160,7 +160,7 @@ After having presented our methodology used when testing our solution, this chap
 
 \section{Energy consumption}
 
-The Fig.\ref{fig:average_energy} shows the average energy consumption in term of \acrfull{mj} by minute for the nodes. The bar charts shows the evolution of the energy consumption with increasing number of nodes (5, 10, 15 and 20) for the three configurations \textit{simple}, \textit{tipfix} and \textit{aggrega}. As a reminder, the \textit{simple} configuration has no monitoring done with TinyIPFIX while the two has monitoring activated by the mean of TinyIPFIX messages. The difference between \textit{tipfix} and \textit{aggrega} configurations lies in the fact that the \textit{aggrega} has aggregator nodes that merge TinyIPFIX messages into one. \\
+The Fig.\ref{fig:average_energy} shows the average energy consumption in terms of \acrfull{mj} by minute for the nodes. The bar charts show the evolution of the energy consumption with an increasing number of nodes (5, 10, 15 and 20) for the three configurations \textit{simple}, \textit{tipfix} and \textit{aggrega}. As a reminder, the \textit{simple} configuration has no monitoring done with TinyIPFIX while the two has monitoring activated by the mean of TinyIPFIX messages. The difference between \textit{tipfix} and \textit{aggrega} configurations lies in the fact that the \textit{aggrega} has aggregator nodes that merge TinyIPFIX messages into one. \\
 
 \begin{figure}[h]
   \centering
@@ -169,7 +169,7 @@ The Fig.\ref{fig:average_energy} shows the average energy consumption in term of
   \label{fig:average_energy}
 \end{figure}
 
-From the chart we can conclude that by using aggregators inside the network we can reduce the added energy consumption induced by the usage of TinyIPFIX messages for monitoring purposes. As can be clearly seen when introducing more nodes, the energy consumption increases much more when not using aggregators. The graph on Fig.\ref{fig:increase_energy} shows exactly how the monitoring increase the energy consumption. The increase was computed by comparing the tipfix and aggrega configurations on their counterpart the simple configuration which do not send any information about the status of the network. As one may notice, the tipfix configuration consumes  relatively more energy when the number of nodes increases. However, it appears not to be the case with the aggrega one. Reasons may be due to the positions of the aggregators who impact greatly how the network behaves and thus weight on the power consumption. By placing intelligently the aggregators it is therefore possible to stress less the network.\\
+From the chart, we can conclude that by using aggregators inside the network we can reduce the added energy consumption induced by the usage of TinyIPFIX messages for monitoring purposes. As can be clearly seen when introducing more nodes, the energy consumption increases much more when not using aggregators. The graph on Fig.\ref{fig:increase_energy} shows exactly how the monitoring increase the energy consumption. The increase was computed by comparing the tipfix and aggrega configurations on their counterpart, the simple configuration which does not send any information about the status of the network. As one may notice, the tipfix configuration consumes relatively more energy when the number of nodes increases. However, it appears not to be the case with the aggrega one. Reasons may be due to the positions of the aggregators that impact greatly how the network behaves and thus weight on the power consumption. By placing intelligently the aggregators it is therefore possible to stress the network less.\\
 
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{res/increase_energy.png}
@@ -177,7 +177,7 @@ From the chart we can conclude that by using aggregators inside the network we c
   \label{fig:increase_energy}
 \end{figure}
 
-One of the big advantage of also using aggregators is that it reduced drastically the load on the nodes that simply exports data and do not merge messages. This is depicted in Fig.\ref{fig:aggrega_energy}. The bar chart represents the energy consumption for the exporters and the aggregators in the aggrega configuration. Apart from the case with 5 number of nodes, all the case shows clearly that the exporters consume less energy than the aggregators with almost 20 mJ of difference for 15 nodes.\\
+One of the big advantages of also using aggregators is that it reduces drastically the load on the nodes that simply export data and does not merge messages. This is depicted in Fig.\ref{fig:aggrega_energy}. The bar chart represents the energy consumption for the exporters and the aggregators in the aggrega configuration. Apart from the case with 5 number of nodes, all the cases show clearly that the exporters consume less energy than the aggregators with almost 20 mJ of difference for 15 nodes.\\
 
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{res/energy_aggrega}
@@ -185,7 +185,7 @@ One of the big advantage of also using aggregators is that it reduced drasticall
   \label{fig:aggrega_energy}
 \end{figure}
 
-With those results, one may wonder how it affects the battery life of the nodes. The estimated lifetime of the battery is indicated in Tab.\ref{tab:battery_lifetime}. To compute those estimations we used the following formula
+With those results, one may wonder how it affects the battery life of the nodes. The estimated lifetime of the battery is indicated in Tab.\ref{tab:battery_lifetime}. To compute those estimations, we used the following formula :
 
 \begin{equation}
   lifetime = \frac{2400 \acrshort{mah} * 2}{X \acrshort{mw} * 24 hours}
@@ -193,7 +193,7 @@ With those results, one may wonder how it affects the battery life of the nodes.
 
 where $X$ is the power consumption of a node. We used $2400mAh$ as we considered that the nodes were powered by AA battery. We multiply it by $2$ as the \textit{Zolertia Z1} uses 2 batteries. \\
 
-The table shows clearly that to preserve the battery lifetime, aggregators become a must the more nodes are present in the IoT network.
+The table clearly shows that to preserve the battery lifetime, aggregators become a must, the more nodes are present in the IoT network.
 
 \begin{table}
   \centering
@@ -214,7 +214,7 @@ The table shows clearly that to preserve the battery lifetime, aggregators becom
 
 \section{Nodes time repartition}
 
-So as to more understand the power consumption induced by our solution, there is a need to see how often the nodes are active, and when it is the case what are they doing. To do so, we kept track on the time the nodes spend with their microprocessor active or in low power mode but also the time they were transmitting or receiving data via radio. This is what Fig.\ref{fig:time_all} shows. The Fig.\ref{fig:cpu_time} shows the average time the microprocessor is active by minute while Fig.\ref{fig:lpm_time} shows the average time the microprocessor is in low power mode. Fig.\ref{fig:tx_time} and Fig.\ref{fig:rx_time} shows average transmission time and receiving time by minute for a node. \\
+For the purpose of better understanding the power consumption induced by our solution, there is a need to see how often the nodes are active, and when it is the case, what are they doing. To do so, we kept track on the time the nodes spend with their microprocessor active or in low power mode but also the time they were transmitting or receiving data via radio. This is what Fig.\ref{fig:time_all} shows. The Fig.\ref{fig:cpu_time} shows the average time the microprocessor is active by minute while Fig.\ref{fig:lpm_time} shows the average time the microprocessor is in low power mode. Fig.\ref{fig:tx_time} and Fig.\ref{fig:rx_time} shows average transmission time and receiving time by minute for a node. \\
 
 \begin{figure}[h]
     \centering
@@ -245,11 +245,11 @@ So as to more understand the power consumption induced by our solution, there is
     \label{fig:time_all}
 \end{figure}
 
-The differences between the three configurations is highly visible for the transmission time and receiving time. In Fig.\ref{fig:tx_time} who shows the transmission time, we can clearly see than by monitoring, nodes pass more time transmitting data which influence the receiving time of the nodes. On Fig.\ref{fig:rx_time}, who shows receiving time, we can see that nodes receive more data which needs to be routed. It is however in the transmission time than there is the most gap between the configurations without and with TinyIPFIX.\\
+The differences between the three configurations is highly visible for the transmission time and receiving time. In Fig.\ref{fig:tx_time} that shows the transmission time, we can clearly see that, by monitoring, nodes pass more time transmitting data, which influences the receiving time of the nodes. On Fig.\ref{fig:rx_time}, that shows the receiving time, we can see that nodes receive more data that needs to be routed. It is however in the transmission time that there is the largest gap between the configurations with and without TinyIPFIX.\\
 
-However when analyzing the time spent with the CPU active on Fig.\ref{fig:cpu_time}, we can only notice than there is only a marginal difference between configurations with and without TinyIPFIX. This is also seen of Fig.\ref{fig:lpm_time} that shows the time the CPU is in low power mode. We can only conclude than the differential of energy consumption lies in the radio usage of the nodes induced by the sending of monitoring data. Increasing the interval at which nodes send their data could be a solution for network imposing as requirement a high battery lifespan.\\
+However, when analyzing the time spent with the CPU active on Fig.\ref{fig:cpu_time}, we can notice that there is only a marginal difference between configurations with and without TinyIPFIX. This is also seen in Fig.\ref{fig:lpm_time}, that showcases the time the CPU is in low power mode. We can only conclude than the differential of energy consumption lies in the radio usage of the nodes induced by the sending of monitoring data. Increasing the interval at which nodes send their data could be a solution for network imposing as requirement a high battery lifespan.\\
 
-We must emphasize the fact that using aggregators reduced the average time spent by the nodes transmitting or receiving but also with CPU active or in low power mode. The fact that TinyIPFIX messages are concentrated into one aggregator that merge them into one packets save the overhead caused by multiple headers from TinyIPFIX itself but also 6lowPan.
+We must emphasize the fact that using aggregators reduced the average time spent by the nodes transmitting or receiving, but also with CPU being active or in low power mode. The fact that TinyIPFIX messages are grouped into one aggregator that merges them into one packet reduces the overhead caused by multiple headers from TinyIPFIX itself but also 6LoWPan.
 
 
 \chapter{Discussion}
@@ -257,10 +257,10 @@ We must emphasize the fact that using aggregators reduced the average time spent
 The topics covered by this chapter will be about :
 
 \begin{description}
-	\item[Nfsen] We began our master thesis by trying to implement a plug in for that particular software. Details will be given on how this tool work and reasons will be given on why we abandoned the idea of of implementing a plug in. However, as you will see, our architecture resembles a lot to Nfsen.
+	\item[Nfsen] We started our master thesis by trying to implement a plug-in for that particular software. Details will be given on how this tool works and reasons will be given on why we abandoned the idea of of implementing an Nfsen plug-in. However, as you will see, our architecture resembles a lot that of Nfsen.
 	\item[Possible extensions] Those are features that could be added to our current software as to improve it.
 	\item[Security] Issues about security will be addressed.
-  \item[Further works] This will mainly be focus on how to improve the data retrieval of meta information about the network.
+  \item[Further works] This will mainly focus on how to improve the data retrieval of meta information about the network.
 \end{description}
 
 \section{Nfsen, A Graphical Web Tool}
