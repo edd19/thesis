@@ -160,7 +160,7 @@ After having presented our methodology used when testing our solution, this chap
 
 \section{Energy consumption}
 
-The Fig.\ref{fig:average_energy} shows the average energy consumption in term of mJ by minute for the nodes. The bar charts shows the evolution of the energy consumption with increasing number of nodes (5, 10, 15 and 20) for the three configurations \textit{simple}, \textit{tipfix} and \textit{aggrega}. As a reminder, the \textit{simple} configuration has no monitoring done with TinyIPFIX while the two has monitoring activated by the mean of TinyIPFIX messages. The different between \textit{tipfix} and \textit{aggrega} configurations lies in the fact that the \textit{aggrega} has aggregator nodes that merge TinyIPFIX messages into one. \\
+The Fig.\ref{fig:average_energy} shows the average energy consumption in term of \acrfull{mj} by minute for the nodes. The bar charts shows the evolution of the energy consumption with increasing number of nodes (5, 10, 15 and 20) for the three configurations \textit{simple}, \textit{tipfix} and \textit{aggrega}. As a reminder, the \textit{simple} configuration has no monitoring done with TinyIPFIX while the two has monitoring activated by the mean of TinyIPFIX messages. The difference between \textit{tipfix} and \textit{aggrega} configurations lies in the fact that the \textit{aggrega} has aggregator nodes that merge TinyIPFIX messages into one. \\
 
 \begin{figure}[h]
   \centering
@@ -169,7 +169,7 @@ The Fig.\ref{fig:average_energy} shows the average energy consumption in term of
   \label{fig:average_energy}
 \end{figure}
 
-From the chart we can conclude that by using aggregators inside the network we can reduce the added energy consumption induced by the usage of TinyIPFIX messages for monitoring purposes. As can be clearly seen when introducing more nodes, the energy consumption increases much more when not using aggregators. The graph on Fig.\ref{fig:increase_energy} shows exactly how the monitoring increase the energy consumption. The increase was computed by comparing the simple and aggrega configurations on their counterpart the simple configuration which do not send any information about the status of the network. As one may notice, the tipfix configuration consumes  relatively more energy when the number of nodes increases. However, it appears not to be the case with the aggrega one. Reasons may be due to the positions of the aggregators who impact greatly how the network behaves and thus weight on the power consumption. By placing intelligently the aggregators it is therefore possible to stress less the network.\\
+From the chart we can conclude that by using aggregators inside the network we can reduce the added energy consumption induced by the usage of TinyIPFIX messages for monitoring purposes. As can be clearly seen when introducing more nodes, the energy consumption increases much more when not using aggregators. The graph on Fig.\ref{fig:increase_energy} shows exactly how the monitoring increase the energy consumption. The increase was computed by comparing the tipfix and aggrega configurations on their counterpart the simple configuration which do not send any information about the status of the network. As one may notice, the tipfix configuration consumes  relatively more energy when the number of nodes increases. However, it appears not to be the case with the aggrega one. Reasons may be due to the positions of the aggregators who impact greatly how the network behaves and thus weight on the power consumption. By placing intelligently the aggregators it is therefore possible to stress less the network.\\
 
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{res/increase_energy.png}
@@ -177,7 +177,6 @@ From the chart we can conclude that by using aggregators inside the network we c
   \label{fig:increase_energy}
 \end{figure}
 
-\todo[inline]{explain why for 5 nodes exporters consume more}
 One of the big advantage of also using aggregators is that it reduced drastically the load on the nodes that simply exports data and do not merge messages. This is depicted in Fig.\ref{fig:aggrega_energy}. The bar chart represents the energy consumption for the exporters and the aggregators in the aggrega configuration. Apart from the case with 5 number of nodes, all the case shows clearly that the exporters consume less energy than the aggregators with almost 20 mJ of difference for 15 nodes.\\
 
 \begin{figure}[h]
@@ -189,7 +188,7 @@ One of the big advantage of also using aggregators is that it reduced drasticall
 With those results, one may wonder how it affects the battery life of the nodes. The estimated lifetime of the battery is indicated in Tab.\ref{tab:battery_lifetime}. To compute those estimations we used the following formula
 
 \begin{equation}
-  lifetime = \frac{2400 mAh * 2}{X mW * 24 hours}
+  lifetime = \frac{2400 \acrshort{mah} * 2}{X \acrshort{mw} * 24 hours}
 \end{equation}
 
 where $X$ is the power consumption of a node. We used $2400mAh$ as we considered that the nodes were powered by AA battery. We multiply it by $2$ as the \textit{Zolertia Z1} uses 2 batteries. \\
@@ -261,6 +260,7 @@ The topics covered by this chapter will be about :
 	\item[Nfsen] We began our master thesis by trying to implement a plug in for that particular software. Details will be given on how this tool work and reasons will be given on why we abandoned the idea of of implementing a plug in. However, as you will see, our architecture resembles a lot to Nfsen.
 	\item[Possible extensions] Those are features that could be added to our current software as to improve it.
 	\item[Security] Issues about security will be addressed.
+  \item[Further works] This will mainly be focus on how to improve the data retrieval of meta information about the network.
 \end{description}
 
 \section{Nfsen, A Graphical Web Tool}
@@ -360,3 +360,7 @@ Purely from a theoretical point of view, there is also a lack of security betwee
 Authentication mechanisms and encryption are the way to go to solve these problems. We would thus have authentication between motes (only gateway mote and server?), and encryption of data when creating packets from motes. However, those mechanisms add lines of codes uploaded on motes, which must be taken into account when analyzing and optimizing performances of the IoT network. In consequence, the mechanisms also add more traffic load to the network.\\
 
 All those points are to be taken into account to showcase accurate data. In our case though, no tempering was possible, as we knew exactly what kind of data passes through the network and which device creates the flows.
+
+\section{Further Works}
+
+In the previous chapter we have seen that our solution 
