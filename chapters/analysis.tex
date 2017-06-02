@@ -345,8 +345,6 @@ As stated, the topology is updated according to netflow packets and information 
 
 Further mechanisms are needed to be able to distinguish the two situations, such as adding some field in our TinyIPFIX structure in combination with \textit{Hello packet} exchanges between a parent node and its childs to test reachability. Plus, it allows to have some information on downstream nodes and send that information to the gateway node. Those solutions require more lines of code on each mote, and a modified netflow structure with added fields.
 
-
-
 \subsection{Protocols distribution}
 
 As of now, our software does not have the possibility to sort the flows by protocols (RPL, UDP, TCP, ...). An improvement of our solution could permit to differentiate flows depending on the protocols. However, to effectively enable such feature, the records sent by the nodes should contain more data. This implies that the nodes would send more data and a study of the impact on the nodes battery life would be necessary.
@@ -363,4 +361,4 @@ All those points are to be taken into account to showcase accurate data. In our 
 
 \section{Further Works}
 
-In the previous chapter we have seen that our solution 
+In the previous chapter we have seen that our solution
