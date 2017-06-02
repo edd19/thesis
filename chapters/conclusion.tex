@@ -1,13 +1,13 @@
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
 
-The Internet of Things presents many advantages that can bring a lot of positive things. \\
+The Internet of Things presents many advantages that can bring a lot of positive things. Indeed, the IoT allows offers a lot of automation and thus avoid human intervention in specific situations, as well as optimizing energy consumption. However, the IoT presents a few challenges that explain why it has yet to be used more regularly. (peaufiner)\\
 
 The subject of our thesis was to develop a monitoring tool of Internet of Things networks, using netflow on IoT devices to collect data about the current state of a network under analysis.\\
 
-We have divided our thesis in three main parts. \\
+We have divided our thesis in three main parts.\\
 
-In the first part, we have introduced \textit{the state of the art} of the Internet of Things. We have explained what it is, and what the smart objects composing such networks are. We have also discussed about its existing challenges that are the reasons why it is not widely deployed yet. We have also introduced the operating systems that are used in the IoT context, and why we have chosen Contiki as the main operating system. To conclude the state of the art, we have introduced existing tools and technologies for the Internet of Things and also traditional networks. We have also specifically introduced Netflow and its principles, as it was among the technologies that were key to being able to monitor IoT networks and retrieve information about them. Additionally, we have introduced several existing monitoring tools that have been developed for traditional networks and IoT networks, and where the main differences with our own monitoring tool lie.\\
+In the first part, we have introduced \textit{the state of the art} of the Internet of Things. We have explained what it is, how it differs from traditional networks, and what the smart objects composing IoT networks are. We have also discussed about its existing challenges that are the reasons why it is not widely deployed yet. We have introduced the operating systems that are used in the IoT context, and why we have chosen Contiki as the main operating system. To conclude the state of the art, we have introduced existing tools and technologies for the Internet of Things and also traditional networks. We have also specifically introduced Netflow and its principles, as it was among the technologies that were key to being able to monitor IoT networks and retrieve information about them. Additionally, we have introduced several existing monitoring tools that have been developed for traditional networks and IoT networks, and where the main differences with our own monitoring tool lie.\\
 
 The second part describes our solution and how it responds to the problem of the thesis. It is divided into two chapters, chapters 4 and 5, one that explains the implementation of our software as the solution, the other one that showcases our software and explains how to use it.\\
 
@@ -19,6 +19,14 @@ In chapter 5, we have written a guide on how to use the software and the differe
 
 The traffic tab contains several panels, all giving specific information about traffic volume generated in the network according to time, with specific filters such as IPFIX traffic, TinyIPFIX traffic, or normal traffic (regular packets sent between nodes). This tab also depicts specific statistics such as minimum and maximum bytes generated in a five-minutes interval and more generally some information about the network. \\
 
-The topology tab showcases the current topology of the IoT network. The topology is an acyclic graph, more specifically a tree. All nodes composing the topology are clickable to obtain more specific information, such as its ID, its battery level, etc.
+The topology tab showcases the current topology of the IoT network. The topology is an acyclic graph, more specifically a tree. All nodes composing the topology are clickable to obtain more specific information, such as its ID, its battery level, etc.\\
+
+In the third part of the thesis, ... (Eddy). \\ 
+
+Finally, chapter 8 discusses about alternatives and possible extensions, as well as security. In this chapter, we discuss about Nfsen, a graphical web-based tool that provides a lot of monitoring information on IoT networks, using Nfdump. Nfsen was along with Nfdump the first technology that we started to work on to develop our monitoring software. However, as we have explained, we decided to use Node.js instead of Nfsen for conviniency and because it being more appropriate for the information that we wanted to retrieve from IoT networks and monitor. \\
+
+We have also discussed about possible extensions to our software such as adding information about loads passing through links, handling network failures, and depicting protocol information on specific protocols such as UDP and RPL. We have also discussed about problems regarding security and what are the impacts of not taking security measures while monitoring the network. In the end, those extensions have not been implemented because of them not being among the main purposes of our research. Most of the extensions require some change in the Netflow structure that we use to collect the data about flows, and require that motes have more capacities such as sending specific packets or being able to handle more situations.\\
+
+
 
 
