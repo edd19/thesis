@@ -311,7 +311,7 @@ In the end, Nfsen used with Nfdump present a lot of advantages, as most of the w
 
 In this master thesis, we have mostly focused on data creation from nodes and passing through nodes, since Netflow is activated on the said nodes. We have not implemented features allowing to monitor traffic passing through specific links, as it would require a few modifications in the way we process data, and would also add more traffic load in the IoT network.\\
 
-In the situation where we would have implemented monitoring mechanisms for data passing through links, we could have used the topology and an opacity chart to show where loads of data are mostly generated from and flowing through, as you can see in figure \ref{fig:opacity}. Using tresholds for bytes of data passing through links, we would use a darker opacity for huge loads of data, and a lighter opacity if not much data passes through a certain link.
+In the situation where we would have implemented monitoring mechanisms for data passing through links, we could have used the topology and an opacity chart to show where loads of data are mostly generated from and flowing through, as you can see in figure \ref{fig:opacity}. Using tresholds for bytes of data passing through links, we would use a darker opacity for huge loads of data, and a lighter opacity if not much data passes through a certain link. Or we could also based the opacity on the average of the flows.
 
 \begin{figure}[!h]
 	\centering
@@ -328,7 +328,7 @@ A possible extension could be to showcase a topology where its nodes are positio
 
 \subsection{Network failure}
 
-When developing the software, we have not made any assumption that links and nodes may potentially fail. As of now, the way the topology updates itself is by refreshing the page and thus showcasing the topology. The topology is built according to netflow packets that are sent from the network to the server, which is everytime the server receives a flow of netflow packets. In reality, a topology change may come from a link failure, i.e. two nodes may have difficulties communicating together, or node failures if a mote runs out of battery or is accidently broken. \\
+When developing the software, we have not made any assumption that links and nodes may potentially fail. As of now, the way the topology updates itself is by refreshing the page and thus showcasing the topology. The topology is built according to IPFIX packets that are sent from the network to the server, which is everytime the server receives a flow of IPFIX packets. In reality, a topology change may come from a link failure, i.e. two nodes may have difficulties communicating together, or node failures if a mote runs out of battery or is accidently broken. \\
 
 One important aspect to take into account is the fact that the topology is organized as a tree, meaning for each node or link failing, there is a cascade of nodes down branches that will consequently not be able to communicate with the gateway node. Of course, the gateway node is a \textit{Single Point of Failure} (see figure \ref{fig:spof}), since it failing would completely cut the communication between the IoT network and the server, thus not having any information on the network anymore.\\
 
@@ -343,7 +343,7 @@ A potential extension could be to have a panel showcasing the \textit{previous t
 
 As stated, the topology is updated according to netflow packets and information retrieval. In the network's current state, a mote that has not sent information for a while or a mote that has failed and that has consequently not sent any information would be interpeted the same way in our topology. \\
 
-Further mechanisms are needed to be able to distinguish the two situations, such as adding some field in our TinyIPFIX structure in combination with \textit{Hello packet} exchanges between a parent node and its childs to test reachability. Plus, it allows to have some information on downstream nodes and send that information to the gateway node. Those solutions require more lines of code on each mote, and a modified netflow structure with added fields.
+Further mechanisms are needed to be able to distinguish the two situations, such as adding some field in our TinyIPFIX structure to represent the loss of a neighbors. Plus, it allows to have some information on downstream nodes and send that information to the gateway node. Those solutions require more lines of code on each mote, and a modified IPFIX structure with added fields.
 
 \subsection{Protocols distribution}
 
