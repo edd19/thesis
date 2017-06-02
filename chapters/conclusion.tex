@@ -1,10 +1,24 @@
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
 
-The Internet of Things presents many advantages that would bring a lot of positive things. The subject of our thesis was to develop a monitoring tool of Internet of Things networks, using netflow on IoT devices to collect data about the current state of a network under analysis.
+The Internet of Things presents many advantages that can bring a lot of positive things. \\
+
+The subject of our thesis was to develop a monitoring tool of Internet of Things networks, using netflow on IoT devices to collect data about the current state of a network under analysis.\\
 
 We have divided our thesis in three main parts. \\
 
 In the first part, we have introduced \textit{the state of the art} of the Internet of Things. We have explained what it is, and what the smart objects composing such networks are. We have also discussed about its existing challenges that are the reasons why it is not widely deployed yet. We have also introduced the operating systems that are used in the IoT context, and why we have chosen Contiki as the main operating system. To conclude the state of the art, we have introduced existing tools and technologies for the Internet of Things and also traditional networks. We have also specifically introduced Netflow and its principles, as it was among the technologies that were key to being able to monitor IoT networks and retrieve information about them. Additionally, we have introduced several existing monitoring tools that have been developed for traditional networks and IoT networks, and where the main differences with our own monitoring tool lie.\\
 
-The second part describes our solution and how it responds to the problem of the thesis. More specifically, we have described the architecture 
+The second part describes our solution and how it responds to the problem of the thesis. It is divided into two chapters, chapters 4 and 5, one that explains the implementation of our software as the solution, the other one that showcases our software and explains how to use it.\\
+
+More specifically, we have described in chapter 4 the whole architecture of our monitoring software. As explained, the architecture is divided in two subdivisions, one that is responsible for collecting data in a netflow fashion and sending it using TinyIPFIX messages, TinyIPFIX being a variant of Netflow. The TinyIPFIX messages are then reformatted into IPFIX messages by the gateway, and are then ready to be sent to the server. The second one is responsible for receiving and processing the collected information. The data is received from the gateway node of the IoT network to the server via UDP. Once the data is received, the server stores the messages in a database so that it can retrieve and process them. It also plays the role of a web server. \\
+
+We have also presented the technologies that we have chosen to use to develop our software and the reasons behind these choices. Indeed, we have chosen to use the framework Node.js that is quite convinient for developing HTTP servers, which is what we needed to develop a monitoring web-server. We also used the Express framework in combination with Node.js. We found it convenient to develop a web-server as a software thanks to the ease with which one can install it along with accessing it, as it scales better with the number users having to use it at the same time. With the help of Javascript, we had an event-driven language, convenient for reacting promptly when the server IPFIX messages from the gateway node. Javascript also couples well with the JSON format that is convenient for dynamic websites such as ours. Along with using HTML and CSS for the visualization aspects of our software, we have used PostgreSQL as the database language for storing logs of data collected beforehand. Following the justification of our choices, we have described why our software is composed of four modules, the collector, the log, the Nodes Status, and the Web. Splitting the software into modules brings \textit{modularity} to the sotware, that can be further extended afterwards.\\
+
+In chapter 5, we have written a guide on how to use the software and the different existing features, and depicted screenshots of it. As stated earlier, it is a web interface. There are two main tabs, one showing \textit{traffic volume} evolution through time, the other one showing a \textit{topology chart}. \\
+
+The traffic tab contains several panels, all giving specific information about traffic volume generated in the network according to time, with specific filters such as IPFIX traffic, TinyIPFIX traffic, or normal traffic (regular packets sent between nodes). This tab also depicts specific statistics such as minimum and maximum bytes generated in a five-minutes interval and more generally some information about the network. \\
+
+The topology tab showcases the current topology of the IoT network. The topology is an acyclic graph, more specifically a tree. All nodes composing the topology are clickable to obtain more specific information, such as its ID, its battery level, etc.
+
+
