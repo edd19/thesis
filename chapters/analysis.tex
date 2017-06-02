@@ -317,7 +317,7 @@ In the situation where we would have implemented monitoring mechanisms for data 
 	\centering
 	\includegraphics[width=0.8\textwidth]{res/opacity.png}
 	\caption{Opacity on links (source : \url{http://bl.ocks.org/d3noob/5155181})}
-	\label{fig:nfsen}
+	\label{fig:opacity}
 \end{figure}
 
 \subsection{Topology according to real position}
@@ -361,4 +361,14 @@ All those points are to be taken into account to showcase accurate data. In our 
 
 \section{Further Works}
 
-In the previous chapter we have seen that our solution
+Those further works will mainly be focus on improving the meta information extraction from the nodes.\\
+
+ The tests shown in the previous chapters were limited to 20 nodes at maximum due to the constraint imposed from the computer used during simulation. However, 20 nodes is quite a small network. Our tests should be improved and tested on bigger networks ranging from hundreds to thousands of nodes. Additionally, the solution should be tested on real nodes and real network so as to confront our solution with real environments and applications. By increasing the number of tests, some parameters should also be highlighted. One of those parameters that should come out should be, we think, the average depth of the network. By depth we means the number of nodes that should reroute a message coming from a leaf node (without children) to the gateway node.\\
+
+ Also our tests supposed that there was no packet loss. This could be applicable to reliable network to a limit of 90\% packet loss ratio but WSN are not to be considered reliable. They are lossy by nature. Thus it would be great to study the impact made by resending messages in case of dropped packets. We could envision for that using a solution like \acrshort{mqtt} \cite{website:mqtt} or simply send messages via TCP and not UDP.\\
+
+A standard should also be worked upon to as to use a common message format from data coming from nodes. IPFIX or TinyIPFIX could be that standard. In this master thesis we used TinyIPFIX to monitor the network. But it was developed at first to send sensors values (humidity, temperature, ...). TinyIPFIX appears to be a versatile solution that could permit monitoring of IoT networks in term of traffic information but also in term of sensors values. The standardization should be done by defining common fields.\\
+
+Optimizations could also be done in the triggering of the message. As of now, we use a fixed interval time set beforehand. But what if the nodes could communicate between themselves and set by themselves the best interval time so as to optimize battery lifetime. Plus, so as to not provoke congestion, nodes could send data at different time. This is a concern that will mostly arise with large networks.\\
+
+In conclusion many improvements can be made as to enhance our solution. Those solutions should have as goal to reduce the energy consumption while not decreasing the informations exctracted.
