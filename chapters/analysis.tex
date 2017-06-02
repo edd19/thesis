@@ -237,7 +237,7 @@ The table shows clearly that to preserve the battery lifetime, aggregators becom
   \label{tab:battery_lifetime}
 \end{table}
 
-\section{Nodes usage time}
+\section{Nodes time repartition}
 
 So as to more understand the power consumption induced by our solution, there is a need to see how often the nodes are active, and when it is the case what are they doing. To do so, we kept track on the time the nodes spend with their microprocessor active or in low power mode but also the time they were transmitting or receiving data via radio. This is what Fig.\ref{fig:time_all} shows. The Fig.\ref{fig:cpu_time} shows the average time the microprocessor is active by minute while Fig.\ref{fig:lpm_time} shows the average time the microprocessor is in low power mode. Fig.\ref{fig:tx_time} and Fig.\ref{fig:rx_time} shows average transmission time and receiving time by minute for a node. \\
 
@@ -275,5 +275,3 @@ The differences between the three configurations is highly visible for the trans
 However when analyzing the time spent with the CPU active on Fig.\ref{fig:cpu_time}, we can only notice than there is only a marginal difference between configurations with and without TinyIPFIX. This is also seen of Fig.\ref{fig:lpm_time} that shows the time the CPU is in low power mode. We can only conclude than the differential of energy consumption lies in the radio usage of the nodes induced by the sending of monitoring data. Increasing the interval at which nodes send their data could be a solution for network imposing as requirement a high battery lifespan.\\
 
 We must emphasize the fact that using aggregators reduced the average time spent by the nodes transmitting or receiving but also with CPU active or in low power mode. The fact that TinyIPFIX messages are concentrated into one aggregator that merge them into one packets save the overhead caused by multiple headers from TinyIPFIX itself but also 6lowPan.
-
-\section{Traffic overhead}

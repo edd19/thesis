@@ -9,6 +9,8 @@
 \usepackage{tabularx}
 \usepackage{listings}
 \usepackage[]{algorithm2e}
+\usepackage[acronym]{glossaries}
+
 
 % Fill in here the information: title, student name, speciality, jury members
 \title{Network Administration Tool For the Internet of Things}	% Master thesis title
@@ -34,13 +36,14 @@
 %\readerthree{Firstname \textsc{Lastname}}	% 3rd reader name
 \years{2016-2017}	% Academic year
 
+\makeglossaries
+\include{glossary}
+
 \begin{document}
 
 \maketitle					% To create front cover page
 \thispagestyle{empty}		% To suppress header and footer on the back of the cover page
 
-
-\include{chapters/abstract}
 \include{chapters/acknowledgments}
 
 \listoftodos
@@ -48,6 +51,7 @@
 \tableofcontents
 \newpage
 
+\printglossary[type=\acronymtype]
 \listoffigures
 \listoftables
 
