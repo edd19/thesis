@@ -307,20 +307,19 @@ In the end, Nfsen used with Nfdump present a lot of advantages, as most of the w
 
 \section{Possible Extensions}
 
-\subsection{Monitoring any IPFIX messages}
+\subsection*{Monitoring any IPFIX messages}
 
-We will hereby discuss how the server would handle IPFIX messages received from traditional networks or any IPFIX message. As we explained in the description of our solution, the server is able to store logs of the information received from networks through gateway nodes. For the server to be able to process those IPFIX messages, it would need slight modifications so that it can treat the data from traditional networks, since the source and destination fields used as netflow information in IoT networks use node IDs and not \textit{IPv6} addresses. \\
+We will hereby discuss how the server would handle IPFIX messages received from traditional networks or any IPFIX message. As we explained in the description of our solution, the server is able to collect and store logs of the information received from networks. At this step, it is able to parse any IPFIX messages as long as it follows the standard. However the issue arise when wanting to extract informations coming from those IPFIX messages. At the time of writing, the current product considers a flow to be described by the source node id, the destination node id, the number of octets and the number of packets. However traditional networks use IPv4 or IPv6 address as a mean to identify devices in the network. Thus, so as to process correctly those IPFIX messages, we should handle a flow to be described by IPv4 or IPv6 addresses for the source and the destination as well. Another solution would be to not use the node id but instead also the Ipv6 addresses of the nodes. However this solution would imbue a cost as an IPv6 address is stored on 16 bytes. \\
 
-As the purpose of this thesis was IoT network monitoring, our server does not currently process IPFIX messages from traditional networks. Nevertheless, modifying its processing capability to be able to correctly use IPFIX messages with IPv6 addresse as source and destination is not too challenging and is 
-definitely a possible extension. Any modification in the IPFIX message format require small modification accordingly to the server to be able to use those messages correctly for monitoring purposes.\\ 
+As the purpose of this thesis was IoT network monitoring, our server does not currently process IPFIX messages from traditional networks. Nevertheless, modifying its processing capability to be able to correctly use IPFIX messages with IPv6 addresse as source and destination is not too challenging and is definitely a possible extension. \\
 
-\subsection{Topology according to real position}
+\subsection*{Topology according to real position}
 
 As of now, the topology feature showcases a network toplogy that only depends on which motes are communicating to each other, no matter what is the relative position of those motes according to others in the network. \\
 
 A possible extension could be to showcase a topology where its nodes are positioned as in real life, with a corresponding proportional distance. However, that would imply adding complexity on each mote to have a feature computing the distances and angles formed from each three nodes, and that would also induct a raise in traffic volume since more packets containing position information are to be exchanged.
 
-\subsection{Network failure and Network changes}
+\subsection*{Network failure and Network changes}
 
 When developing the software, we have not made any assumption that links and nodes may potentially fail. As of now, the way the topology updates itself is by refreshing the page and thus showcasing the topology. The topology is built according to IPFIX packets that are sent from the network to the server, which is everytime the server receives a flow of IPFIX packets. In reality, a topology change may come from a link failure, i.e. two nodes may have difficulties communicating together, or node failures if a mote runs out of battery or is accidently broken. \\
 
@@ -339,9 +338,13 @@ As stated, the topology is updated according to netflow packets and information 
 
 Further mechanisms are needed to be able to distinguish the two situations, such as adding some field in our TinyIPFIX structure to represent the loss of a neighbors. Plus, it allows to have some information on downstream nodes and send that information to the gateway node. Those solutions require more lines of code on each mote, and a modified IPFIX structure with added fields.
 
-\subsection{Protocols distribution}
+\subsection*{Protocols distribution}
 
 As of now, our software does not have the possibility to sort the flows by protocols (RPL, UDP, TCP, ...). An improvement of our solution could permit to differentiate flows depending on the protocols. However, to effectively enable such feature, the records sent by the nodes should contain more data. This implies that the nodes would send more data and a study of the impact on the nodes battery life would be necessary.
+
+\subsection*{Time range}
+
+A possible extension would be to allow an user to select a specific time range to analyze. In the traffic volume page, it would show amount of traffic and the statistics for that particular interval of time. For the topology, it would display the topology at that interval of time.
 
 \section{Security}
 
@@ -357,9 +360,9 @@ All those points are to be taken into account to showcase accurate data. In our 
 
 Those further works will mainly be focus on improving the meta information extraction from the nodes.\\
 
- The tests shown in the previous chapters were limited to 20 nodes at maximum due to the constraint imposed from the computer used during simulation. However, 20 nodes is quite a small network. Our tests should be improved and tested on bigger networks ranging from hundreds to thousands of nodes. Additionally, the solution should be tested on real nodes and real network so as to confront our solution with real environments and applications. By increasing the number of tests, some parameters should also be highlighted. One of those parameters that should come out should be, we think, the average depth of the network. By depth we means the number of nodes that should reroute a message coming from a leaf node (without children) to the gateway node.\\
+The tests shown in the previous chapters were limited to 20 nodes at maximum due to the constraint imposed from the computer used during simulation. However, 20 nodes is quite a small network. Our tests should be improved and tested on bigger networks ranging from hundreds to thousands of nodes. Additionally, the solution should be tested on real nodes and real network so as to confront our solution with real environments and applications. By increasing the number of tests, some parameters should also be highlighted. One of those parameters that should come out should be, we think, the average depth of the network. By depth we means the number of nodes that should reroute a message coming from a leaf node (without children) to the gateway node.\\
 
- Also our tests supposed that there was no packet loss. This could be applicable to reliable network to a limit of 90\% packet loss ratio but WSN are not to be considered reliable. They are lossy by nature. Thus it would be great to study the impact made by resending messages in case of dropped packets. We could envision for that using a solution like \acrshort{mqtt} \cite{website:mqtt} or simply send messages via TCP and not UDP.\\
+Also our tests supposed that there was no packet loss. This could be applicable to reliable network to a limit of 90\% packet loss ratio but WSN are not to be considered reliable. They are lossy by nature. Thus it would be great to study the impact made by resending messages in case of dropped packets. We could envision for that using a solution like \acrshort{mqtt} \cite{website:mqtt} or simply send messages via TCP and not UDP.\\
 
 A standard should also be worked upon to as to use a common message format from data coming from nodes. IPFIX or TinyIPFIX could be that standard. In this master thesis we used TinyIPFIX to monitor the network. But it was developed at first to send sensors values (humidity, temperature, ...). TinyIPFIX appears to be a versatile solution that could permit monitoring of IoT networks in term of traffic information but also in term of sensors values. The standardization should be done by defining common fields.\\
 
