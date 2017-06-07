@@ -326,7 +326,7 @@ As of now, the topology feature showcases a network toplogy that only depends on
 
 A possible extension could be to showcase a topology where its nodes are positioned as in real life, with a corresponding proportional distance. However, that would imply adding complexity on each mote to have a feature computing the distances and angles formed from each three nodes, and that would also induct a raise in traffic volume since more packets containing position information are to be exchanged.
 
-\subsection{Network failure}
+\subsection{Network failure and Network changes}
 
 When developing the software, we have not made any assumption that links and nodes may potentially fail. As of now, the way the topology updates itself is by refreshing the page and thus showcasing the topology. The topology is built according to IPFIX packets that are sent from the network to the server, which is everytime the server receives a flow of IPFIX packets. In reality, a topology change may come from a link failure, i.e. two nodes may have difficulties communicating together, or node failures if a mote runs out of battery or is accidently broken. \\
 
