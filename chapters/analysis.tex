@@ -307,18 +307,12 @@ In the end, Nfsen used with Nfdump present a lot of advantages, as most of the w
 
 \section{Possible Extensions}
 
-\subsection{Load of data on Links}
+\subsection{Monitoring any IPFIX messages}
 
-In this master thesis, we have mostly focused on data creation from nodes and passing through nodes, since Netflow is activated on the said nodes. We have not implemented features allowing to monitor traffic passing through specific links, as it would require a few modifications in the way we process data, and would also add more traffic load in the IoT network.\\
+We will hereby discuss how the server would handle IPFIX messages received from traditional networks or any IPFIX message. As we explained in the description of our solution, the server is able to store logs of the information received from networks through gateway nodes. For the server to be able to process those IPFIX messages, it would need slight modifications so that it can treat the data from traditional networks, since the source and destination fields used as netflow information in IoT networks use node IDs and not \textit{IPv6} addresses. \\
 
-In the situation where we would have implemented monitoring mechanisms for data passing through links, we could have used the topology and an opacity chart to show where loads of data are mostly generated from and flowing through, as you can see in figure \ref{fig:opacity}. Using tresholds for bytes of data passing through links, we would use a darker opacity for huge loads of data, and a lighter opacity if not much data passes through a certain link. Or we could also based the opacity on the average of the flows.
-
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.8\textwidth]{res/opacity.png}
-	\caption{Opacity on links (source : \url{http://bl.ocks.org/d3noob/5155181})}
-	\label{fig:opacity}
-\end{figure}
+As the purpose of this thesis was IoT network monitoring, our server does not currently process IPFIX messages from traditional networks. Nevertheless, modifying its processing capability to be able to correctly use IPFIX messages with IPv6 addresse as source and destination is not too challenging and is 
+definitely a possible extension. Any modification in the IPFIX message format require small modification accordingly to the server to be able to use those messages correctly for monitoring purposes.\\ 
 
 \subsection{Topology according to real position}
 
