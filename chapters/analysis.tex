@@ -40,11 +40,11 @@ To implement our benchmarks, we used the couple Contiki-OS and Cooja. The former
 This chapter will be organized in two sections. Firstly, we will explain the different configurations (number and role of nodes) used for our benchmarks. Secondly, we will explain in more detail the mechanisms used for nodes to send their data. The code used to implement those parts can be found on our public repository \textit{\href{https://github.com/edd19/netflow_contiki}{netflow\_contiki}} on github.
 
 \section{Configurations}
-Three different configurations were used for the purpose of our tests. They all differ by the facts that nodes send IPFIX messages or TinyIPFIX messages, or simply none. However, they all share the common components of WSN: sensor nodes and gateway node.
+Three different configurations were used for the purpose of our tests. They all differ by the facts that nodes send TinyIPFIX messages for monitoring purposes, or simply none or that they present aggregators. However, they all share the common components of WSN: sensor nodes and gateway node.
 
 \begin{description}
   \item[simple] In this configuration, the nodes do not send information about the flows they observed or any meta information about their network. They only occupy the role of sensor nodes, meaning sensing the environment and transmitting the values observed. To effectively simulate that, we made nodes send, by periods of one minute, a message of 10 bytes to the gateway node.
-  \item[tipfix] This configuration is also an upgrade of the \textit{simple} configuration. The nodes send flows information but using the TinyIPFIX format. This implies that the gateway node does the conversion of TinyIPFIX to IPFIX before transmitting the data to the collector.
+  \item[tipfix] This configuration is an upgrade of the \textit{simple} configuration. The nodes send flows information but using the TinyIPFIX format. This implies that the gateway node does the conversion of TinyIPFIX to IPFIX before transmitting the data to the collector.
   \item[aggrega] This last configuration adds aggregators to the \textit{tipfix} configuration. Aggregators collect TinyIPFIX messages and merge them in one message. They then send those merged messages to the gateway who will convert them to compliant IPFIX messages. In return, the gateway node will send the converted messages directly to the collector. \\
 \end{description}
 
@@ -75,7 +75,7 @@ Our tests were done solely on simulation using the Cooja simulation software. Th
 
 \section{Sending of data}
 
-This section will answer the questions relative on how the motes send IPFIX/TinyIPFIX messages, what triggers the sending of those meta information and what particular information is sent. Distinction must be done on the three types of motes: exporter, aggregator and gateway.\\
+This section will answer the questions relative on how the motes send TinyIPFIX messages, what triggers the sending of those meta information and what particular information is sent. Distinction must be done on the three types of motes: exporter, aggregator and gateway.\\
 
 \begin{description}
   \item[Exporter] It is straighforward. It first sends the templates then sets a timer. When the timer has expired or when the flows table has reached its maximum capacity, the exporter exports the records. All packets, templates or data, are sent either directly to the gateway or to an aggregator node depending on the configuration. The Alg.\ref{algo:exporter} is the algorithm corresponding to an exporter.
@@ -92,7 +92,7 @@ This section will answer the questions relative on how the motes send IPFIX/Tiny
         reset timer\;
       }
     }
-   \caption{Exporter algorithm}
+   \caption{Exporter}
    \label{algo:exporter}
   \end{algorithm}
 
@@ -114,7 +114,7 @@ This section will answer the questions relative on how the motes send IPFIX/Tiny
         reset timer\;
       }
     }
-   \caption{Aggregator algorithm}
+   \caption{Aggregator}
    \label{algo:aggregator}
   \end{algorithm}
 
@@ -129,13 +129,14 @@ This section will answer the questions relative on how the motes send IPFIX/Tiny
         send converted message;
       }
     }
-   \caption{Gateway algorithm}
+   \caption{Gateway}
    \label{algo:gateway}
   \end{algorithm}
 
 \end{description}
 
-The template used during our tests is represented in Tab.\ref{table:traffic_template}. It was used to send traffic information about the network. This template considers records of size of 8 bytes. Each record contains the source node id, the destination node id which is the receiving end of a flow and also the number of octets for that particular flows, plus the number of packets. All the fields mentioned occupy 2 bytes which leaves the possibility of having values up to 65535, which appears to be sufficient for the majority of WSNs. Indeed, appart for discovering the neighbors or organizing the routing topology, WSNs rarely communicate between themselves for the majority of usages. Thus, having 2 bytes for the number of octets appears to be a judicious choice. However, with IPFIX, the size of fields can be defined with the template and thus adapted to the network. The fields source node id and destination node id were defined for the purpose of this thesis. They are not standard ones, meaning not IANA defined. They are entreprise fields defined for this thesis.
+The template used during our tests is represented in Tab.\ref{table:traffic_template}. It was used to send traffic information about the network. This template considers records of size of 8 bytes. Each record contains the source node id, the destination node id which is the receiving end of a flow and also the number of octets for that particular flows, plus the number of packets. All the fields mentioned occupy 2 bytes which leaves the possibility of having values up to 65535, which appears to be sufficient for the majority of WSNs. Indeed, appart for discovering the neighbors or organizing the routing topology, WSNs rarely communicate between themselves for the majority of usages. Thus, having 2 bytes for the number of octets appears to be a judicious choice. However, with IPFIX, the size of fields can be defined with the template and thus adapted to the network. The fields source node id and destination node id were defined for the purpose of this thesis. They are not standard ones, meaning not IANA defined. They are ent
+reprise fields defined for this thesis.
 
 \begin{table}
   \centering
