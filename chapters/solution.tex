@@ -240,7 +240,7 @@ Finally, the fifth and sixth panels show the top five sources and top five desti
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=1.1\textwidth]{res/topologyinterface.png}
+	\includegraphics[width=1.1\textwidth]{res/topology_interface.png}
 	\caption{Topology Tab}
 	\label{fig:topo}
 \end{figure}
@@ -251,22 +251,32 @@ The traffic data used to build the topology is the last load of information rece
 
 It is worth noting that the topology is dynamic. Indeed, internally, it reconstructs itself every time new information is received from the gateway node. However a refresh of the page is needed to see the modified topology. Hence, topology changes on the web interface are not made punctually. \\
 
-Evidently, each node is represented as a circle, the \textit{gateway mote} being slightly larger and in sky blue. and each grey link represents a connection "parent to child" in the IoT network. All nodes in the topology are clickable, one at a time. It is not possible to click on a node if another node is already selected. Once a node is clicked on, its circle becomes larger and is filled in blue, as you can see in figure \ref{fig:snodeblue}. The \textit{Selected Node} panel (figure \ref{fig:snode}) (on the right) allows to display specific information about the node we are interested in, namely its ID, its parent, its current battery level, and the total volume of data it has sent. The panel will use information based on the most recent messages received. Note that the Node \textbf{1} is the gateway mote of the network, it thus has no parent and its \textit{Parent} field is filled with "none", for other nodes it would contain another ID.\\
+Evidently, each node is represented as a circle, the \textit{gateway mote} being in sky blue. Each grey link represents a connection "parent to child" in the IoT network. The bigger the circle used to represent the node, the bigger the nodes send data or route data. This is clearly seen in the Fig.\ref{fig:topo} where the node 4 is clearly bigger than node 3. Also, we also scale the link depending on the amount of traffic that pass through it. Bigger meaning a higher amount of data. It is possible to mouse over those links to see the amount of bytes that passed through it.\\
+
+The Fig.\ref{fig:topo_info} shows information about the current state of the topology based on the freshest data. It shows the number of nodes composing the network. It also shows the maximum depth of the network. The depth of a node corresponds to the notion of depth for a tree. It is the number of edges from the node to the tree's route node (in our case the gateway node). Also, it gives information about the minimum battery left and the total volume of bytes and packets sent by the nodes.\\
+
+All nodes in the topology are clickable, one at a time. It is not possible to click on a node if another node is already selected. Once a node is clicked on, its circle becomes larger and is filled in blue, as you can see in figure \ref{fig:snodeblue}. The \textit{Node status} panel (Fig.\ref{fig:snode}) allows to display specific information about the node we are interested in, namely its ID, its parent, its current battery level, and the total volume of data it has sent. It also gives information about the amount of data the node routed. The panel will use information based on the most recent messages received. There is also the \textit{Node flows} panel (Fig.\ref{fig:snode}) who shows the recent flows having as source the node selected.\\
 
 As for the three different colors for regular nodes, we have decided to use them as indicators for battery levels, a node in green has more than 50\% of battery, a node in yellow lies between 50\% and 20\%, and a node in red is below 20\%. The colors could be used for other indicators in the network and with more tresholds, such as the total volume sent, or last time a node has sent information.\\
 
-\begin{figure}[!h]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{res/snodeblue.png}
 	\caption{Node clicked on}
 	\label{fig:snodeblue}
 \end{figure}
 
-
-\begin{figure}[!h]
+\begin{figure}
 	\centering
-	\includegraphics[width=0.6\textwidth]{res/snode.png}
-	\caption{The panel showing specific data for a node}
+	\includegraphics[width=0.7\textwidth]{res/topology_info.png}
+	\caption{Panel showing information about the network}
+	\label{fig:topo_info}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{res/node_info.png}
+	\caption{The panels showing specific data for a node}
 	\label{fig:snode}
 \end{figure}
 
@@ -274,7 +284,7 @@ As for the three different colors for regular nodes, we have decided to use them
 
 \subsection*{The Dragging feature}
 
-\begin{figure}[!h]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{res/populated.png}
 	\caption{Populated topology, with out-of-border nodes}
@@ -288,13 +298,13 @@ We have decided to implement a dragging feature. That is, by clicking on a node 
 
 \begin{figure}
     \centering
-    \begin{subfigure}[h]{0.3\textwidth}
+    \begin{subfigure}{0.3\textwidth}
         \includegraphics[width=\textwidth]{res/outnode.png}
         \caption{Out of borders nodes}
         \label{fig:outnode}
     \end{subfigure}
     ~
-    \begin{subfigure}[h]{0.3\textwidth}
+    \begin{subfigure}{0.3\textwidth}
         \includegraphics[width=\textwidth]{res/visible.png}
         \caption{Visible with dragging}
         \label{fig:visible}
