@@ -37,7 +37,7 @@ where $I_m$ and $t_m$ represent the current draw of the microprocessor when runn
 
 To implement our benchmarks, we used the couple Contiki-OS and Cooja. The former was used to configure the nodes while the latter was used to simulate those nodes. For more details on those two, see Chap.\ref{chap:contiki}.\\
 
-This chapter will be organized in two sections. Firstly, we will explain the different configurations (number and role of nodes) used for our benchmarks. Secondly, we will explain in more detail the mechanisms used for nodes to send their data. The code used to implement those parts can be found on our public repository \textit{\href{https://github.com/edd19/Netflow_contiki}{Netflow\_contiki}} on github.
+In the following section, we will explain the different configurations (number and role of nodes) used for our benchmarks. The code used to implement those parts can be found on our public repository \textit{\href{https://github.com/edd19/Netflow_contiki}{Netflow\_contiki}} on github.
 
 \section{Configurations}
 Three different configurations were used for the purpose of our tests. They all differ by the facts that nodes send TinyIPFIX messages for monitoring purposes, or simply none or that they present aggregators. However, they all share the common components of WSN: sensor nodes and gateway node.
@@ -67,92 +67,36 @@ The Tab.\ref{table:configurations} summarizes the different configurations used 
   \label{table:configurations}
 \end{table}
 
-We tested each configuration with an increasing number of nodes of 5, 10, 15 and 20. Each configuration was tested for 30 minutes. The number of nodes was limited by the computer used during benchmarking, as it proved unable to simulate more than 20 nodes with Cooja. The packet rate was fixed at an interval of 5 minutes for TinyIPFIX messages. However, in the case of having their flows table full, it could occure that some motes send their data earlier.\\
+We tested each configuration with an increasing number of nodes of 5, 10, 15 and 20. Each configuration was tested for 30 minutes. The number of nodes was limited by the computer used during benchmarking, as it proved unable to simulate more than 20 nodes with Cooja. The packet rate was fixed at an interval of 5 minutes for TinyIPFIX messages meaning that nodes will send messages each five minutes. However, in the case of having their flows table full, which we capped to 10 flows per node, it could occure that some motes send their data earlier. The positions of the nodes is shown in Fig.\ref{fig:nodes_position}. The node having its id set to 1 and colored in green is the gateway node. The square are of the size of 10\acrshort{m}. This means that the area covered by a configuration with 20 nodes is of approximately 100m*100m.\\
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{res/5_nodes}
+        \caption{5 nodes}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{res/10_nodes}
+        \caption{10 nodes}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{res/15_nodes}
+        \caption{15 nodes}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{res/20_nodes}
+        \caption{20 nodes}
+    \end{subfigure}
+    \caption{Position of the nodes}
+    \label{fig:nodes_position}
+\end{figure}
 
 Also, for each simulation, we keep track of the 4-uple ($t_r$, $t_t$, $t_m$, $t_l$) where $t_r$ is the radio reception time, $t_t$ the radio transmission time, $t_m$ the time the Cpu is working, and $t_l$ the time the Cpu is in low power mode. This 4-uple was recorded for each minute. This gave an idea on how the energy consumption evolved minute by minute.\\
 
-Our tests were done solely on simulation using the Cooja simulation software. The nodes used during the simulations were the \textit{Zolertia Z1} as they proved to have sufficient memory for our code. However, we do want to emphasize that we did not set as a goal to minimize the memory footprint of our code. Optimizations are thus possible to further decrease the code size, and thus maybe reduce the cpu load also. We also considered a setup for all configurations where the radio loss was null. Additionally, all motes were fixed by position, meaning they did not move during the simulation.
-
-\section{Sending of data}
-
-This section will answer the questions relative on how the motes send TinyIPFIX messages, what triggers the sending of those meta information and what particular information is sent. Distinction must be done on the three types of motes: exporter, aggregator and gateway.\\
-
-\begin{description}
-  \item[Exporter] It is straighforward. It first sends the templates then sets a timer. When the timer has expired or when the flows table has reached its maximum capacity, the exporter exports the records. All packets, templates or data, are sent either directly to the gateway or to an aggregator node depending on the configuration. The Alg.\ref{algo:exporter} is the algorithm corresponding to an exporter.
-
-  \begin{algorithm}
-    \textbf{Function} Exporter:\\
-    send templates\;
-    set timer\;
-    \While{true}{
-      yield process until event\;
-      \If{timer timeout or flows table is full}{
-        send data/records\;
-        empty flows table\;
-        reset timer\;
-      }
-    }
-   \caption{Exporter}
-   \label{algo:exporter}
-  \end{algorithm}
-
-  \item[Aggregator] It is an extension of the Exporter. It both merges and sends TinyIPFIX messages. At first, it sends the templates used then set a timer as well. When the aggregator has received an TinyIPFIX message, it merges that one with previous ones if any. When a timeout of the timer has occured or when the flows table of the aggregator has reached its limit, it will merge its records with the ones received then will send the new formed message to the gateway. This behavior is shown by the Alg.\ref{algo:aggregator}.
-
-  \begin{algorithm}
-    \textbf{Function} Aggregator:\\
-    send templates\;
-    set timer\;
-    \While{true}{
-      yield process until event\;
-      \If{received TinyIPFIX message}{
-        merge message with previous ones\;
-      }
-      \If{timer timeout or flows table is full}{
-        merge aggregator data/records with received ones\;
-        send merged messages\;
-        empty flows table\;
-        reset timer\;
-      }
-    }
-   \caption{Aggregator}
-   \label{algo:aggregator}
-  \end{algorithm}
-
-  \item[Gateway] It converts TinyIPFIX messages received into IPFIX messages. The converted messages are sent directly to the collector. This is shown by Alg.\ref{algo:gateway}.
-
-  \begin{algorithm}
-    \textbf{Function} Gateway:\\
-    \While{true}{
-      yield process until event\;
-      \If{received TinyIPFIX message}{
-        convert into IPFIX message;
-        send converted message;
-      }
-    }
-   \caption{Gateway}
-   \label{algo:gateway}
-  \end{algorithm}
-
-\end{description}
-
-The template used during our tests is represented in Tab.\ref{table:traffic_template}. It was used to send traffic information about the network. This template considers records of size of 8 bytes. Each record contains the source node id, the destination node id which is the receiving end of a flow and also the number of octets for that particular flows, plus the number of packets. All the fields mentioned occupy 2 bytes which leaves the possibility of having values up to 65535, which appears to be sufficient for the majority of WSNs. Indeed, apart for discovering the neighbors or organizing the routing topology, WSNs rarely communicate between themselves for the majority of usages. Thus, having 2 bytes for the number of octets appears to be a judicious choice. However, with IPFIX, the size of fields can be defined with the template and thus adapted to the network. The fields source node id and destination node id were defined for the purpose of this thesis. They are not standard ones, meaning not IANA defined. They are enterprise fields defined for this thesis.
-
-\begin{table}
-  \centering
-  \begin{tabular}{|c|c|}
-    \hline
-    Source Node Id & 2 bytes \\
-    \hline
-    Destination Node Id & 2 bytes \\
-    \hline
-    Octets delta count & 2 bytes \\
-    \hline
-    Packets delta count & 2 bytes \\
-    \hline
-  \end{tabular}
-  \caption{Traffic template}
-  \label{table:traffic_template}
-\end{table}
+Our tests were done solely on simulation using the Cooja simulation software. The radio model was the default one offered by Cooja which is the \acrfull{udgm}. This radio model abstracts the radio transmission range as circles. The nodes used during the simulations were the \textit{Zolertia Z1} as they proved to have sufficient memory for our code. However, we do want to emphasize that we did not set as a goal to minimize the memory footprint of our code. Optimizations are thus possible to further decrease the code size, and thus maybe reduce the cpu load also. We also considered a setup for all configurations where the radio loss was null. Additionally, all motes were fixed by position, meaning they did not move during the simulation.
 
 \chapter{Results}
 

@@ -19,6 +19,141 @@ The data exportation is done in a Netflow fashion. The nodes occupy the role of 
 
 The server that receives the IPFIX messages from the IoT network plays two roles. One role is straightforward, it is the the role of collector. Each message is collected by the server and logged in a database for further processing and analyze. The other role is of a web server. Multiple users can know the network status by having access to web pages served by the server.
 
+\section{Contiki modifications}
+
+This section will tell about the modifications that we operated on the network stack of Contiki OS. Also we will explain the different codes used on our nodes as to effectively send the metadata about the networks.
+
+\subsection{Network stack modification}
+
+To effectively permit nodes to store the flows passing through them, it was inevitable to modify the Contiki network stack. First and foremost, we had to add an module who would be in charge of the maintenance of the flow table and, when a timeout occured or when the flow table attain its full capacity, send the corresponding TinyIPFIX messages. This also lead to the development of a library that would permit the construction of TinyIPFIX messages but also their conversion into IPFIX compliant messages (for the gateway node). The modified Contiki OS can be found on our Github repository \href{https://github.com/edd19/netflow_contiki}{netflow\_contiki}. The flow table code can be found in the \textit{/core/net/ipv6/ipv6flow} directory.\\
+
+As stated before, we had to modify the network stack of Contiki OS. The reason is that in Contiki OS there is no event launched to notify that a node sent a message. This is quite cumbersome as we decided that the flow table of a node would only reflect the quantity of messages sent by that particular node. This means that each node is responsible to record the flows originated from it and send them. As to solve that issue we had to modify each function that would launch a message to update the flow table by describing to whom is the message addressed to and the size of the message. Our flow table is thus composed of the destination IPv6 address, the number of bytes sent and the number of packets. We do not need to store the source IPv6 address as it corresponds to the one of the node storing the flow table and is easily accessible. The Tab.\ref{table:flow_table} shows the different attributes composing the flow table. A flow occupy a total of 20 bytes.\\
+
+\begin{table}
+  \centering
+  \begin{tabular}{|p{4.5cm}|p{3cm}|p{3.5cm}|}
+    \hline
+    Destination IPv6 address \newline (16 bytes) & Number of bytes \newline (2 bytes) & Number of packets \newline (2 bytes)\\
+    \hline
+  \end{tabular}
+  \caption{Flow table}
+  \label{table:flow_table}
+\end{table}
+
+Finally, the module in charge of the flow table permits to launch a process that would periodically send TinyIPFIX messages when a timeout occured (which we set to 5 minutes) or when the flow table reached its maximum capacity. More details in the next section.
+
+\subsection{Sending of data}
+
+This section will answer the questions relative on how the motes send TinyIPFIX messages, what triggers the sending of those meta information and what particular information is sent. Distinction must be done on the three types of motes: exporter, aggregator and gateway.\\
+
+\begin{description}
+  \item[Exporter] It is straightforward. It first sends the templates then sets a timer. When the timer has expired or when the flows table has reached its maximum capacity, the exporter exports the records. All packets, templates or data, are sent either directly to the gateway or to an aggregator node depending on the configuration. A bigger timer is used to send the records reflecting the status of the node (parent and battery). The Alg.\ref{algo:exporter} is the algorithm corresponding to an exporter.
+
+  \begin{algorithm}
+    \textbf{Function} Exporter:\\
+    send templates\;
+		send node status (TinyIPFIX)\;
+    set small timer\;
+		set big timer\;
+    \While{true}{
+      yield process until event\;
+      \If{small timer timeout or flows table is full}{
+        send flows (TinyIPFIX)\;
+        empty flows table\;
+        reset timer\;
+      }
+
+			\If{big timer timeout or modification of RPL parent}{
+				send node status (TinyIPFIX)\
+			}
+    }
+   \caption{Exporter}
+   \label{algo:exporter}
+  \end{algorithm}
+
+  \item[Aggregator] It is an extension of the Exporter. It both merges and sends TinyIPFIX messages. At first, it sends the templates used then set a timer as well. When the aggregator has received an TinyIPFIX message, it merges that one with previous ones if any. When a timeout of the timer has occured or when the flows table of the aggregator has reached its limit, it will merge its records with the ones received then will send the new formed message to the gateway. This behavior is shown by the Alg.\ref{algo:aggregator}.
+
+  \begin{algorithm}
+    \textbf{Function} Aggregator:\\
+    send templates\;
+		send node status (TinyIPFIX)\;
+    set small timer\;
+		set big timer\;
+    \While{true}{
+      yield process until event\;
+      \If{received TinyIPFIX message}{
+        merge message with previous ones\;
+      }
+      \If{small timer timeout or flows table is full}{
+        merge aggregator data/records (flows) with received ones\;
+        send merged messages\;
+        empty flows table\;
+        reset timer\;
+      }
+
+			\If{big timer timeout or modification of RPL parent}{
+			merge aggregator data/records (node status) with received ones\;
+			send merged messages\;
+			}
+    }
+   \caption{Aggregator}
+   \label{algo:aggregator}
+  \end{algorithm}
+
+  \item[Gateway] It converts TinyIPFIX messages received into IPFIX messages. The converted messages are sent directly to the collector. This is shown by Alg.\ref{algo:gateway}.
+
+  \begin{algorithm}
+    \textbf{Function} Gateway:\\
+    \While{true}{
+      yield process until event\;
+      \If{received TinyIPFIX message}{
+        convert into IPFIX message;
+        send converted message;
+      }
+    }
+   \caption{Gateway}
+   \label{algo:gateway}
+  \end{algorithm}
+
+\end{description}
+
+The templates used are represented in Tab.\ref{table:traffic_template} and Tab.\ref{table:node_template}. The first one was used to send traffic information about the network. This template considers records of size of 8 bytes. Each record contains the source node id, the destination node id which is the receiving end of a flow and also the number of octets for that particular flows, plus the number of packets. All the fields mentioned occupy 2 bytes which leaves the possibility of having values up to 65535, which appears to be sufficient for the majority of WSNs. Indeed, apart for discovering the neighbors or organizing the routing topology, WSNs rarely communicate between themselves for the majority of usages. Thus, having 2 bytes for the number of octets appears to be a judicious choice. However, with IPFIX, the size of fields can be defined with the template and thus adapted to the network. The fields source node id and destination node id were defined for the purpose of this thesis. They are not standard ones, meaning not IANA defined. They are enterprise fields defined for this thesis. \\
+
+The second template (Tab.\ref{table:node_template}) was used to send status information about the nodes. It gives information about the RPL parent of the node but also its battery left. For that template, each node should submit only one record. Also, records using that template should be submitted using a larger timeout than the previous ones or when a change in parent appear. We used those records to construct the RPL topology.
+
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Source Node Id & 2 bytes \\
+    \hline
+    Destination Node Id & 2 bytes \\
+    \hline
+    Octets delta count & 2 bytes \\
+    \hline
+    Packets delta count & 2 bytes \\
+    \hline
+  \end{tabular}
+  \caption{Traffic template}
+  \label{table:traffic_template}
+\end{table}
+
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Source Node Id & 2 bytes \\
+    \hline
+    Parent Node Id & 2 bytes \\
+    \hline
+    Battery & 1 byte \\
+    \hline
+  \end{tabular}
+  \caption{Node information template}
+  \label{table:node_template}
+\end{table}
+
+
 \section{Technologies}
 
 The monitoring tool developed for this thesis is a \textit{web-based} solution. We have chosen to write the monitoring tool with \textbf{Node.js} \cite{website:nodejs} which is a server-side solution for Javascript. In that sense, it offers modules or libraries to effectively develop HTTP server, i.e. a web server. To speed up our development, we used the \textit{Express framework} \cite{website:express} on top of Node.js. Express simplifies the routing of requests to views. A view can be seen as an web page. \\
