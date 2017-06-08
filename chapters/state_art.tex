@@ -238,7 +238,7 @@ Contiki OS is not the sole Operating System for Internet of Things. There exist 
 \chapter{Monitoring tools}
 \label{chap:monitoring_tools}
 
-This chapter will be the occasion to present what has been done in the matter of monitoring tools for networks. The first section will be about the traditional networks and the second one will focus on the IoT networks.
+This chapter will be the occasion to present what has been done in the field of monitoring tools for networks. The first section will be about the traditional networks and the second one will focus on the IoT networks.
 
 \section{Traditional networks}
 
@@ -253,13 +253,13 @@ There are three components when having Netflow set up : the Flow Exporter, the F
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{res/netflow.png}
-  \caption{Netflow}
+  \caption{Netflow (Source: \href{commons.wikimedia.org/wiki/File:NetFlow_Architecture_2012.png}{commons.wikimedia.org})}
   \label{fig:netflow}
 \end{figure}
 
-The version of Netflow that we are quite interested in, is the Netflow version 10 or \textit{IPFIX} \cite{claise2013rfc}. This version is an IETF (Internet Engineering Task Force) protocol whereas the previous versions are proprietaty protocols of Cisco. IPFIX is template-based, meaning that contrary to previous versions of Netflow (excluded version 9 which is also template based), the netflow records can vary to suit the needs of the administrators or organizations. The template allows to define what we want to retrieve and by the same occasion define what we consider to be a flow. An organization could consider a flow to be 3-uple: source ipv6 address, destination ipv6 address, number of octets exchanged. While another one could consider a flow to be the 4-uple: source ipv6 address, destination ipv6 address, number of octets exchanged, number of packets exchanged. \\
+The version of Netflow that we are quite interested in, is the Netflow version 10 or \textit{IPFIX} \cite{claise2013rfc}. This version is an IETF (Internet Engineering Task Force) protocol whereas the previous versions are proprietary protocols of Cisco. IPFIX is template-based, meaning that contrary to previous versions of Netflow (excluded version 9 which is also template based), the netflow records can vary to suit the needs of the administrators or organizations. The template allows to define what we want to retrieve and by the same occasion define what we consider to be a flow. An organization could consider a flow to be 3-uple: source ipv6 address, destination ipv6 address, number of octets exchanged. While another one could consider a flow to be the 4-uple: source ipv6 address, destination ipv6 address, number of octets exchanged, number of packets exchanged. \\
 
-The \acrfull{iana} has already defined some record fields like the Ipv6 source/destination address, the source transport port, and so on \cite{website:ipfix_entities}. However, the power of IPFIX lies in the possibility to define ourselves record fields (called entreprise fields). That is the main reason we were particularly interested in it. It is thus possible to for example define a record field for battery power remaining of the sender for. Furthermore, even if they suggest a size for record fields, they offer the possibility to redefine the size to a smaller one. The suggested field is only considered as an upper-bound, meaning we cannot propose a bigger size.\\
+The \acrfull{iana} has already defined some record fields like the Ipv6 source/destination address, the source transport port, and so on \cite{website:ipfix_entities}. However, the power of IPFIX lies in the possibility to define ourselves record fields (called enterprise fields). That is the main reason we were particularly interested in it. It is thus possible to for example define a record field for battery power remaining of the sender for. Furthermore, even if they suggest a size for record fields, they offer the possibility to redefine the size to a smaller one. The suggested field is only considered as an upper-bound, meaning we cannot propose a bigger size.\\
 
 Having defined what Netflow is, the main goal here is to be able to use Netflow on an IoT device. In the Introduction section, we explained that our main goal was to analyze the traffic of an IoT Network and retrieve pertinent information such as the volume exchanged in the network, and its topology. Netflow is basically what we want to achieve in terms of data collecting. However, it has not been implemented by Cisco for IoT devices. Our task is to implement Netflow for an IoT device, using predefined data formats that will allow us to collect the information we are interested in (battery level, source and destination addresses, packet volume, etc.). In the Part \ref{part:solution}, we will describe in more details how we used Netflow in IoT networks as a solution to our monitoring task.
 
@@ -267,7 +267,7 @@ Having defined what Netflow is, the main goal here is to be able to use Netflow 
 
 \textit{sFlow} (for sampled flow) was initially proposed by the company HP. It is maintained by the sFlow.org consortium \cite{website:sflow}. The approach taken by SFlow is different than the one taken by Netflow. The two solutions share the notion of exporter, collector and analysis application. But the difference lies in the records that are sent by the exporter. \\
 
-Whereas Netflow only sends information on the flows observed, sFlow sends original packets that pass through the network. sFlow is characterized by the \textit{polling interval} and the \textit{sampling rate}. The polling interval defines the periods at which the collector must report the number of occurences of packets that pass through. The sampling rate defines how much packets need to be sampled on a set number of packets. \\
+Whereas Netflow only sends information on the flows observed, sFlow sends original packets that pass through the network. sFlow is characterized by the \textit{polling interval} and the \textit{sampling rate}. The polling interval defines the periods at which the collector must report the number of occurrences of packets that pass through. The sampling rate defines how much packets need to be sampled on a set number of packets. \\
 
 The fact that exporters need to store packets makes this solution too heavy for majority of IoT devices. Another issue with sFlow is that we can miss peculiar packets by having a sampling rate different than 1:1 and thus lose important informations.
 
@@ -337,7 +337,7 @@ Some features of SensMap are:
   \item export data and much more.
 \end{itemize}
 
-The data that SensMap needs to be stored in the Xively public cloud \cite{website:xively}. This means that the sensor devices need to send their values to Xively. Then, SensMap will have access to them via the \acrshort{rest} api offered by Xively.
+The data that SensMap feed on needs to be stored in the Xively public cloud \cite{website:xively}. This means that the sensor devices need to send their values to Xively. Then, SensMap will have access to them via the \acrshort{rest} api offered by Xively.
 
 \begin{figure}
   \centering
@@ -381,6 +381,6 @@ Most of the monitoring solutions for Internet of Things networks are essentially
 
 The drawbacks of having such disparity of format for data are that users cannot switch freely between those tools, nor they have the convenience to use multiple tools at the same time. The motes would need to be reprogrammed to deliver new data format. Plus, it would impose too much charge on them if they had to send their values in multiple format. One solution would be to have a service that reformat data in the desired format but it would not resolve the problem. There is a need for a protocol that would suit the need of all organizations in the values that they would like to retrieve. This is why our attention was focused on \textit{TinyIPFIX}, as we consider it to be the solution to this particular issue. \\
 
-As stated before, majority of the tools focused on showing the readings of the sensors. In that sense, they do not give information about how traffic is generated by the network. We cannot detect abnormal behaviors such as nodes contacting a surprising number of other nodes. We also lack statistics to improve our network. For instance, by knowing that a certain node is highly solicited we can replace it by a more powerful device. Organizations, if not already, will be in need of powerful tools to diagnose their networks in order to correct issues more rapidly or improve the efficiency of their networks. Our monitoring tool has as a goal to solve this issue and provide meaningful insights about IoT networks. \\
+As stated before, majority of the tools focused on showing the readings of the sensors. In that sense, they do not give information about how traffic is generated by the network. We cannot detect abnormal behaviors such as nodes contacting a surprising number of nodes. We also lack statistics to improve our network. For instance, by knowing that a certain node is highly solicited we can replace it by a more powerful device. Organizations, if not already, will be in need of powerful tools to diagnose their networks in order to correct issues more rapidly or improve the efficiency of their networks. Our monitoring tool has as a goal to solve this issue and provide meaningful insights about IoT networks. \\
 
-However, all those tools share some common functionalities which must be considered as a basis when developing new such softwares. One important functionality is the display of logical topology of the motes showing the links formed between the motes. Another feature is the storing of the data for later analyzing. One other common requirement is the modularity of those tools and the ease to produce plug-ins. Those basic functionalities should be included when designing such softwares.
+However, all those tools share some common functionalities which must be considered as a basis when developing new such softwares. One important functionality is the display of logical topology of the motes showing the links formed between the motes. Another feature is the storing of the data for later analyzing. One other common requirement is the modularity of those tools and the ease to produce plugins. Those basic functionalities should be included when designing such softwares.
