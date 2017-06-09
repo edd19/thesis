@@ -40,7 +40,7 @@ To implement our benchmarks, we used the couple Contiki-OS and Cooja. The former
 In the following section, we will explain the different configurations (number and role of nodes) used for our benchmarks. The code used to implement those parts can be found on our public repository \textit{\href{https://github.com/edd19/Netflow_contiki}{Netflow\_contiki}} on github.
 
 \section{Configurations}
-Three different configurations were used for the purpose of our tests. They all differ by the facts that nodes send TinyIPFIX messages for monitoring purposes, or simply none or that they present aggregators. However, they all share the common components of WSN: sensor nodes and gateway node.
+Three different configurations were used for the purpose of our tests. They all differ by the facts that nodes send TinyIPFIX messages for monitoring purposes, or that they present aggregators, or simply none. However, they all share the common components of WSN: sensor nodes and gateway node.
 
 \begin{description}
   \item[simple] In this configuration, the nodes do not send information about the flows they observed or any meta information about their network. They only occupy the role of sensor nodes, meaning sensing the environment and transmitting the values observed. To effectively simulate that, we made nodes send, by periods of one minute, a message of 10 bytes to the gateway node.
@@ -67,7 +67,7 @@ The Tab.\ref{table:configurations} summarizes the different configurations used 
   \label{table:configurations}
 \end{table}
 
-We tested each configuration with an increasing number of nodes of 5, 10, 15 and 20. Each configuration was tested for 30 minutes. The number of nodes was limited by the computer used during benchmarking, as it proved unable to simulate more than 20 nodes with Cooja. The packet rate was fixed at an interval of 5 minutes for TinyIPFIX messages meaning that nodes will send messages each five minutes. However, in the case of having their flows table full, which we capped to 10 flows per node, it could occure that some motes send their data earlier. The positions of the nodes is shown in Fig.\ref{fig:nodes_position}. The node having its id set to 1 and colored in green is the gateway node. The square are of the size of 10\acrshort{m}. This means that the area covered by a configuration with 20 nodes is of approximately 100m*100m.\\
+We tested each configuration with an increasing number of nodes of 5, 10, 15 and 20. Each configuration was tested for 30 minutes. The number of nodes was limited by the computer used during benchmarking, as it proved unable to simulate more than 20 nodes with Cooja. The packet rate was fixed at an interval of 5 minutes for TinyIPFIX messages meaning that nodes will send messages each five minutes. However, in the case of having their flows table full, which we capped to 10 flows per node, it could occure that some motes send their data earlier. The positions of the nodes is shown in Fig.\ref{fig:nodes_position}. The node having its id set to 1 and colored in green is the gateway node. The squares are of the size of 10\acrshort{m}. This means that the area covered by a configuration with 20 nodes is of approximately 100m*100m.\\
 
 \begin{figure}[h]
     \centering
@@ -94,7 +94,7 @@ We tested each configuration with an increasing number of nodes of 5, 10, 15 and
     \label{fig:nodes_position}
 \end{figure}
 
-Also, for each simulation, we keep track of the 4-uple ($t_r$, $t_t$, $t_m$, $t_l$) where $t_r$ is the radio reception time, $t_t$ the radio transmission time, $t_m$ the time the Cpu is working, and $t_l$ the time the Cpu is in low power mode. This 4-uple was recorded for each minute. This gave an idea on how the energy consumption evolved minute by minute.\\
+Also, for each simulation, we keep track of the 4-uple ($t_r$, $t_t$, $t_m$, $t_l$) where $t_r$ is the radio reception time, $t_t$ the radio transmission time, $t_m$ the time the Cpu is working, and $t_l$ the time the Cpu is in low power mode. This 4-uple was recorded for each minute. This gave an idea on how the energy consumption evolved, minute by minute.\\
 
 Our tests were done solely on simulation using the Cooja simulation software. The radio model was the default one offered by Cooja which is the \acrfull{udgm}. This radio model abstracts the radio transmission range as circles. The nodes used during the simulations were the \textit{Zolertia Z1} as they proved to have sufficient memory for our code. However, we do want to emphasize that we did not set as a goal to minimize the memory footprint of our code. Optimizations are thus possible to further decrease the code size, and thus maybe reduce the cpu load also. We also considered a setup for all configurations where the radio loss was null. Additionally, all motes were fixed by position, meaning they did not move during the simulation.
 
@@ -104,7 +104,7 @@ After having presented our methodology used when testing our solution, this chap
 
 \section{Energy consumption}
 
-The Fig.\ref{fig:average_energy} shows the average energy consumption in terms of \acrfull{mj} by minute for the nodes. The bar charts show the evolution of the energy consumption with an increasing number of nodes (5, 10, 15 and 20) for the three configurations \textit{simple}, \textit{tipfix} and \textit{aggrega}. As a reminder, the \textit{simple} configuration has no monitoring done with TinyIPFIX while the two has monitoring activated by the mean of TinyIPFIX messages. The difference between \textit{tipfix} and \textit{aggrega} configurations lies in the fact that the \textit{aggrega} has aggregator nodes that merge TinyIPFIX messages into one. \\
+The Fig.\ref{fig:average_energy} shows the average energy consumption in terms of \acrfull{mj} by minute for the nodes. The bar charts show the evolution of the energy consumption with an increasing number of nodes (5, 10, 15 and 20) for the three configurations \textit{simple}, \textit{tipfix} and \textit{aggrega}. As a reminder, the \textit{simple} configuration has no monitoring done with TinyIPFIX while the two have monitoring activated by the mean of TinyIPFIX messages. The difference between \textit{tipfix} and \textit{aggrega} configurations lies in the fact that the \textit{aggrega} has aggregator nodes that merge TinyIPFIX messages into one. \\
 
 \begin{figure}[h]
   \centering
@@ -113,7 +113,7 @@ The Fig.\ref{fig:average_energy} shows the average energy consumption in terms o
   \label{fig:average_energy}
 \end{figure}
 
-From the chart, we can conclude that by using aggregators inside the network we can reduce the added energy consumption induced by the usage of TinyIPFIX messages for monitoring purposes. As can be clearly seen when introducing more nodes, the energy consumption increases much more when not using aggregators. The graph on Fig.\ref{fig:increase_energy} shows exactly how the monitoring increase the energy consumption. The increase was computed by comparing the tipfix and aggrega configurations on their counterpart, the simple configuration which does not send any information about the status of the network. As one may notice, the tipfix configuration consumes relatively more energy when the number of nodes increases. However, it appears not to be the case with the aggrega one. Reasons may be due to the positions of the aggregators that impact greatly how the network behaves and thus weight on the power consumption. By placing intelligently the aggregators it is therefore possible to stress the network less.\\
+From the chart, we can conclude that by using aggregators inside the network we can reduce the added energy consumption induced by the usage of TinyIPFIX messages for monitoring purposes. As can be clearly seen when introducing more nodes, the energy consumption increases much more when not using aggregators. The graph on Fig.\ref{fig:increase_energy} shows exactly how the monitoring increases the energy consumption. The increase was computed by comparing the tipfix and aggrega configurations on their counterpart, the simple configuration, which does not send any information about the status of the network. As one may notice, the tipfix configuration consumes relatively more energy when the number of nodes increases. However, it appears not to be the case with the aggrega one. Reasons may be due to the positions of the aggregators that impact greatly how the network behaves and thus weight on the power consumption. By placing intelligently the aggregators, it is therefore possible to stress the network less.\\
 
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{res/increase_energy.png}
@@ -158,7 +158,7 @@ The table clearly shows that to preserve the battery lifetime, aggregators becom
 
 \section{Nodes time repartition}
 
-For the purpose of better understanding the power consumption induced by our solution, there is a need to see how often the nodes are active, and when it is the case, what are they doing. To do so, we kept track on the time the nodes spend with their microprocessor active or in low power mode but also the time they were transmitting or receiving data via radio. This is what Fig.\ref{fig:time_all} shows. The Fig.\ref{fig:cpu_time} shows the average time the microprocessor is active by minute while Fig.\ref{fig:lpm_time} shows the average time the microprocessor is in low power mode. Fig.\ref{fig:tx_time} and Fig.\ref{fig:rx_time} shows average transmission time and receiving time by minute for a node. \\
+For the purpose of better understanding the power consumption induced by our solution, there is a need to see how often the nodes are active, and when it is the case, what they are doing. To do so, we kept track of the time the nodes spend with their microprocessor active or in low power mode but also the time they were transmitting or receiving data via radio. This is what Fig.\ref{fig:time_all} shows. The Fig.\ref{fig:cpu_time} shows the average time the microprocessor is active by minute while Fig.\ref{fig:lpm_time} shows the average time the microprocessor is in low power mode. Fig.\ref{fig:tx_time} and Fig.\ref{fig:rx_time} shows average transmission time and receiving time by minute for a node. \\
 
 \begin{figure}[h]
     \centering
@@ -201,10 +201,10 @@ We must emphasize the fact that using aggregators reduced the average time spent
 The topics covered by this chapter will be about :
 
 \begin{itemize}
-	\item \textbf{Nfsen} We started our master thesis by trying to implement a plugin for that particular software. Details will be given on how this tool works and reasons will be given on why we abandoned the idea of implementing an Nfsen plugin. However, as you will see, our architecture resembles a lot to that of Nfsen.
+	\item \textbf{Nfsen} We started our master thesis by trying to implement a plugin for that particular software. Details will be given on how this tool works and reasons will be given on why we abandoned the idea of implementing an Nfsen plugin. However, as you will see, our architecture resembles a lot that of Nfsen.
 	\item \textbf{Possible extensions} Those are features that could be added to our current software as to improve it.
 	\item \textbf{Security} Issues about security will be addressed.
-  \item \textbf{Further works} This will mainly focus on how to improve the data retrieval of meta information about the network.
+  \item \textbf{Further works} Here, we will mainly focus on how to improve the data retrieval of meta information about the network.
 \end{itemize}
 
 \section{Nfsen, A Graphical Web Tool}
@@ -220,7 +220,7 @@ The subject of our master thesis having been proposed by Professor Sadre last ye
 
 In this section, we will explain all the underlying layers of Nfsen, from data exchanged in the monitored network to the graphical web page. We will also discuss our thought process about using Nfsen and the reasons why we have not used it in the end.\\
 
-The first step towards monitoring is data collecting. As we explained in Chapter 3, Netflow is used for collecting flows we are interested in, according to some specific attributes such as the source and destination addresses. Once the flow are captured, they are stored and waiting to be processed. \\
+The first step towards monitoring is data collecting. As we explained in Chapter 3, Netflow is used for collecting flows we are interested in, according to some specific attributes such as the source and destination addresses. Once the flows are captured, they are stored and waiting to be processed. \\
 
 In reality, when the structure of the Netflow data is defined, the flows are actually captured by \textit{nfcapd}, a \textit{Netflow capture deamon}. With nfcapd, the flows are read from the network and the collected data is stored into files, data being split in files according to time slices. Each five minutes, nfcapd outputs a new file where data is stored, named with the current timestamp. One nfcapd process is used for each existing Netflow stream that we want to capture.\\
 
@@ -243,17 +243,17 @@ We talked before about Nfsen and how it is possible to create plugins to have fu
 
 At the beginning of this school year, once we started working on our thesis, we dug into Nfsen and its functionalities, trying to get familiar with it. First of all, setting up the Nfsen tool showed itself to be very tedious and challenging, as many installation tutorials did not work for all computers and OSs, and had different instructions.\\
 
-The main reason why Nfsen is useful is that it easily and immediately treats the Netflow information retrieved by nfcapd and Nfdump, with little to no addition and/or modification needed. However, as we had decided to design our own IPFIX fields to visualize IoT networks according to our needs, we also had to modify Nfdump. Namely, two fields that the original IPFIX structure does not monitor, and hence are not standardized fields, are the battery level of devices and the parent of each mote in the IoT networks. Digging into Nfdump seems to require quite some time and some knowledge of the Perl language. Entering the last year of our master thesis, we also had never used nor learned the PHP and Perl languages in contrary to Javascript with the Node.js framework. \\
+The main reason why Nfsen is useful is that it easily and immediately treats the Netflow information retrieved by nfcapd and Nfdump, with little to no addition and/or modification needed. However, as we had decided to design our own IPFIX fields to visualize IoT networks according to our needs, we also had to modify Nfdump. Namely, two fields that the original IPFIX structure does not monitor, and hence are not standardized fields, are the battery level of devices and the parent of each mote in the IoT networks. Digging into Nfdump seems to require quite some time and some knowledge of the Perl language. Entering the last year of our master degree, we also had never used nor learned the PHP and Perl languages in contrary to Javascript with the Node.js framework. \\
 
 Thinking of using the Node.js framework seemed reasonably more practical in our case in terms of time allocation, since we required to modify the Netflow information retrieved from networks. With further discussion, we decided to write a Javascript program that played the role of Nfdump to efficiently parse and store the Netflow information captured. Similarly, instead of using Nfsen as the graphical interface, we programmed a web server with Node.js to be able to visualize information in which we are interested in. Of course, our graphical interface is less complete than Nfsen's, but it contains a topology showcase that Nfsen does not, that we have programmed using the D3.js library.\\
 
-In the end, Nfsen used with Nfdump present a lot of advantages, as most of the work is already present in its core, only a few things have to be added, i.e. the topology here. It contains a lot of graphical information on how much traffic passes through the network, with many filters such as graphs split according to which protocols send the information. But for the reasons we have cited above, we have decided not to use it and opted for a solution using Node.js.
+In the end, Nfsen used with Nfdump presents a lot of advantages, as most of the work is already present in its core, only a few things have to be added, i.e. the topology here. It contains a lot of graphical information on how much traffic passes through the network, with many filters such as graphs split according to which protocols send the information. But for the reasons we have cited above, we have decided not to use it and opted for a solution using Node.js.
 
 \section{Possible Extensions}
 
 \subsection*{Monitoring any IPFIX messages}
 
-We will hereby discuss how the server would handle IPFIX messages received from traditional networks or any IPFIX message. As we explained in the description of our solution, the server is able to collect and store logs of the information received from networks. At this step, it is able to parse any IPFIX messages as long as it follows the standard. However the issue arise when wanting to extract informations coming from those IPFIX messages. At the time of writing, the current product considers a flow to be described by the source node id, the destination node id, the number of octets and the number of packets. However traditional networks use IPv4 or IPv6 address as a mean to identify devices in the network. Thus, so as to process correctly those IPFIX messages, we should handle a flow to be described by IPv4 or IPv6 addresses for the source and the destination as well. Another solution would be to not use the node id but instead also the Ipv6 addresses of the nodes. However this solution would imbue a cost as an IPv6 address is stored on 16 bytes. \\
+We will hereby discuss how the server would handle IPFIX messages received from traditional networks or any IPFIX message. As we explained in the description of our solution, the server is able to collect and store logs of the information received from networks. At this step, it is able to parse any IPFIX messages as long as it follows the standard. However, the issue arises when willing to extract information coming from those IPFIX messages. At the time of writing, the current product considers a flow to be described by the source node id, the destination node id, the number of octets and the number of packets. However, traditional networks use IPv4 or IPv6 address as a mean to identify devices in the network. Thus, so as to process correctly those IPFIX messages, we should handle a flow to be described by IPv4 or IPv6 addresses for the source and the destination as well. Another solution would be to not use the node id but use instead the Ipv6 addresses of the nodes. However, this solution would imbue a cost as an IPv6 address is stored on 16 bytes. \\
 
 As the purpose of this thesis was IoT network monitoring, our server does not currently process IPFIX messages from traditional networks. Nevertheless, modifying its processing capability to be able to correctly use IPFIX messages with IPv6 addresses as source and destination is not too challenging and is definitely a possible extension. \\
 
@@ -261,7 +261,7 @@ As the purpose of this thesis was IoT network monitoring, our server does not cu
 
 As of now, the topology feature showcases a network topology that only depends on the routing routes, no matter what is the relative position of those motes according to others in the network. \\
 
-A possible extension could be to showcase a topology where its nodes are positioned as in real life, with a corresponding proportional distance. However, that would imply adding complexity on each mote to have a feature computing the coordinates relative to a base point, and that would also induct a raise in traffic volume since more packets containing position information are to be exchanged.
+A possible extension could be to showcase a topology where its nodes are positioned as in real life, with a corresponding proportional distance. That would imply adding complexity on each mote to have a feature computing the coordinates relative to a base point, and that would also induct a raise in traffic volume since more packets containing position information are to be exchanged.
 
 \subsection*{Network failure and Network changes}
 
@@ -288,7 +288,7 @@ As of now, our software does not have the possibility to sort the flows by proto
 
 \subsection*{Time range}
 
-A possible extension would be to allow an user to select a specific time range to analyze as it is possible with Nfsen. In the traffic volume page, it would show amount of traffic and the statistics for that particular interval of time.
+A possible extension would be to allow a user to select a specific time range to analyze as it is possible with Nfsen. In the traffic volume page, it would show the amount of traffic and the statistics for that particular time interval.
 
 \section{Security}
 
@@ -298,18 +298,18 @@ Purely from a theoretical point of view, there is also a lack of security betwee
 
 Authentication mechanisms and encryption are the way to go to solve these problems. We would thus have authentication between motes, and encryption of data when creating packets from motes. However, those mechanisms add lines of codes uploaded on motes, which must be taken into account when analyzing and optimizing performances of the IoT network. In consequence, the mechanisms also add more traffic load to the network.\\
 
-All those points are to be taken into account to showcase accurate data. In our case though, no tempering was possible, as we knew exactly what kind of data passes through the network and which device creates the flows.
+All those points are to be taken into account to showcase accurate data. In our case though, no tempering was possible, as we knew exactly what kind of data was passing through the network and which devices are creating the flows.
 
 \section{Further Works}
 
 Those further works will mainly be focus on improving the meta information extraction from the nodes.\\
 
-The tests shown in the previous chapters were limited to 20 nodes at maximum due to the constraint imposed from the computer used during simulation. However, 20 nodes is quite a small network. Our tests should be improved and tested on bigger networks ranging from hundreds to thousands of nodes. Additionally, the solution should be tested on real nodes and real network so as to confront our solution with real environments and applications. By increasing the number of tests, some parameters should also be highlighted. One of those parameters that should come out should be, we think, the average depth of the network. By depth we means the number of nodes that should reroute a message coming from a leaf node (without children) to the gateway node.\\
+The tests shown in the previous chapters were limited to 20 nodes at maximum due to the constraint imposed from the computer used during simulation. However, 20 nodes is quite a small network. Our tests should be improved and tested on bigger networks ranging from hundreds to thousands of nodes. Additionally, the solution should be tested on real nodes and real network so as to confront our solution with real environments and applications. By increasing the number of tests, some parameters should also be highlighted. One of those parameters that should come out should be, we think, the average depth of the network. By depth we means the number of nodes that should reroute a message coming from a leaf node (without any child) to the gateway node.\\
 
-Also our tests supposed that there was no packet loss. This could be applicable to reliable network to a limit of 90\% packet loss ratio but WSN are not to be considered reliable. They are lossy by nature. Thus it would be great to study the impact made by resending messages in case of dropped packets. We could envision for that using a solution like \acrshort{mqtt} \cite{website:mqtt} or simply send messages via TCP and not UDP.\\
+Also, our tests were made with the assumption that there was no packet loss. This could be applicable to reliable network to a limit of 90\% packet loss ratio but WSN are not to be considered reliable. They are lossy by nature. It would thus be great to study the impact made by resending messages in case of dropped packets. We could envision that using a solution like \acrshort{mqtt} \cite{website:mqtt} or simply send messages via TCP and not UDP.\\
 
-A standard should also be worked upon to as to use a common message format from data coming from nodes. IPFIX or TinyIPFIX could be that standard. In this master thesis we used TinyIPFIX to monitor the network. But it was developed at first to send sensors values (humidity, temperature, ...). TinyIPFIX appears to be a versatile solution that could permit monitoring of IoT networks in term of traffic information but also in term of sensors values. The standardization should be done by defining common fields.\\
+A standard should also be worked upon to as to use a common message format from data coming from nodes. IPFIX or TinyIPFIX could be that standard. In this master thesis, we used TinyIPFIX to monitor the network. But it was developed at first to send sensors values (humidity, temperature, ...). TinyIPFIX appears to be a versatile solution that could permit monitoring of IoT networks in term of traffic information but also in term of sensors values. The standardization should be done by defining common fields.\\
 
 Optimizations could also be done in the triggering of the message. As of now, we use a fixed interval time set beforehand. But what if the nodes could communicate between themselves and set by themselves the best interval time so as to optimize battery lifetime. Plus, so as to not provoke congestion, nodes could send data at different time. This is a concern that will mostly arise with large networks.\\
 
-In conclusion many improvements can be made as to enhance our solution. Those solutions should have as goal to reduce the energy consumption while not decreasing the informations extracted.
+In conclusion many improvements can be made as to enhance our solution. Those solutions should have as a goal to reduce the energy consumption while not decreasing the amount of information extracted.
